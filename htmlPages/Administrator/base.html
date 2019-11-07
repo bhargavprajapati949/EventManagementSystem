@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    {% block title %}
+
+    {% endblock %}
+
+    {% block loadcss %}
+
+    {% endblock %}
+
+</head>
+<body>
+
+    <div class="dashboard_detail">
+        <img src="{% static 'media/avatar_logo.png' %}" id="profile_image">
+        <div class="profile_name">Profile</div>
+        
+        <ul class="admin_links">
+            <li id="manage_label" style="margin-bottom: 10px;">
+                <div class="dropdown">
+                    <button class="dropbtn">Manage 
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="participant_manager">Participant</a>
+                        <a href="volunteer_manager">Volunteer</a>
+                        <a href="event_head_manager">Event Head</a>
+                        <a href="coordinator_manager">Co-ordinator</a>
+                        <a href="collage_manager">Colleges</a>
+                    </div>
+                </div>
+            </li>
+            <li id="collect_money_label"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
+            <li id="sign_out_label"><a id="Sign_Out" href="#">&nbsp;Sign Out</a></li>
+        </ul>
+    </div>
+        
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+</html>

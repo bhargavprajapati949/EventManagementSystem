@@ -1,0 +1,88 @@
+{% extends 'Administrator/base.html'%}
+
+{% load static %}
+
+{% block title %}
+    
+    <title>Participant</title>
+
+{% endblock %}
+    
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+
+{% endblock%}
+
+{% block content %}
+
+    <div class="main">
+
+        <div class="main_detail_container" id="main_detail_container">
+            <div class="search_bar">
+                <div class="search_inbox_container">
+                <input type="text" placeholder="Search" id="search_bar">&nbsp;&nbsp;
+                </div>
+
+                <div class="search_button_container">
+                    <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/search_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
+                </div>
+
+                <div class="sortby_selection_container">
+                    <select id="sort_by_menu" class="sort_by_menu">
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                    </select>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <div class="manage_table_container" id="manage_table_container">
+                <table id="manage_table" class="manage_table">
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Mobile No.</th>
+                        <th>Email ID</th>
+                        <th>Event</th>
+                        <th>Clg Name</th>
+                        <th>Total Payment</th>
+                        <th>Paid Payment</th>
+                        <th>Remaining Payment</th>
+                        <th></th>
+                    </tr>
+
+                    <tr>
+                            <td>335</td>
+                            <td>Niral</td>
+                            <td>7096890142</td>
+                            <td>niralkpatelia@gmail.com</td>
+                            <td>Codejam</td>
+                            <td>Nirma University</td>
+                            <td>500</td>
+                            <td>200</td>
+                            <td>300</td>
+                            <td><button class="edit_btn">EDIT</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>2548</td>
+                        <td>Bhargav</td>
+                        <td>8511128457</td>
+                        <td>17BCE092@gmail.com</td>
+                        <td>Treasure Hunt</td>
+                        <td>Nirma University</td>
+                        <td>500</td>
+                        <td>200</td>
+                        <td>300</td>
+                        <td><button class="edit_btn">EDIT</button></td>
+                </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

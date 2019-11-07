@@ -1,0 +1,100 @@
+body {
+    background-image: url('../media/nirma_bck.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.main .event_selection_title {
+    padding: 0;
+    margin: 0 0 30px; 
+    color: #fff;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+.main {
+    padding: 40px;
+    background: rgba(0, 0, 0, .6);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.5);
+    border-radius: 10px;
+    margin: 3%;
+}
+
+.event_selection_container {
+    width: 100%;
+    height: auto;
+    background: white;
+    box-shadow: 5px 5px 3px rgba(0,0,0,.5);
+    /* add flex-box style*/
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap; 
+}
+
+.main_event {
+    width: 20%;
+    height: 250px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.911);
+    background: rgba(0, 0, 0, .6);
+    margin: 20px;
+    font-size: 25px;
+    box-sizing: border-box; 
+    min-width: 250px; 
+}
+
+.event_info {
+    width: 25px;
+    height: 25px;
+}
+.main .selected_event_payment_container .selected_events {
+    background: #03a9a4;
+    width: 100%;
+    height: auto;
+}
+
+.main .selected_event_payment_container .total_payment_container {
+    width: 240px;
+    height: auto;
+    background: #fff;
+    text-align: left;
+}
+
+.main .selected_event_payment_container .total_payment {
+    font-size: 30px;
+    padding-left: 10%;
+}
+@media screen and (max-width:1200px) {
+    .box {
+        width: 40%;
+
+    }
+}
+
+@media screen and (max-width:600px) {
+    .box {
+        width: 90%;
+
+    }
+}
+
+.main .submit_container {
+    display: block;
+}
+.main .submit {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #03a9f4;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.6s ;
+    overflow: hidden;
+    float: left;
+}

@@ -1,0 +1,69 @@
+{% extends 'Administrator/base.html'%}
+
+{% load static %}
+
+{% block title %}
+    
+    <title>Colleges</title>
+
+{% endblock %}
+    
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+
+{% endblock%}
+
+{% block content %}
+
+    <div class="main">
+
+            <div class="main_detail_container" id="main_detail_container" >
+                <div class="search_bar">
+                    <div class="search_inbox_container">
+                    <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
+                    </div>
+    
+                    <div class="search_button_container">
+                        <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/search_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
+                    </div>
+    
+                    <div class="sortby_selection_container">
+                        <select id="sort_by_menu" class="sort_by_menu">
+                            <option value="a-z">A-Z</option>
+                            <option value="z-a">Z-A</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <br/>
+                <br/>
+                <br/>
+
+                <div class="manage_table_container" id="manage_table_container">
+                    <table id="manage_table" class="manage_table">
+                        
+                        <tr>
+                            <th>Id</th>
+                            <th>Collage Name</th>
+                            <!-- <th>Status</th> -->
+                            <th></th>
+                        </tr>
+    
+                        {% for clg in collages %}
+                            <tr>
+                                {% for item in clg %}
+                                    <td>{{ item }}</td>
+                                {% endfor %}
+                                <!-- <td><div class="status_container"><input type="checkbox" id="status_checkbox"></div></td> -->
+                                <td><button class="edit_btn">EDIT</button></td>
+                            </tr>    
+                        {% endfor %}
+
+                    </table>
+                </div>
+    
+            </div>
+        </div>
+
+{% endblock %}

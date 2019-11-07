@@ -1,0 +1,62 @@
+{% extends 'FestOfficialWebSite/base.html' %}
+
+    {% load static %}
+    
+    {% block loadcss %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_style.css' %}">
+
+    {% endblock %}
+
+    {% block title %}
+
+    <title>NU-Tech</title>
+
+    {% endblock %}
+
+    {% block content %}
+
+    </div id="slideshow" style="height: 100px;">
+        <img src="{% static 'media/slideshow.jpg' %}" alt="slideshow Image 1" style="width: 100%; height: 700px;">
+    </div>
+
+    <div id="news" class="basic">
+        <ul>
+            {% for n in news %}
+            <li><a href="{{n.hyperlink}}">{{n.news_containt}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="about" id="about" name="about">
+			<!-- Intro Item -->
+			<div class="intro_item">
+				<div class="intro_image"><img src="{% static 'media/modi.jpg' %}" alt=""></div>
+				<div class="intro_body">
+					<div class="intro_title">Inaugaration by Chief Minister</div>
+					<div class="intro_subtitle">NuTech was inaugarated by Chief monister Mr. Narendra Modi</div>
+				</div>
+			</div>
+    </div>
+    
+    
+    <div class="sponsers_title" id="sponsers">Sponsers</div>    
+    <div class="sponsers_container">
+        
+
+        <div class="sponser_item">
+            <div class="sponser_image"><img src="{% static 'media/fasoos.png' %}"></div>
+        </div>
+
+        
+        <div class="sponser_item">
+                <div class="sponser_image"><img src="{% static 'media/Paytm_logo.png' %}"></div>
+            </div>
+
+            <div class="sponser_item">
+                    <div class="sponser_image"><img src="{% static 'media/rebull.png' %}"></div>
+                </div>
+    </div>
+
+    {% endblock %}
