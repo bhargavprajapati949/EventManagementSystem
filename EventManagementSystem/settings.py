@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'UserManager.apps.UsermanagerConfig',
+    'UserManager.apps.UsermanagerConfig',
     # 'FestOfficialWebSite.apps.FestofficialwebsiteConfig',
     # 'Administrator.apps.AdministratorConfig',
     'django.contrib.admin',
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-# AUTH_USER_MODEL = 'UserManager.User'
+AUTH_USER_MODEL = 'UserManager.User'
 
 WSGI_APPLICATION = 'EventManagementSystem.wsgi.application'
 
