@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'UserManager.apps.UsermanagerConfig',
-    # 'FestOfficialWebSite.apps.FestofficialwebsiteConfig',
+    'EventWebSite.apps.EventwebsiteConfig',
     # 'Administrator.apps.AdministratorConfig',
     'django.contrib.admin',
     'django.contrib.auth',
