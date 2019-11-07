@@ -57,3 +57,32 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
+class Event_Commitee(models.Model):
+    reg_no = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
+    commitee_id = models.CharField(unique=True, max_length = 20)
+    is_vol = models.BooleanField(default=False)
+    is_coordinator = models.BooleanField(default=False)
+    is_event_head = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+
+class Participant(models.Model):
+    reg_no = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
+
+class Publicity_Volunteer(models.Model):
+    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    payment_hold = models.IntegerField()
+    isActive = models.BooleanField(default = False)
+
+class Event_Head(models.Model):
+    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    isActive = models.BooleanField(default = False)
+
+class Coordinator(models.Model):
+    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    payment_hold = models.IntegerField()
+    isActive = models.BooleanField(default = False)
+
+class Admin(models.Model):
+    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    isActive = models.BooleanField(default = False)
