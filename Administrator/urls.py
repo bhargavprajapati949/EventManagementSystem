@@ -10,7 +10,8 @@ urlpatterns = [
    path('volunteer_manager', views.volunteer_manager, name='volunteer_manager'),
    path('event_head_manager', views.event_head_manager, name='event_head_manager'),
    path('coordinator_manager', views.coordinator_manager, name='coordinator_manager'),
-   path('collage_manager', views.collage_manager, name='collage_manager'), 
+   path('collage_manager', views.collage_manager, name='collage_manager'),
+   path('news_manager', views.news_manager, name='news_manager'),
    path('collect_money', views.collect_money, name='collect_money'),
    path('signout', views.signout, name='signout'),
 ]

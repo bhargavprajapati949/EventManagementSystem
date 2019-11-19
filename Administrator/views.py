@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from UserManager.models import Collages
+from EventWebSite.models import news
 
 # Create your views here.
 
@@ -30,6 +31,12 @@ def collage_manager(request):
     clg = Collages.objects.values_list('clg_id', 'clg_name')
     data['collages'] = clg
     return render(request, 'Administrator/collage_manager.html', data)
+
+def news_manager(request):
+    data = {}
+    newslist = news.objects.values_list('news_id', 'for_whome', 'news_containt', 'hyperlink')
+    data['news'] = newslist
+    return render(request, 'Administrator/news_manager.html', data)
 
 def collect_money(request):
     return render(request, 'Administrator/collect_money.html')

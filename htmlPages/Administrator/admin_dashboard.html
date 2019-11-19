@@ -1,60 +1,37 @@
+{% extends 'Administrator/base.html' %}
+
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+{% block title %}
     <title>Admin</title>
+{% endblock %}
+
+{% block loadcss %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/Admin_dashboard.css' %}">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="main" style="padding-left: 40px;">
     
-        <div class="dashboard_detail">
-            <img src="{% static 'media/avatar_logo.png' %}" id="profile_image">
-            <div class="profile_name">Profile</div>
-
-            <ul class="admin_links">
-                <li id="manage_label" style="margin-bottom: 10px;">
-                        <div class="dropdown">
-                            <button class="dropbtn">Manage 
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                            <div class="dropdown-content">
-                                    <a href="participant_manager">Participant</a>
-                                    <a href="volunteer_manager">Volunteer</a>
-                                    <a href="event_head_manager">Event Head</a>
-                                    <a href="coordinator_manager">Co-ordinator</a>
-                                    <a href="collage_manager">Colleges</a>
-                            </div>
-                        </div>
-                </li>
-                <li id="collect_money_label"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
-                <li id="sign_out_label"><a id="Sign_Out" href="#">&nbsp;Sign Out</a></li>
-            </ul>
-        </div>
-
-        <div class="main" style="padding-left: 40px;">
-
-                <div class="partcipant_detail_container" id="partcipant_detail_container" style="padding-left: 130px; padding-right: 160px;">
-                </div>
-
-                <div class="volunteer_detail_container" id="volunteer_detail_container" style="padding-left: 130px; padding-right: 160px;">
-                    
-                </div>
-                
-                <div class="eventhead_detail_container" id="eventhead_detail_container" style="padding-left: 130px; padding-right: 160px;">
-                    
-                </div>
-
-                <div class="co-ordinator_detail_container" id="co-ordinator_detail_container" style="padding-left: 130px; padding-right: 160px;">
-                    
-                </div>
-
-                <div class="college_detail_container" id="college_detail_container" style="padding-left: 130px; padding-right: 160px;">
-                    
-                </div>
-            </div>
+    <div class="partcipant_detail_container" id="partcipant_detail_container" style="padding-left: 130px; padding-right: 160px;">
+    </div>
     
-</body>
-</html>
+    <div class="volunteer_detail_container" id="volunteer_detail_container" style="padding-left: 130px; padding-right: 160px;">
+        
+    </div>
+    
+    <div class="eventhead_detail_container" id="eventhead_detail_container" style="padding-left: 130px; padding-right: 160px;">
+        
+    </div>
+    
+    <div class="co-ordinator_detail_container" id="co-ordinator_detail_container" style="padding-left: 130px; padding-right: 160px;">
+        
+    </div>
+    
+    <div class="college_detail_container" id="college_detail_container" style="padding-left: 130px; padding-right: 160px;">
+        
+    </div>
+</div>
+    {% endblock %}
