@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import news, Event, Parent_event
+from EventWebSite.models import news, Event, Parent_event 
+from EventWebSite.form import ParticipantRegForm
 
  # Create your views here.
 
@@ -17,8 +18,23 @@ def homepage(request):
 def login(request):
     return render(request, 'FestOfficialWebSite/login.html')
 
+# def register(request):
+#     form = UserCreationForm
+#     return render(request, 'FestOfficialWebSite/registration.html')
+
 def register(request):
-    return render(request, 'FestOfficialWebSite/registration.html')
+    if request.method == 'POST':
+        regform = ParticipantRegForm(data=request.POST)
+        if regform.is_valid():
+            user = regform.save()
+            print('done')
+            return redirect('homepage')
+        else:
+            return redirect('register')
+    else:
+        regform = ParticipantRegForm()
+        context = {'regform' : regform}
+        return render(request, 'FestOfficialWebSite/registration.html', context)
 
 def event_detail(request):
     content = {}

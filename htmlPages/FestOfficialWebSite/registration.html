@@ -1,21 +1,46 @@
-{% load static %}
-<!DOCTYPE html>
+{% extends  'FestOfficialWebSite/base.html' %}
+
+    {% load static %}
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registration | NUTECH-2020</title>
-    <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    {% block loadcss %}
+        <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">  
+    {% endblock %}
+
+    {% block title %}
+        <title>Registration | NUTECH-2020</title>
+    {% endblock %}
+
+    {% block content %}
+    
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+        <form method="POST" style="background-color: blue;">
+            {% csrf_token %}
+            {{ regform.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    {% endblock %}
+<!--     
 </head>
 
-<body>
-    <div id="reg_form_box" class="box">
-        <!--<img src="../media/avatar.png" id="logo">-->
+<body> -->
+    <!-- <div id="reg_form_box" class="box">
+        <img src="../media/avatar.png" id="logo">
         <p id="registration" class="box_title">Registration</p>
 
-        <form action="" method="POST" novalidate onsubmit="return validate_form()" >
-                {% csrf_token %}
+        <form action="" method="POST" novalidate onsubmit="return validate_form()">
+            {% csrf_token %}
             <div class="inputbox">
                 <input type="text" id="name" required="required">
                 <label>Name</label>
@@ -40,8 +65,12 @@
                 <input type="submit" value="REGISTER NOW" id="submit_btn">
             </div>
         </form>
-    </div>
+    </div> -->
     
-    <script src="../script/registration.js" type="text/javascript"></script>
+    {% block loadScript %}
+        <!-- <script src="../script/registration.js" type="text/javascript"></script> -->
+    {% endblock %}
+
+<!--     
 </body>
-</html>
+</html> -->
