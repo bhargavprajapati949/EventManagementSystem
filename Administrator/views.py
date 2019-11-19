@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from UserManager.models import Collages
+from UserManager.models import Collages, Stream
 from EventWebSite.models import news
 
 # Create your views here.
@@ -37,6 +37,12 @@ def news_manager(request):
     newslist = news.objects.values_list('news_id', 'for_whome', 'news_containt', 'hyperlink')
     data['news'] = newslist
     return render(request, 'Administrator/news_manager.html', data)
+
+def stream_manager(request):
+    data = {}
+    streamlist = Stream.objects.values_list('stream_id', 'stream_name')
+    data['streams'] = streamlist
+    return render(request, 'Administrator/stream_manager.html')
 
 def collect_money(request):
     return render(request, 'Administrator/collect_money.html')

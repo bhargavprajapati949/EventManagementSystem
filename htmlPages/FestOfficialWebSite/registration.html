@@ -25,11 +25,34 @@
     </ul>
     {% endif %}
 
+        <!-- <form method="POST" style="background-color: blue;">
+            {% csrf_token %}
+            {{  regform.as_p }}
+            <button type="submit">Submit</button>
+        </form> -->
+
         <form method="POST" style="background-color: blue;">
             {% csrf_token %}
-            {{ regform.as_p }}
+            <p><label for="fname">Fname:</label> <input type="text" name="fname" maxlength="50" required id="fname"></p>
+            <p><label for="lname">Lname:</label> <input type="text" name="lname" maxlength="50" required id="lname"></p>
+
+            <p>
+                <label for="clg_id">Clg id:</label> 
+                <select name="clg_id" id="clg_id">
+                    {% for item in form.clg_id %}
+                    <option value="2">Nirma University</option>
+                    <option value="3">Daiict</option>
+                </select>
+            </p>
+            
+            <p><label for="stream">Stream:</label> <select name="stream" id="stream"></select></p>
+            <p><label for="email">Email:</label> <input type="email" name="email" maxlength="254" autofocus required id="email"></p>
+            <p><label for="contect_no">Contect no:</label> <input type="number" name="contect_no" required id="contect_no"></p>
+            <p><label for="password1">Password:</label> <input type="password" name="password1" required id="password1"> <span class="helptext"><ul><li>Your password must contain at least 8 characters.</li></ul></span></p>
+            <p><label for="password2">Password confirmation:</label> <input type="password" name="password2" required id="password2"> <span class="helptext">Enter the same password as before, for verification.</span></p>
             <button type="submit">Submit</button>
         </form>
+            
     {% endblock %}
 <!--     
 </head>

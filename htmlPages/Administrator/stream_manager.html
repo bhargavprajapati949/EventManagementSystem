@@ -4,7 +4,7 @@
 
 {% block title %}
     
-    <title>Colleges</title>
+    <title>Stream</title>
 
 {% endblock %}
     
@@ -19,7 +19,7 @@
     <div class="main">
 
             <div class="main_detail_container" id="main_detail_container" >
-                <div class="search_bar">
+                <div class="search_bar">    
 
                         <div class="add_inbox_container" style="margin-right: 145px;">
                                 <input type="text" placeholder="Add" id="add_bar">&nbsp;&nbsp;
@@ -28,7 +28,7 @@
                             <div class="search_button_container" style="margin-left:-145px; margin-right: 144px;">
                                     <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/add_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
                             </div>
-                            
+
                     <div class="search_inbox_container">
                     <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
                     </div>
@@ -54,14 +54,14 @@
                         
                         <tr>
                             <th>Id</th>
-                            <th>Collage Name</th>
+                            <th>Stream Name</th>
                             <!-- <th>Status</th> -->
                             <th></th>
                         </tr>
     
-                        {% for clg in collages %}
+                        {% for stream in streams %}
                             <tr>
-                                {% for item in clg %}
+                                {% for item in stream %}
                                     <td>{{ item }}</td>
                                 {% endfor %}
                                 <!-- <td><div class="status_container"><input type="checkbox" id="status_checkbox"></div></td> -->

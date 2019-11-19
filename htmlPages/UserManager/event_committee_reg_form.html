@@ -1,13 +1,43 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link type="text/css" rel="stylesheet" href="event_committee_reg_form.html">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/event_committee_reg_form.css' %}">
+    <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
     <title>NU Tech | Registration Form</title>
 </head>
 <body>
-    
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in regform %}
+        <div class="fieldWrapper" id="{{ field.id_for_label }}wrapper">
+            {{ field.errors }}
+            <!--error message like
+                 <ul class="errorlist"><li>This field is required.</li></ul> -->
+            {{ field.label_tag }} {{ field }}
+            <!--label like
+                 <label for="id_stream">Stream:</label> -->
+            <!--field like
+                 <select name="clg_id" id="id_clg_id">
+                <option value="2" selected>Nirma University</option>
+                <option value="3">Daiict</option>
+            </select> -->
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+            <!--Help text be like 
+                <p class="help">
+                <ul>
+                    <li>Your password must contain at least 8 characters.</li>
+                </ul>
+            </p> -->
+        </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

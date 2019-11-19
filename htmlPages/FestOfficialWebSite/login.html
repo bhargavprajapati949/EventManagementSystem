@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign In | NUTECH-2020</title>
+    <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
     <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">
 </head>
 <body>
@@ -13,14 +14,15 @@
                 <!--<img src="../media/avatar.png" id="logo">-->
                 <p id="signin" class="box_title">Sign In</p>
         
-                <form>
+                <form method="POST">
+                    {% csrf_token %}
                     <div id="username" class="inputbox">
-                        <input type="text" required="required">
+                        <input name="usernamefield" type="text" required="required">
                         <label>User Name</label>
                     </div>
         
                     <div id="password" class="inputbox">
-                        <input type="password" required="required">
+                        <input name="passwordfield" type="password" required="required">
                         <label>Password</label>
                     </div>
 

@@ -101,6 +101,9 @@ class Event_Commitee(models.Model):
 class Participant(models.Model):
     reg_no = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
 
+    def __str__(self):
+        return User.objects.filter(participant__reg_no = self.reg_no)
+
 class Publicity_Volunteer(models.Model):
     reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
     payment_hold = models.IntegerField()

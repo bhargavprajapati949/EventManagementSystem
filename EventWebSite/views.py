@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login as auth_login, logout
 from EventWebSite.models import news, Event, Parent_event 
 from EventWebSite.form import ParticipantRegForm
+from UserManager.models import User, Participant
 
  # Create your views here.
 
@@ -16,7 +18,27 @@ def homepage(request):
 
 
 def login(request):
-    return render(request, 'FestOfficialWebSite/login.html')
+    if request.method == 'POST':
+        username = request.POST.get('usernamefield')
+        password = request.POST.get('passwordfield')
+        print('username = ', username)
+        print('password = ', password)
+        user = authenticate(username=username, password=password)
+        print('user object = ', user)
+        if user:
+            if user.is_participant:
+                auth_login(request, user)
+                print('login success')
+                return redirect('homepage')
+            else:
+                print('is_participant = false')
+                return HttpResponse('You are not registered. First Register yourself.')
+        else:
+            return HttpResponse('Invalid login details')
+            print('invalid details')
+    else:
+        print('get method')
+        return render(request, 'FestOfficialWebSite/login.html')
 
 # def register(request):
 #     form = UserCreationForm
@@ -25,12 +47,16 @@ def login(request):
 def register(request):
     if request.method == 'POST':
         regform = ParticipantRegForm(data=request.POST)
-        if regform.is_valid():
-            user = regform.save()
-            print('done')
-            return redirect('homepage')
+        usercheck = User.objects.filter(email = request.POST.get('email'))
+        if usercheck and len(usercheck) == 1:
+            Participant.objects.create(reg_no = usercheck[0])
         else:
-            return redirect('register')
+            if regform.is_valid():
+                user = regform.save()
+                print('done')
+                return redirect('homepage')
+            else:
+                return redirect('register')
     else:
         regform = ParticipantRegForm()
         context = {'regform' : regform}

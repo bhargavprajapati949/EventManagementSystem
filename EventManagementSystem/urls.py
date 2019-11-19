@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('EventWebSite.urls')),
     path('administrator/', include('Administrator.urls')),
+    path('users/', include('UserManager.urls')),
 ]
 
 if settings.DEBUG:
