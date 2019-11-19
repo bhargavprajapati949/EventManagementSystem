@@ -22,8 +22,8 @@
         <img src="{% static 'media/avatar_logo.png' %}" id="profile_image">
         <div class="profile_name">Profile</div>
         
-        <ul class="admin_links">
-            <li id="manage_label" style="margin-bottom: 10px;">
+        <ul class="admin_links">    
+            <li id="manage_label" style="margin-bottom: 10px; list-style-type: none;">
                 <div class="dropdown">
                     <button class="dropbtn">Manage 
                         <i class="fa fa-caret-down"></i>
@@ -35,18 +35,21 @@
                         <a href="coordinator_manager">Co-ordinator</a>
                         <a href="collage_manager">Colleges</a>
                         <a href="news_manager">News</a>
-                        <a href="stream_manager">Stream</a>
+                        <a href="stream_manager">Stream</a>  
                     </div>
                 </div>
             </li>
-            <li id="collect_money_label"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
-            <li id="sign_out_label"><a id="Sign_Out" href="#">&nbsp;Sign Out</a></li>
+            <li id="collect_money_label" style="list-style-type: none;"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
+            <li id="sign_out_label" style="list-style-type: none;"><a id="Sign_Out" href="#">&nbsp;Sign Out</a></li>
         </ul>
+    </div>
+    <div class="header">
+
     </div>
         
     {% block content %}
 
     {% endblock %}
-
+    
 </body>
 </html>
