@@ -28,4 +28,4 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += url(r'.', never_cache(serve_static)),
+    urlpatterns += url(r'.+', never_cache(serve_static)),
