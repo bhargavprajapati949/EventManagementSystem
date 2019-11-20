@@ -19,12 +19,22 @@
     {% endfor %}
 </ul>
 {% endif %}
-    <!-- <form method="POST" style="background-color: blue;">
-        {% csrf_token %}
-        {{  regform.as_p }}
-        <button type="submit">Submit</button>
-    </form> -->
     <form method="POST" style="background-color: blue;">
+        {% csrf_token %}
+
+        {% for field in regform %}
+        <div id="{{ field.label }}Wrapper">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+                <p>{{ field.help_text|safe }}</p>
+            {% endif %}
+            {{ field.errors }}
+        </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+    <!-- <form method="POST" style="background-color: blue;">
         {% csrf_token %}
         <p><label for="fname">Fname:</label> <input type="text" name="fname" maxlength="50" required id="fname"></p>
         <p><label for="lname">Lname:</label> <input type="text" name="lname" maxlength="50" required id="lname"></p>
@@ -42,7 +52,7 @@
         <p><label for="password1">Password:</label> <input type="password" name="password1" required id="password1"> <span class="helptext"><ul><li>Your password must contain at least 8 characters.</li></ul></span></p>
         <p><label for="password2">Password confirmation:</label> <input type="password" name="password2" required id="password2"> <span class="helptext">Enter the same password as before, for verification.</span></p>
         <button type="submit">Submit</button>
-    </form>
+    </form> -->
         
 {% endblock %}
     

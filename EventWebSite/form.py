@@ -4,31 +4,6 @@ from UserManager.models import Collages, User, Participant
 
 
 class ParticipantRegForm(UserCreationForm):
-    # fname = forms.CharField(max_length=50)
-    # lname = forms.CharField(max_length=50)
-    
-    # clg_id_choices = (
-    #     ('nu', 'nirma'),
-    #     ('da', 'daiict'),
-    # )
-    # # for clg in Collages.objects.all():
-    # #     clg_id_choices += [clg.clg_id, clg.clg_name]
-
-    # clg_id = forms.ChoiceField(choices=clg_id_choices)
-
-    # stream_choices = (
-    #     ('Computer Eng', 'ce'), 
-    #     ('Electrical Eng', 'ee'),
-    #     ('Chemical Eng', 'ch'),
-    #     ('Civil Eng', 'ci'),
-    # )
-    # stream = forms.ChoiceField(choices=stream_choices)
-
-    # email = forms.EmailField()
-    # contect_no = forms.IntegerField()
-
-    # password = forms.PasswordInput()
-    # confpassword = forms.PasswordInput()
 
     class Meta:
         model = User
@@ -44,10 +19,8 @@ class ParticipantRegForm(UserCreationForm):
         user.stream = self.cleaned_data['stream']
         user.is_participant = True
 
-        Participant.objects.create(reg_no = user)
-        # user.password = self.cleaned_data['password']
-        
         user.save()
+        Participant.objects.create(reg_no = user)
         return user
         
         

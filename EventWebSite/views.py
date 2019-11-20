@@ -50,13 +50,16 @@ def register(request):
         usercheck = User.objects.filter(email = request.POST.get('email'))
         if usercheck and len(usercheck) == 1:
             Participant.objects.create(reg_no = usercheck[0])
+            return redirect('homepage')
         else:
             if regform.is_valid():
                 user = regform.save()
                 print('done')
                 return redirect('homepage')
             else:
-                return redirect('register')
+                print('invalid')
+                context = {'regform' : regform }
+                return render(request, 'FestOfficialWebSite/registration.html', context)
     else:
         regform = ParticipantRegForm()
         context = {'regform' : regform}

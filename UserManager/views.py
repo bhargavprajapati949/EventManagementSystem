@@ -4,6 +4,9 @@ from UserManager.models import User, Participant
 
 # Create your views here.
 
+# def eventCommittee(request):
+#     return render(request, 'UserManager/eventCommittee.html')
+
 def eventCommitteeRegForm(request):
     if request.method == 'POST':
         regform = EventCommitteeRegForm(data=request.POST)
