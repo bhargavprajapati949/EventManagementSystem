@@ -18,48 +18,62 @@ class Stream(models.Model):
         return self.stream_name
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username, password=None):
+    def _create_user(self, fname, lname, contect_no, email, password=None):
     
         user=self.model(
-            email=self.normalize_email(email), 
-            username=username,
+            fname = fname,
+            lname = lname,
+            contect_no = contect_no,
+            email=self.normalize_email(email)
         )
 
         user.set_password(password)
+        return user
+
+    def create_user(self, fname, lname, contect_no, email, password=None):
+        user = self._create_user(
+            fname = fname,
+            lname = lname,
+            contect_no = contect_no,
+            email = email,
+            password = password
+        )
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, password):
-        # user = self.create_superuser(
-        #     email = self.normalize_email(email), 
-        #     password = password,
-        #     username = username,
-        # )
-        # user.is_superuser = True
+    def create_superuser(self, email, password = None):
+        user = self._create_user(
+            fname = 'Bhargav', 
+            lname = 'Prajapati',
+            contect_no = 9876543210,
+            password = password,
+            email = email
+        )
 
-        user = self.model(username = username)
-        user.set_password(password)
+        user.is_admin = True
+        user.is_staff = True
+        
         user.save(using=self._db)
         return user
 
 
 class User(AbstractBaseUser):
-    reg_no = models.AutoField(primary_key = True)
+    reg_no = models.AutoField(verbose_name = "Registration Number", primary_key = True)
 
-    fname = models.CharField(max_length = 50)
-    lname = models.CharField(max_length = 50)
+    fname = models.CharField(verbose_name = "First Name", max_length = 50)
+    lname = models.CharField(verbose_name = "Last Name", max_length = 50)
     
-    contect_no = models.IntegerField()
-    email = models.EmailField(unique=True)
+    contect_no = models.IntegerField(verbose_name = "Contect No")
+    email = models.EmailField(verbose_name = "Email ID", unique=True)
     
     # password = models.CharField(max_length = 20)
     
-    clg_id = models.ForeignKey(Collages, on_delete=models.SET_DEFAULT, default = 0)
-    stream = models.ForeignKey(Stream, on_delete=models.SET_DEFAULT, default = 0)
+    clg_id = models.ForeignKey(Collages, verbose_name = "Collage", on_delete=models.SET_NULL, null=True, default = None)
+    stream = models.ForeignKey(Stream, verbose_name = "Stream", on_delete=models.SET_NULL, null=True, default = None)
 
-    is_participant = models.BooleanField(default=False)
-    is_event_commitee = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    is_participant = models.BooleanField(default=False, verbose_name = "Participant")
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default = False, verbose_name = "Event Committee")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELD = ['reg_no', 'contect_no', 'email', 'fname', 'lname', 'clg_id', 'stream']
