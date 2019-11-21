@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout
 from EventWebSite.models import news, Event, Parent_event 
 from EventWebSite.form import ParticipantRegForm
@@ -8,13 +8,13 @@ from UserManager.models import User, Participant
  # Create your views here.
 
 def redirectToHomepage(request):
-    return redirect('homepage')
+    return HttpResponseRedirect('homepage')
 
 def homepage(request):
 
     newsObject = news.objects.filter(for_whome='Participants')
 
-    return render(request, 'FestOfficialWebSite/homepage.html', {'news' : newsObject})
+    return render(request, 'EventWebSite/homepage.html', {'news' : newsObject})
 
 
 def login(request):
@@ -38,11 +38,8 @@ def login(request):
             print('invalid details')
     else:
         print('get method')
-        return render(request, 'FestOfficialWebSite/login.html')
+        return render(request, 'EventWebSite/login.html')
 
-# def register(request):
-#     form = UserCreationForm
-#     return render(request, 'FestOfficialWebSite/registration.html')
 
 def register(request):
     if request.method == 'POST':
@@ -59,11 +56,11 @@ def register(request):
             else:
                 print('invalid')
                 context = {'regform' : regform }
-                return render(request, 'FestOfficialWebSite/registration.html', context)
+                return render(request, 'EventWebSite/registration.html', context)
     else:
         regform = ParticipantRegForm()
         context = {'regform' : regform}
-        return render(request, 'FestOfficialWebSite/registration.html', context)
+        return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
     content = {}
@@ -75,4 +72,4 @@ def event_detail(request):
         events += event
 
     content['events'] = events
-    return render(request, 'FestOfficialWebSite/event_detail.html', content)
+    return render(request, 'EventWebSite/event_detail.html', content)

@@ -3,7 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('favicon.ico', view.favicon, name='favicon'),
     path('', views.redirectToHomepage, name='redirectToHomepage'),
     path('homepage', views.homepage, name='homepage'),
     path('login', views.login, name='login'),

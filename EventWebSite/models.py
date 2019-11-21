@@ -29,9 +29,9 @@ class news(models.Model):
         ('Participants', 'Participants'),
         ('Volunteer', 'Volunteer')
     ]
-    for_whome = models.CharField(max_length = 50, choices = news_receivers)
-    news_containt = models.TextField()
-    hyperlink = models.URLField()
+    for_whome = models.CharField(max_length = 50, choices = news_receivers, verbose_name = 'News Viewers')
+    news_content = models.TextField(verbose_name = 'News Content')
+    hyperlink = models.CharField(verbose_name = 'hyperlink', max_length=50)
 
 
 class Registers(models.Model):

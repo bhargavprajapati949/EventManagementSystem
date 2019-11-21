@@ -72,7 +72,7 @@ class User(AbstractBaseUser):
     stream = models.ForeignKey(Stream, verbose_name = "Stream", on_delete=models.SET_NULL, null=True, default = None)
 
     is_participant = models.BooleanField(default=False, verbose_name = "Participant")
-    is_admin = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False, verbose_name = "Admin")
     is_staff = models.BooleanField(default = False, verbose_name = "Event Committee")
 
     USERNAME_FIELD = 'email'

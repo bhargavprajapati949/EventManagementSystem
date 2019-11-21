@@ -20,6 +20,9 @@
     
     <div class="main_detail_container" id="main_detail_container" >
         <div class="search_bar">
+            <label for="add_news">Add News</label>
+            <input type="checkbox" id="add_news">
+
             <div class="search_inbox_container">
                 <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
             </div>
@@ -35,7 +38,25 @@
                 </select>
             </div>
         </div>
-        
+
+        <div id="add_news_bar">
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in addnews_form %}
+                <div id="{{ field.label }}Wrapper">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                    <p>{{ field.help_text|safe }}</p>
+                    {% endif %}
+                    {{ field.errors }}
+                </div>
+                {% endfor %}
+                {{ form.non_field_errors }}
+                <button type="submit">Add News</button>
+            </form>
+        </div>
+            
         <br/>
         <br/>
         <br/>
