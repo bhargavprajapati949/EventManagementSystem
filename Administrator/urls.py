@@ -13,6 +13,8 @@ urlpatterns = [
    path('collage_manager', views.collage_manager, name='collage_manager'),
    path('stream_manager', views.stream_manager, name='stream_manager'),
    path('news_manager', views.news_manager, name='news_manager'),
+   path('news_add', views.news_add, name='news_add'),
+   path('news_edit/<?P<news_id>', views.news_edit, name='news_edit'),
    path('collect_money', views.collect_money, name='collect_money'),
    path('signout', views.signout, name='signout'),
 ]

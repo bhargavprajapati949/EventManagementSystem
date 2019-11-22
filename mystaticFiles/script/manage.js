@@ -1,11 +1,16 @@
-// let editbtn = document.getElementsByClassName("edit_btn");
+// function editbtn(divid){
+//     news_id = divid.split('_')[0]
+//     olddiv = document.getElementById(divid)
+//     id = document.getElementById(news_id + "_id")
+//     for_whome = document.getElementById(news_id + "_for_whome")
+//     news_content = document.getElementById(news_id + "_news_content")
+//     hyperlink = document.getElementById(news_id + "_hyperlink")
 
-// editbtn.addEventListener("click", editdata);
+//     // olddiv.style.display = "none"
 
-// function editfunction() {
-//     let x = document.getElementById("main_table").rows[0].cells;
-//     x[1].innerHTML = "Pushpendra";
+    
 // }
 
-let x = document.getElementById("manage_table").rows[0].cells;
-x[1].innerHTML = "Pushpendra";
+// function savebtn(divid){
+//     console.log("hiiii")
+// }

@@ -30,7 +30,7 @@ class news(models.Model):
         ('Volunteer', 'Volunteer')
     ]
     for_whome = models.CharField(max_length = 50, choices = news_receivers, verbose_name = 'News Viewers')
-    news_content = models.TextField(verbose_name = 'News Content')
+    news_content = models.CharField(max_length = 1000 ,verbose_name = 'News Content')
     hyperlink = models.CharField(verbose_name = 'hyperlink', max_length=50)
 
 

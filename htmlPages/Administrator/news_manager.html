@@ -40,7 +40,7 @@
         </div>
 
         <div id="add_news_bar">
-            <form method="POST">
+            <form method="POST" action="news_add">
                 {% csrf_token %}
                 {% for field in addnews_form %}
                 <div id="{{ field.label }}Wrapper">
@@ -74,18 +74,54 @@
                 </tr>
                 
                 {% for n in news %}
-                <tr>
-                    {% for item in n %}
-                    <td>{{ item }}</td>
-                    {% endfor %}
-                    <!-- <td><div class="status_container"><input type="checkbox" id="status_checkbox"></div></td> -->
-                    <td><button class="edit_btn">EDIT</button></td>
-                </tr>    
+                {% if n.news_id != news_id %}
+                <tr id="{{ n.news_id }}_Record">
+                    <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
+                    <td id="{{ n.news_id }}_for_whome" class="for_whome">{{ n.for_whome }}</td>
+                    <td id="{{ n.news_id }}_news_content" class="news_content">{{ n.news_content }}</td>
+                    <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ n.hyperlink }}</td>
+                    <td><a id="{{ n.news_id }}_editbtn" class="edit_btn" href="{% url 'news_edit' news_id=n.news_id %}">EDIT</a></td>
+                </tr>
+                {% else %}
+                <tr id="{{ n.news_id }}_Record">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <!-- {{editnews_form}} -->
+                        <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
+                        <td id="{{ n.news_id }}_for_whome" class="for_whome">{{ editnews_form.for_whome }}</td>
+                        <td id="{{ n.news_id }}_news_content" class="news_content">{{ editnews_form.news_content }}</td>
+                        <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ editnews_form.hyperlink }}</td>
+                        <td>
+                            <button type="submit">SAVE</button>
+                            <button type="button" onclick="viewDeleteConfBox()">CANCAL</button>
+                        </td>
+                        
+                    </form>
+                </tr>
+                {% endif %}
                 {% endfor %}
-                
             </table>
+            <!-- {% if editnews_form %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="news_id" value="{{ news_id }}">
+                {{ editnews_form }}
+                <td><button type="submit">SAVE</button></td>
+            </form>
+            <form method="POST">
+                {% csrf_token %}
+                {{editnews_form}}
+                <button type="submit">Submit</button>
+            </form>
+            {% endif %} -->
         </div>        
     </div>
 </div>
+
+{% endblock %}
+
+{% block loadscript %}
+
+<script src="{% static 'script/manage.js' %}"></script>
 
 {% endblock %}
