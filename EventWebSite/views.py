@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout
-from EventWebSite.models import news, Event, Parent_event 
+from EventWebSite.models import news, Event
 from EventWebSite.form import ParticipantRegForm
 from UserManager.models import User, Participant
 
@@ -63,13 +63,4 @@ def register(request):
         return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    content = {}
-    parent_events = Parent_event.objects.all()
-    # content['parent_event'] = parant_events
-    events = []
-    for pevent in parent_events:
-        event = Event.objects.filter(parent_event_id = pevent.parent_event_id)
-        events += event
-
-    content['events'] = events
-    return render(request, 'EventWebSite/event_detail.html', content)
+    return render(request, 'EventWebSite/event_detail.html')

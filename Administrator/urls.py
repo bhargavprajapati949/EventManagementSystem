@@ -11,6 +11,13 @@ urlpatterns = [
    path('event_head_manager', views.event_head_manager, name='event_head_manager'),
    path('coordinator_manager', views.coordinator_manager, name='coordinator_manager'),
 
+   path('event_manager', views.event_manager, name='event_manager'),
+   path('event_info/<?P<event_id>', views.event_info, name='event_info'),
+   path('event_add', views.event_add, name='event_add'),
+   path('event_edit/<?P<event_id>', views.event_edit, name='event_edit'),
+   path('event_delete/<?P<event_id>', views.event_delete, name='event_delete'),
+
+
    path('collage_manager', views.collage_manager, name='collage_manager'),
    path('collage_add', views.collage_add, name='collage_add'),
    path('collage_edit/<?P<clg_id>', views.collage_edit, name='collage_edit'),

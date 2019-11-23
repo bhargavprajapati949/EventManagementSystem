@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout
-from django.views.generic import UpdateView
+from django.views.generic import DetailView
 from UserManager.models import Collages, Stream
-from EventWebSite.models import news
-from UserManager.models import Collages, Stream
+from EventWebSite.models import news, Event
 from Administrator.forms import *
 # Create your views here.
 
@@ -43,6 +42,76 @@ def event_head_manager(request):
 
 def coordinator_manager(request):
     return render(request, 'Administrator/coordinator_manager.html')
+
+def event_manager(request):
+    eventlist = Event.objects.values('event_id', 'event_name', 'event_status')
+    context = {'events' : eventlist}
+    return render(request, 'Administrator/event_manager.html', context)
+
+def event_info(request, event_id):
+    event_detail = Event.objects.get(event_id = event_id)
+    context = {'eventdetail' : event_detail}
+    return render(request, 'Administrator/event_manager.html', context)
+
+# class event_info(DetailView):
+#     model = Event
+#     context_object_name = 'eventdetail'
+#     pk_url_kwarg = 'event_id'
+#     template_name = 'Administrator/event_manager.html'
+
+def event_add(request):
+    if request.method == 'POST':
+        addevent_form = event_model_form(request.POST, request.FILES)
+        if addevent_form.is_valid():
+            addevent_form.save()
+            return redirect('event_manager')
+        else:
+            context = {'addevent_form' : addevent_form}
+            return render(request, 'Administrator/event_manager.html', context)
+    else:
+        addevent_form = event_model_form()
+        context = {'addevent_form' : addevent_form}
+        return render(request, 'Administrator/event_manager.html', context)
+
+
+# def event_edit(request, event_id):
+#     print(event_id)
+#     print('event_edit called')
+#     if request.method == 'POST':
+#         pass
+#     else:
+#         pass
+
+def event_edit(request, event_id):
+    event_obj = Event.objects.get(event_id = event_id)
+    print("news_edit called")
+    if request.method == 'POST':
+        print("post called")
+        editevent_form = event_model_form(request.POST, request.FILES , instance = event_obj)
+        if editevent_form.is_valid():
+            print("valid data")
+            editevent_form.save()
+            return redirect('event_manager')
+        else:
+            print("invalid data")            
+            context = {'editevent_form' : editevent_form, 'editevent_id' : event_id}
+            return render(request, 'Administrator/event_manager.html', context)
+    else:
+        print("get called")
+        editevent_form = event_model_form(instance = event_obj, initial = {'event_logo': event_obj.event_logo} )
+        context = {'editevent_form' : editevent_form, 'editevent_id' : event_id}
+        return render(request, 'Administrator/event_manager.html', context)
+
+
+def event_delete(request, event_id):
+    print(event_id, 'event_delete called')
+    if request.method == 'POST':
+        Event.objects.get(event_id = event_id).delete()
+        return redirect('event_manager')
+    else:
+        event_obj = Event.objects.get(event_id = event_id)
+        context = {'deleteevent_id' : event_id, 'eventdetail':  event_obj}
+        return render(request, 'Administrator/event_manager.html', context)
 
 def collage_manager(request):
     print('collage_manager called')

@@ -3,7 +3,6 @@ from EventWebSite.models import *
 
 # Register your models here.
 
-admin.site.register(Parent_event)
 admin.site.register(Event)
 admin.site.register(news)
 admin.site.register(Registers)

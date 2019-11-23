@@ -3,25 +3,26 @@ from UserManager.models import User, Event_Commitee, Admin, Publicity_Volunteer,
 
 # Create your models here.
 
-class Parent_event(models.Model):
-    parent_event_id = models.AutoField(primary_key = True)
-    parent_event_name = models.CharField(max_length = 50, unique = True)
+# class Parent_event(models.Model):
+#     parent_event_id = models.AutoField(primary_key = True)
+#     parent_event_name = models.CharField(max_length = 50, unique = True)
 
 class Event(models.Model):
     event_id = models.AutoField(primary_key = True)
     event_name = models.CharField(max_length = 50)
-    Evnet_Detail = models.TextField()
+    event_detail = models.TextField()
     rules = models.TextField()
-    event_logo = models.ImageField(upload_to = 'event_logo', null=True)
+    event_logo = models.ImageField(upload_to = 'event_logo/', null=True)
     event_statuses = [
         ('Available', 'Available'),
         ('Scrapped', 'Scrapped'),
-        ('Delete', 'Delete')
+        ('Delete', 'Delete'),
+        ('Full', 'Full')
     ]
     event_status = models.CharField(max_length = 30, choices = event_statuses)    
     venue = models.CharField(max_length = 50)
     date_time = models.DateTimeField(blank = True)
-    parent_event = models.ForeignKey(Parent_event, on_delete = models.SET_DEFAULT, default = 0)
+    # parent_event = models.ForeignKey(Parent_event, on_delete = models.SET_DEFAULT, default = 0)
 
 class news(models.Model):
     news_id = models.AutoField(primary_key = True)

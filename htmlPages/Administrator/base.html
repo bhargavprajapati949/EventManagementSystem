@@ -29,13 +29,14 @@
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a href="participant_manager">Participant</a>
-                        <a href="volunteer_manager">Volunteer</a>
-                        <a href="event_head_manager">Event Head</a>
-                        <a href="coordinator_manager">Co-ordinator</a>
-                        <a href="collage_manager">Colleges</a>
-                        <a href="news_manager">News</a>
-                        <a href="stream_manager">Stream</a>  
+                        <a href="{% url 'participant_manager' %}">Participant</a>
+                        <a href="{% url 'volunteer_manager' %}">Volunteer</a>
+                        <a href="{% url 'event_head_manager' %}">Event Head</a>
+                        <a href="{% url 'coordinator_manager' %}">Co-ordinator</a>
+                        <a href="{% url 'event_manager' %}">Events</a>
+                        <a href="{% url 'collage_manager' %}">Colleges</a>
+                        <a href="{% url 'news_manager' %}">News</a>
+                        <a href="{% url 'stream_manager' %}">Stream</a>  
                     </div>
                 </div>
             </li>
