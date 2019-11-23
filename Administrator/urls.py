@@ -17,6 +17,9 @@ urlpatterns = [
    path('collage_delete/<?P<clg_id>', views.collage_delete, name='collage_delete'),
 
    path('stream_manager', views.stream_manager, name='stream_manager'),
+   path('stream_add', views.stream_add, name='stream_add'),
+   path('stream_edit/<?P<stream_id>', views.stream_edit, name='stream_edit'),
+   path('stream_delete/<?P<stream_id>', views.stream_delete, name='stream_delete'),
 
    path('news_manager', views.news_manager, name='news_manager'),
    path('news_add', views.news_add, name='news_add'),

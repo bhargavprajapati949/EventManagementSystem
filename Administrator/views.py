@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.views.generic import UpdateView
 from UserManager.models import Collages, Stream
 from EventWebSite.models import news
-from UserManager.models import Collages
+from UserManager.models import Collages, Stream
 from Administrator.forms import *
 # Create your views here.
 
@@ -98,6 +98,61 @@ def collage_delete(request, clg_id):
         context = {'collages' : clg, 'clg_id': 'None', 'deletecollage_id' : clg_id }
         return render(request, 'Administrator/collage_manager.html', context)
 
+
+def stream_manager(request):
+    streamlist = Stream.objects.values('stream_id', 'stream_name')
+    context = {'streams' : streamlist}
+    return render(request, 'Administrator/stream_manager.html', context)
+
+def stream_add(request):
+    print('stream_add called')
+    streamlist = Stream.objects.values('stream_id', 'stream_name')
+    if request.method == 'POST':
+        addstream_form = stream_model_form(data = request.POST)
+        if addstream_form.is_valid():
+            addstream_form.save()
+            return redirect('stream_manager')
+        else:
+            context = {'streams': streamlist, 'addstream_form':addstream_form, 'stream_id' : 'None'}
+            return render(request, 'Administrator/stream_manage.html', context)
+    else:
+        addstream_form = stream_model_form()
+        context = {'streams' : streamlist , 'addstream_form': addstream_form, 'stream_id' : 'None'}
+        return render(request, 'Administrator/stream_manager.html', context)
+
+def stream_edit(request, stream_id):
+    stream_obj = Stream.objects.get(stream_id = stream_id)
+    print("stream_edit called")
+    if request.method == 'POST':
+        print("post called")
+        editstream_form = stream_model_form(data = request.POST , instance = stream_obj)
+        if editstream_form.is_valid():
+            print("valid data")
+            editstream_form.save()
+            return redirect('stream_manager')
+        else:
+            print("invalid data")
+            streamlist = Stream.objects.values('stream_id', 'stream_name')
+            context = {'streams' : streamlist, 'editstream_form' : editstream_form, 'stream_id': stream_id}
+            return render(request, 'Administrator/stream_manager.html', context)
+    else:
+        print("get called")
+        editstream_form = stream_model_form(instance = stream_obj)
+        streamlist = Stream.objects.values('stream_id', 'stream_name')
+        context = {'streams' : streamlist, 'editstream_form' : editstream_form, 'stream_id': stream_id}
+        return render(request, 'Administrator/stream_manager.html', context)
+
+
+def stream_delete(request, stream_id):
+    print('stream_delete called')
+    if request.method == 'POST':
+        Stream.objects.get(stream_id = stream_id).delete()
+        return redirect('stream_manager')
+    else:
+        streamlist = Stream.objects.values('stream_id', 'stream_name')
+        context = {'streams' : streamlist, 'stream_id': 'None', 'deletestream_id' : stream_id }
+        return render(request, 'Administrator/stream_manager.html', context)
+
 def news_manager(request):
     newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
     context = {'news' : newslist }
@@ -154,12 +209,6 @@ def news_delete(request, news_id):
         newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
         context = {'news' : newslist , 'news_id' : 0, 'delnews_id' : news_id}
         return render(request, 'Administrator/news_manager.html', context)
-
-def stream_manager(request):
-    data = {}
-    streamlist = Stream.objects.values_list('stream_id', 'stream_name')
-    data['streams'] = streamlist
-    return render(request, 'Administrator/stream_manager.html')
 
 def collect_money(request):
     return render(request, 'Administrator/collect_money.html')

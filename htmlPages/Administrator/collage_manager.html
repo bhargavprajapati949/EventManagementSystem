@@ -22,7 +22,7 @@
         <div class="search_bar">
             
             {% if not addcollage_form %}
-            <a href="{% url 'collage_add' %}">Add Collage</a>
+            <a href="{% url 'collage_add' %}">Add College</a>
             {% endif %}
 
             <div class="search_inbox_container">
@@ -56,7 +56,7 @@
                 </div>
                 {% endfor %}
                 {{ form.non_field_errors }}
-                <button type="submit">Add News</button>
+                <button type="submit">Add Collage</button>
                 <a href="{% url 'collage_manager' %}">Cancal</a>
             </form>
         </div>
@@ -70,7 +70,7 @@
                 
                 <tr>
                     <th>Id</th>
-                    <th>Collage Name</th>
+                    <th>College Name</th>
                     <th></th>
                 </tr>
                 
