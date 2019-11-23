@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login as auth_login, logout
 from django.views.generic import UpdateView
 from UserManager.models import Collages, Stream
 from EventWebSite.models import news
-from Administrator.forms import news_model_form
+from UserManager.models import Collages
+from Administrator.forms import *
 # Create your views here.
 
 def redirectToAdmin_login(request):
@@ -44,66 +45,81 @@ def coordinator_manager(request):
     return render(request, 'Administrator/coordinator_manager.html')
 
 def collage_manager(request):
-    data = {}
-# [('clg_id', 'clg_name')] + 
-    clg = Collages.objects.values_list('clg_id', 'clg_name')
-    data['collages'] = clg
-    return render(request, 'Administrator/collage_manager.html', data)
+    print('collage_manager called')
+    clg = Collages.objects.values('clg_id', 'clg_name')
+    context = {'collages' : clg}
+    return render(request, 'Administrator/collage_manager.html', context)
+
+def collage_add(request):
+    print('collage_add called')
+    clg = Collages.objects.values('clg_id', 'clg_name')
+    if request.method == 'POST':
+        addcollage_form = collage_model_form(data = request.POST)
+        if addcollage_form.is_valid():
+            addcollage_form.save()
+            return redirect('collage_manager')
+        else:
+            context = {'collages':clg, 'addcollage_form':addcollage_form, 'clg_id' : 'None'}
+            return render(request, 'Administrator/collage_manage.html', context)
+    else:
+        addcollage_form = collage_model_form()
+        context = {'collages' : clg , 'addcollage_form': addcollage_form, 'clg_id' : 'None'}
+        return render(request, 'Administrator/collage_manager.html', context)
+
+def collage_edit(request, clg_id):
+    clg_obj = Collages.objects.get(clg_id = clg_id)
+    print("news_edit called")
+    if request.method == 'POST':
+        print("post called")
+        editcollage_form = collage_model_form(data = request.POST , instance = clg_obj)
+        if editcollage_form.is_valid():
+            print("valid data")
+            editcollage_form.save()
+            return redirect('collage_manager')
+        else:
+            print("invalid data")
+            clg = Collages.objects.values('clg_id', 'clg_name')
+            context = {'collages' : clg, 'editcollage_form' : editcollage_form, 'clg_id': clg_id}
+            return render(request, 'Administrator/collage_manager.html', context)
+    else:
+        print("get called")
+        editcollage_form = collage_model_form(instance = clg_obj)
+        clg = Collages.objects.values('clg_id', 'clg_name')
+        context = {'collages' : clg, 'editcollage_form' : editcollage_form, 'clg_id': clg_id}
+        return render(request, 'Administrator/collage_manager.html', context)
+
+def collage_delete(request, clg_id):
+    print('collage_delete called')
+    if request.method == 'POST':
+        Collages.objects.get(clg_id = clg_id).delete()
+        return redirect('collage_manager')
+    else:
+        clg = Collages.objects.values('clg_id', 'clg_name')
+        context = {'collages' : clg, 'clg_id': 'None', 'deletecollage_id' : clg_id }
+        return render(request, 'Administrator/collage_manager.html', context)
 
 def news_manager(request):
     newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
     context = {'news' : newslist }
-    addnewsform = news_model_form
-    context['addnews_form'] = addnewsform
     return render(request, 'Administrator/news_manager.html', context)
 
 def news_add(request):
+    print('news_add called')
     newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
     context = {'news' : newslist }
+    context['news_id'] = 0
     if request.method == 'POST':
-        addnewsform = news_model_form(data = request.POST)
-        if addnewsform.is_valid():
-            addnewsform.save()
-            print(addnewsform)
+        addnews_form = news_model_form(data = request.POST)
+        if addnews_form.is_valid():
+            addnews_form.save()
             return redirect('news_manager')
-            # addnewsform = addnews_form()
-            # context['addnews_form'] = addnewsform
-            # return render(request, 'Administrator/news_manager.html', context)
         else:
-            context['addnews_form'] = addnewsform
+            context['addnews_form'] = addnews_form
             return render(request, 'Administrator/news_manager.html', context)
     else:
-        redirect('news_manager')
-
-# def news_edit(request, news_id):
-#     newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
-#     context = {'news' : newslist }
-#     addnewsform = news_model_form()
-#     context['addnews_form'] = addnewsform
-#     news_obj = news.objects.get(news_id = news_id)
-#     context['news_id'] = news_obj.news_id
-#     print('news_id ', news_obj.news_id)
-#     print("edit called")
-#     if request.method == 'POST':
-#         editnewsform = news_model_form(data=request.POST, instance = news_obj)
-#         print(editnewsform)
-#         print(request.POST)
-#         if addnewsform.is_valid():
-#             print("valid data is going to save")
-#             addnewsform.save()
-#             return redirect('news_manager')
-#         else:
-#             print("invalid data")
-#             # print(editnewsform)
-#             context['editnews_form'] = editnewsform
-#             # print('context added')
-#             return render(request, 'Administrator/news_manager.html', context)
-#     else:
-#         print("get request")
-#         editnewsform = news_model_form(instance = news_obj)
-#         context['editnews_form'] = editnewsform
-#         context['news_id'] = news_obj.news_id
-#         return render(request, 'Administrator/news_manager.html', context)
+        addnews_form = news_model_form()
+        context['addnews_form'] = addnews_form
+        return render(request, 'Administrator/news_manager.html', context)
 
 def news_edit(request, news_id):
     n = news.objects.get(news_id = news_id)
@@ -118,17 +134,26 @@ def news_edit(request, news_id):
         else:
             print("invalid data")
             newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
-            addnews_form = news_model_form()
-            context = {'news' : newslist, 'editnews_form' : editnews_form, 'news_id': n.news_id, 'addnews_form' : addnews_form}
+            context = {'news' : newslist, 'editnews_form' : editnews_form, 'news_id': n.news_id}
             return render(request, 'Administrator/news_manager.html', context)
     else:
         print("get called")
         editnews_form = news_model_form(instance = n)
         newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
-        addnews_form = news_model_form()
-        context = {'news' : newslist, 'editnews_form' : editnews_form, 'news_id' : n.news_id, 'addnews_form' : addnews_form}
+        context = {'news' : newslist, 'editnews_form' : editnews_form, 'news_id' : n.news_id}
         return render(request, 'Administrator/news_manager.html', context)
 
+def news_delete(request, news_id):
+    print('news_delete called')
+    if request.method == 'POST':
+        print('post method')
+        news.objects.get(news_id = news_id).delete()
+        return redirect('news_manager')
+    else:
+        print('get method')
+        newslist = news.objects.values('news_id', 'for_whome', 'news_content', 'hyperlink')
+        context = {'news' : newslist , 'news_id' : 0, 'delnews_id' : news_id}
+        return render(request, 'Administrator/news_manager.html', context)
 
 def stream_manager(request):
     data = {}

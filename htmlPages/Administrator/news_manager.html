@@ -20,9 +20,9 @@
     
     <div class="main_detail_container" id="main_detail_container" >
         <div class="search_bar">
-            <label for="add_news">Add News</label>
-            <input type="checkbox" id="add_news">
-
+            {% if not addnews_form %}
+            <a href="{% url 'news_add' %}">Add News</a>
+            {% endif %}
             <div class="search_inbox_container">
                 <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
             </div>
@@ -38,9 +38,9 @@
                 </select>
             </div>
         </div>
-
+        {% if addnews_form %}
         <div id="add_news_bar">
-            <form method="POST" action="news_add">
+            <form method="POST" action="{% url 'news_add' %}">
                 {% csrf_token %}
                 {% for field in addnews_form %}
                 <div id="{{ field.label }}Wrapper">
@@ -54,9 +54,11 @@
                 {% endfor %}
                 {{ form.non_field_errors }}
                 <button type="submit">Add News</button>
+                <a href="{% url 'news_manager' %}">Cancal</a>
             </form>
         </div>
-            
+        {% endif %}
+
         <br/>
         <br/>
         <br/>
@@ -80,20 +82,22 @@
                     <td id="{{ n.news_id }}_for_whome" class="for_whome">{{ n.for_whome }}</td>
                     <td id="{{ n.news_id }}_news_content" class="news_content">{{ n.news_content }}</td>
                     <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ n.hyperlink }}</td>
-                    <td><a id="{{ n.news_id }}_editbtn" class="edit_btn" href="{% url 'news_edit' news_id=n.news_id %}">EDIT</a></td>
+                    <td>
+                        <a id="{{ n.news_id }}_editbtn" class="edit_btn" href="{% url 'news_edit' news_id=n.news_id %}">EDIT</a>
+                        <a id="{{ n.news_id }}_deletebtn" class="delete_btn" href="{% url 'news_delete' news_id=n.news_id %}">DELETE</a>
+                    </td>
                 </tr>
                 {% else %}
                 <tr id="{{ n.news_id }}_Record">
                     <form method="POST">
                         {% csrf_token %}
-                        <!-- {{editnews_form}} -->
                         <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
                         <td id="{{ n.news_id }}_for_whome" class="for_whome">{{ editnews_form.for_whome }}</td>
                         <td id="{{ n.news_id }}_news_content" class="news_content">{{ editnews_form.news_content }}</td>
                         <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ editnews_form.hyperlink }}</td>
                         <td>
                             <button type="submit">SAVE</button>
-                            <button type="button" onclick="viewDeleteConfBox()">CANCAL</button>
+                            <a href="{% url 'news_manager' %}">Cancal</a>
                         </td>
                         
                     </form>
@@ -101,22 +105,21 @@
                 {% endif %}
                 {% endfor %}
             </table>
-            <!-- {% if editnews_form %}
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="news_id" value="{{ news_id }}">
-                {{ editnews_form }}
-                <td><button type="submit">SAVE</button></td>
-            </form>
-            <form method="POST">
-                {% csrf_token %}
-                {{editnews_form}}
-                <button type="submit">Submit</button>
-            </form>
-            {% endif %} -->
         </div>        
     </div>
 </div>
+
+{% if delnews_id %}
+<form method="POST">
+    {% csrf_token %}
+    <div id="deleteConfDialogbox">
+        <p id="conftext">Are you sure you want to delete news having news id = {{ delnews_id }}</p>
+        <button type="submit" id="deletebtn">Delete</button>
+        <a id="cancalbtn" href="{% url 'news_manager' %}">Cancal</a>
+    </div>
+</form>
+    
+{% endif %}
 
 {% endblock %}
 

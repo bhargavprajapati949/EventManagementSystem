@@ -261,4 +261,12 @@ input:checked [type="checkbox"] {
   background-color: #03a9f4;
 }
 
+#deleteConfDialogbox{
+  position: fixed;
+  left: 40%;
+  top: 40%;
+  background-color: #4867e0;
+  padding: 10px;
+}
+
 
