@@ -60,6 +60,11 @@
             <p id="date_time">{{ eventdetail.date_time }}</p>
         </div>
             
+        <div>
+            <label for="fees">Fees</label>    
+            <p id="date_time">{{ eventdetail.fees }}</p>
+        </div>
+
         <a href="{% url 'event_edit' event_id=eventdetail.event_id %}">Event Edit</a>
         <a href="{% url 'event_delete' event_id=eventdetail.event_id %}">Delete Event</a>
         <a href="{% url 'event_manager' %}">Back to Event Manager</a>
@@ -128,6 +133,11 @@
                 <p id="date_time">{{ editevent_form.date_time }}</p>
             </div>
             
+            <div>
+                <label for="fees">Fees</label>    
+                <p id="fees">{{ editevent_form.fees }}</p>
+            </div>
+
             <button type="submit">SAVE</button>
             <a href="{% url 'event_info' event_id=editevent_id %}">Cancal</a>
         </form>

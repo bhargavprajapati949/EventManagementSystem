@@ -37,6 +37,15 @@
             </p> -->
         </div>
         {% endfor %}
+        {% for field in infoform %}
+        <div class="fieldWrapper" id="{{ field.id_for_label }}wrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+        {% endfor %}
         <button type="submit">Submit</button>
     </form>
 </body>

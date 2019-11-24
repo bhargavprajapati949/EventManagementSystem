@@ -32,11 +32,24 @@
             {{ field.errors }}
         </div>
         {% endfor %}
+
+        {% for event in events %}
+        <div class="eventWrapper">
+            <input type="checkbox" id="{{ event.event_name }}_checkbox" name="select_event" value="{{event.event_name}}" onchange="changeToAmount('{{event.event_name}}', '{{event.fees}}')">
+            <label for="{{ event.event_name }}">{{ event.event_name }}</label>
+            <p>Fees : <span id="fees_{{event.event_name}}">{{event.fees}}</span></p>
+        </div>
+        {% endfor %}
+
         <button type="submit">Submit</button>
     </form>
+    <div>
+        <label for="total_fees">Total Fees</label>
+        <p id="total_fees">0</p>
+    </div>
         
 {% endblock %}
     
-    {% block loadScript %}
-        <!-- <script src="../script/registration.js" type="text/javascript"></script> -->
-    {% endblock %}
+{% block loadScript %}
+    <script src="{% static 'script/registration.js' %}" type="text/javascript"></script>]
+{% endblock %}

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from UserManager.models import Collages, User, Participant
+from EventWebSite.models import Registers, Event
 
 
 class ParticipantRegForm(UserCreationForm):
@@ -21,6 +22,7 @@ class ParticipantRegForm(UserCreationForm):
 
         user.save()
         Participant.objects.create(reg_no = user)
+
         return user
         
         
