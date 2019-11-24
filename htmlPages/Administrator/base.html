@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
+    <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
     {% block title %}
 
     {% endblock %}
@@ -22,33 +22,41 @@
         <img src="{% static 'media/avatar_logo.png' %}" id="profile_image">
         <div class="profile_name">Profile</div>
         
+<<<<<<< HEAD
         <ul class="admin_links">
+=======
+        <ul class="admin_links">    
+>>>>>>> f52b946c8e569f66147e76838855a249d97e3faf
             <li id="manage_label" style="margin-bottom: 10px; list-style-type: none;">
                 <div class="dropdown">
                     <button class="dropbtn">Manage 
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
+<<<<<<< HEAD
                         <a href="participant_manager">Participant</a>
                         <a href="volunteer_manager">Volunteer</a>
                         <a href="event_head_manager">Event Head</a>
                         <a href="coordinator_manager">Co-ordinator</a>
                         <a href="collage_manager">Colleges</a>
                         <a href="news_manager">News</a>
+=======
+                        <a href="{% url 'participant_manager' %}">Participant</a>
+                        <a href="{% url 'volunteer_manager' %}">Volunteer</a>
+                        <a href="{% url 'event_head_manager' %}">Event Head</a>
+                        <a href="{% url 'coordinator_manager' %}">Co-ordinator</a>
+                        <a href="{% url 'event_manager' %}">Events</a>
+                        <a href="{% url 'collage_manager' %}">Colleges</a>
+                        <a href="{% url 'news_manager' %}">News</a>
+                        <a href="{% url 'stream_manager' %}">Stream</a>  
+>>>>>>> f52b946c8e569f66147e76838855a249d97e3faf
                     </div>
-                </li>
-            
-
-            
-                    <li id="collect_money_label" style="list-style-type: none;"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
-            
-            
-            
-                    <li id="sign_out_label" style="list-style-type: none;"><a id="Sign_Out" href="#">&nbsp;Sign Out</a></li>
-        
+                </div>
+            </li>
+            <li id="collect_money_label" style="list-style-type: none;"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
+            <li id="sign_out_label" style="list-style-type: none;"><a id="Sign_Out" href="#">&nbsp;Sign Out</a></li>
         </ul>
     </div>
-
     <div class="header">
 
     </div>
@@ -57,5 +65,8 @@
 
     {% endblock %}
     
+    {% block loadscript %}
+
+    {% endblock %}
 </body>
 </html>

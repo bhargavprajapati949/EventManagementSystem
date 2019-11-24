@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
+    <title>NU Tech | Event Committee </title>
+</head>
+<body>
+    <div id="login">
+        <a href="#">Volunteer</a>
+        <a href="#">Co Ordinator</a>
+        <a href="#">Event Head</a>
+        <a href="{% url 'admin_login' %}">Admin</a>
+    </div>
+    <div id="Registration">
+        <a href="eventCommitteeRegForm">Register</a>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Submit</button>
+    </form>
+    
+</body>
+</html>

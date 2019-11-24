@@ -1,0 +1,42 @@
+{% extends  'EventWebSite/base.html' %}
+
+{% load static %}
+
+{% block loadcss %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">  
+{% endblock %}
+
+{% block title %}
+    <title>Registration | NUTECH-2020</title>
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <form method="POST" style="background-color: blue;">
+        {% csrf_token %}
+
+        {% for field in regform %}
+        <div id="{{ field.label }}Wrapper">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+                <p>{{ field.help_text|safe }}</p>
+            {% endif %}
+            {{ field.errors }}
+        </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+        
+{% endblock %}
+    
+    {% block loadScript %}
+        <!-- <script src="../script/registration.js" type="text/javascript"></script> -->
+    {% endblock %}

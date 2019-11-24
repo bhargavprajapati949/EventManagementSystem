@@ -1,49 +1,66 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from EventWebSite.models import news, Event, Parent_event 
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login as auth_login, logout
+from EventWebSite.models import news, Event
 from EventWebSite.form import ParticipantRegForm
+from UserManager.models import User, Participant
 
  # Create your views here.
 
 def redirectToHomepage(request):
-    return redirect('homepage')
+    return HttpResponseRedirect('homepage')
 
 def homepage(request):
 
     newsObject = news.objects.filter(for_whome='Participants')
 
-    return render(request, 'FestOfficialWebSite/homepage.html', {'news' : newsObject})
+    return render(request, 'EventWebSite/homepage.html', {'news' : newsObject})
 
 
 def login(request):
-    return render(request, 'FestOfficialWebSite/login.html')
+    if request.method == 'POST':
+        username = request.POST.get('usernamefield')
+        password = request.POST.get('passwordfield')
+        print('username = ', username)
+        print('password = ', password)
+        user = authenticate(username=username, password=password)
+        print('user object = ', user)
+        if user:
+            if user.is_participant:
+                auth_login(request, user)
+                print('login success')
+                return redirect('homepage')
+            else:
+                print('is_participant = false')
+                return HttpResponse('You are not registered. First Register yourself.')
+        else:
+            return HttpResponse('Invalid login details')
+            print('invalid details')
+    else:
+        print('get method')
+        return render(request, 'EventWebSite/login.html')
 
-# def register(request):
-#     form = UserCreationForm
-#     return render(request, 'FestOfficialWebSite/registration.html')
 
 def register(request):
     if request.method == 'POST':
         regform = ParticipantRegForm(data=request.POST)
-        if regform.is_valid():
-            user = regform.save()
-            print('done')
+        usercheck = User.objects.filter(email = request.POST.get('email'))
+        if usercheck and len(usercheck) == 1:
+            Participant.objects.create(reg_no = usercheck[0])
             return redirect('homepage')
         else:
-            return redirect('register')
+            if regform.is_valid():
+                user = regform.save()
+                print('done')
+                return redirect('homepage')
+            else:
+                print('invalid')
+                context = {'regform' : regform }
+                return render(request, 'EventWebSite/registration.html', context)
     else:
         regform = ParticipantRegForm()
         context = {'regform' : regform}
-        return render(request, 'FestOfficialWebSite/registration.html', context)
+        return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    content = {}
-    parent_events = Parent_event.objects.all()
-    # content['parent_event'] = parant_events
-    events = []
-    for pevent in parent_events:
-        event = Event.objects.filter(parent_event_id = pevent.parent_event_id)
-        events += event
-
-    content['events'] = events
-    return render(request, 'FestOfficialWebSite/event_detail.html', content)
+    return render(request, 'EventWebSite/event_detail.html')
