@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.generic import DetailView
 from UserManager.models import Collages, Stream
 from EventWebSite.models import news, Event
@@ -302,5 +302,6 @@ def news_delete(request, news_id):
 def collect_money(request):
     return render(request, 'Administrator/collect_money.html')
 
-def signout(request):
+def logout(request):
+    auth_logout(request)
     return redirect('admin_login')
