@@ -22,25 +22,14 @@
         <img src="{% static 'media/avatar_logo.png' %}" id="profile_image">
         <div class="profile_name">Profile</div>
         
-<<<<<<< HEAD
-        <ul class="admin_links">
-=======
+
         <ul class="admin_links">    
->>>>>>> f52b946c8e569f66147e76838855a249d97e3faf
             <li id="manage_label" style="margin-bottom: 10px; list-style-type: none;">
                 <div class="dropdown">
                     <button class="dropbtn">Manage 
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-<<<<<<< HEAD
-                        <a href="participant_manager">Participant</a>
-                        <a href="volunteer_manager">Volunteer</a>
-                        <a href="event_head_manager">Event Head</a>
-                        <a href="coordinator_manager">Co-ordinator</a>
-                        <a href="collage_manager">Colleges</a>
-                        <a href="news_manager">News</a>
-=======
                         <a href="{% url 'participant_manager' %}">Participant</a>
                         <a href="{% url 'volunteer_manager' %}">Volunteer</a>
                         <a href="{% url 'event_head_manager' %}">Event Head</a>
@@ -49,7 +38,6 @@
                         <a href="{% url 'collage_manager' %}">Colleges</a>
                         <a href="{% url 'news_manager' %}">News</a>
                         <a href="{% url 'stream_manager' %}">Stream</a>  
->>>>>>> f52b946c8e569f66147e76838855a249d97e3faf
                     </div>
                 </div>
             </li>
