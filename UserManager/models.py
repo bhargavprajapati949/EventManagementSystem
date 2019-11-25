@@ -58,7 +58,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    reg_no = models.AutoField(verbose_name = "Registration Number", primary_key = True)
+    reg_no = models.AutoField(verbose_name = "Registration Number", primary_key = True, unique = True)
 
     fname = models.CharField(verbose_name = "First Name", max_length = 50)
     lname = models.CharField(verbose_name = "Last Name", max_length = 50)

@@ -113,4 +113,6 @@ def register(request):
         return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    return render(request, 'EventWebSite/event_detail.html')
+    events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
+    context = {'events' : events}
+    return render(request, 'EventWebSite/event_detail.html', context)
