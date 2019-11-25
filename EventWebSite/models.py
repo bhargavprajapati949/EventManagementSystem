@@ -1,5 +1,5 @@
 from django.db import models
-from UserManager.models import User, Event_Commitee, Admin, Publicity_Volunteer, Event_Head
+from UserManager.models import User, Event_Committee, Admin, Volunteer, Event_Head
 
 # Create your models here.
 
@@ -13,6 +13,7 @@ class Event(models.Model):
     event_detail = models.TextField()
     rules = models.TextField()
     event_logo = models.ImageField(upload_to = 'event_logo/', null=True)
+    fees = models.IntegerField()
     event_statuses = [
         ('Available', 'Available'),
         ('Scrapped', 'Scrapped'),
@@ -37,14 +38,12 @@ class news(models.Model):
 
 class Registers(models.Model):
     reg_no = models.OneToOneField(User, primary_key = True, on_delete = models.CASCADE)
-    
-    remark = models.TextField()
+    remark = models.TextField(default = None, null=True)
     total_payment = models.IntegerField()
     remaining_payment = models.IntegerField()
-    paid_payment = models.IntegerField()
-    # filled_by = models.CharField(max_length = 50)
-    filled_by = models.ForeignKey(Publicity_Volunteer, null=True, on_delete = models.SET_NULL)
-    conformed = models.BooleanField(default = False)
+    paid_payment = models.IntegerField(default = 0)
+    filled_by = models.ForeignKey(Volunteer, null=True, on_delete = models.SET_NULL, default = None)
+    # conformed = models.BooleanField(default = False)
     is_paid = models.BooleanField(default = False)
 
 class Participation(models.Model):
@@ -62,7 +61,7 @@ class Participation(models.Model):
     ]
     reg_status = models.CharField(max_length = 50, choices = allowed_event_status)
     certi_otp = models.IntegerField()
-    event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
+    # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
     amount = models.IntegerField()
 
 
@@ -87,7 +86,7 @@ class to_whome_paid(models.Model):
 
 class vol_to_admin_pay(models.Model):
     a_id = models.ForeignKey(Admin, on_delete = models.SET_DEFAULT, default = 0)
-    vol_id = models.ForeignKey(Event_Commitee, on_delete = models.SET_DEFAULT, default = 0)
+    vol_id = models.ForeignKey(Event_Committee, on_delete = models.SET_DEFAULT, default = 0)
     amount = models.IntegerField(default = 0)
     date_time = models.DateTimeField()
 
@@ -96,5 +95,5 @@ class Sponsers(models.Model):
     name = models.CharField(max_length = 50)
     logo = models.ImageField(upload_to = 'sponsers_logo')
     amount = models.IntegerField(null = True)
-    done_by = models.ForeignKey(Event_Commitee, on_delete = models.SET_DEFAULT, default = 0)
+    done_by = models.ForeignKey(Event_Committee, on_delete = models.SET_DEFAULT, default = 0)
     date = models.DateField()

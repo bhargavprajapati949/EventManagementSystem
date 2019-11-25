@@ -90,9 +90,9 @@ class User(AbstractBaseUser):
         return True
 
 
-class Event_Commitee(models.Model):
+class Event_Committee(models.Model):
     reg_no = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
-    commitee_id = models.CharField(unique=True, max_length = 20)
+    committee_id = models.CharField(unique=True, max_length = 20)
     yearOfStudy = models.IntegerField()
 
     #Added as
@@ -116,22 +116,22 @@ class Participant(models.Model):
     reg_no = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
 
     def __str__(self):
-        return User.objects.filter(participant__reg_no = self.reg_no)
+        return User.objects.get(participant__reg_no = self.reg_no).email
 
-class Publicity_Volunteer(models.Model):
-    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
-    payment_hold = models.IntegerField()
+class Volunteer(models.Model):
+    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
+    payment_hold = models.IntegerField(default = 0)
     isActive = models.BooleanField(default = False)
 
 class Event_Head(models.Model):
-    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     isActive = models.BooleanField(default = False)
 
 class Coordinator(models.Model):
-    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     payment_hold = models.IntegerField()
     isActive = models.BooleanField(default = False)
 
 class Admin(models.Model):
-    reg_no = models.OneToOneField(Event_Commitee, on_delete = models.CASCADE, primary_key = True)
+    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     isActive = models.BooleanField(default = False)

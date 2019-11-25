@@ -35,10 +35,30 @@ def participant_manager(request):
     return render(request, 'Administrator/participant_manager.html')
 
 def volunteer_manager(request):
+    volunteerlist = Event.objects.all()
+    context = {}
     return render(request, 'Administrator/volunteer_manager.html')
+
+def volunteer_add(request):
+    if request.method == 'POST':
+        volunteer_form = volunteer_model_form(request.POST)
+        if volunteer_form.is_valid():
+            volunteer_form.save()
+            return redirect('volunteer_manager')
+        else:
+            context = {'volunteeradd_form' : volunteer_form}
+            return render(request, 'Administrator/volunteer_manager.html', context)
+    else:
+        pass
 
 def event_head_manager(request):
     return render(request, 'Administrator/event_head_manager.html')
+
+def event_head_add(request):
+    return render(request, 'Administrator/event_head_manager.html')
+
+def coordinator_add(request):
+    return render(request, 'Administrator/coordinator_manager.html')
 
 def coordinator_manager(request):
     return render(request, 'Administrator/coordinator_manager.html')
