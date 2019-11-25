@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from EventWebSite.models import news, Event, Registers, Participation
 from EventWebSite.form import ParticipantRegForm
 from UserManager.models import User, Participant
@@ -113,7 +113,10 @@ def register(request):
         return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    return render(request, 'EventWebSite/event_detail.html')
+    events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
+    context = {'events' : events}
+    return render(request, 'EventWebSite/event_detail.html', context)
 
-def participant_dashboard(request):
-    return render(request, 'EventWebSite/participant_dashboard.html')
+def participant_logout(request):
+    auth_logout(request)
+    return redirect('homepage')

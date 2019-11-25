@@ -8,21 +8,21 @@ from UserManager.models import User, Event_Committee, Admin, Volunteer, Event_He
 #     parent_event_name = models.CharField(max_length = 50, unique = True)
 
 class Event(models.Model):
-    event_id = models.AutoField(primary_key = True)
-    event_name = models.CharField(max_length = 50)
-    event_detail = models.TextField()
-    rules = models.TextField()
-    event_logo = models.ImageField(upload_to = 'event_logo/', null=True)
-    fees = models.IntegerField()
+    event_id = models.AutoField(primary_key = True, verbose_name = "Event Id")
+    event_name = models.CharField(max_length = 50, verbose_name = "Event Name")
+    event_detail = models.TextField(verbose_name = "Event Details")
+    rules = models.TextField(verbose_name = "Rules")
+    event_logo = models.ImageField(upload_to = 'event_logo/', null=True, verbose_name = "Event Logo")
+    fees = models.IntegerField(verbose_name = "Fees")
     event_statuses = [
         ('Available', 'Available'),
         ('Scrapped', 'Scrapped'),
         ('Delete', 'Delete'),
         ('Full', 'Full')
     ]
-    event_status = models.CharField(max_length = 30, choices = event_statuses)    
-    venue = models.CharField(max_length = 50)
-    date_time = models.DateTimeField(blank = True)
+    event_status = models.CharField(max_length = 30, choices = event_statuses, verbose_name = "Event Status")
+    venue = models.CharField(max_length = 50, verbose_name = "Venue")
+    date_time = models.DateTimeField(blank = True, verbose_name = "Event Date & Time")
     # parent_event = models.ForeignKey(Parent_event, on_delete = models.SET_DEFAULT, default = 0)
 
 class news(models.Model):

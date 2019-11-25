@@ -16,55 +16,26 @@
             <div class="event_title_container">
                 <p id="event_detail">Events</p>
             </div>
-
-            <div class="main_detail_container">
-                <div class="parent_event_container">
-                    <p id="parent_detail">Code-o-crates</p>
-                    
-                    <div class="child_event_container">
-                            <ul class="chid_event_list">
-                                    <li>Codejam</li>
-                                    <li>Coderun</li>
-                                    <li>Codezilla</li>
-                                    <li>Treasure Hunt</li>
-                                    <li>Jigsaw Puzzle</li>
-                                    <li>Enigma</li>
-                                </ul>
-                    </div>
-                </div>
+            
+            {% for event in events %}
+            <div class="eventbox">
+                <img src="media/{{ event.event_logo }}" height="300px" width="300px">
+                <p>{{event.event_name}}</p>
+                <p>{{event.event_status}}</p>
+                <p>{{event.event_detail}}</p>
             </div>
+            <div class="eventDetailWrapper">
+                <button>X</button>
+                <img src="media/{{ event.event_logo }}" height="300px" width="300px">
+                <p>{{event.event_name}}</p>
+                <p>{{event.event_status}}</p>
+                <p>{{event.event_detail}}</p>
+                <p>{{event.rules}}</p>
+                <p>{{event.fees}}</p>
+            </div>
+            {% endfor %}
+{% endblock %}
 
-            <div class="main_detail_container">
-                    <div class="parent_event_container">
-                        <p id="parent_detail">Code-o-crates</p>
-                        
-                        <div class="child_event_container">
-                                <ul class="chid_event_list">
-                                        <li>Codejam</li>
-                                        <li>Coderun</li>
-                                        <li>Codezilla</li>
-                                        <li>Treasure Hunt</li>
-                                        <li>Jigsaw Puzzle</li>
-                                        <li>Enigma</li>
-                                    </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="main_detail_container">
-                        <div class="parent_event_container">
-                            <p id="parent_detail">Code-o-crates</p>
-                            
-                            <div class="child_event_container">
-                                    <ul class="chid_event_list">
-                                            <li>Codejam</li>
-                                            <li>Coderun</li>
-                                            <li>Codezilla</li>
-                                            <li>Treasure Hunt</li>
-                                            <li>Jigsaw Puzzle</li>
-                                            <li>Enigma</li>
-                                        </ul>
-                            </div>
-                        </div>
-                    </div>
+{% block loadScript %}
+<script src="{% static 'script/event_detail.html' %}"></script>
 {% endblock %}
