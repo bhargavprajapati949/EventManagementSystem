@@ -34,8 +34,12 @@
         </nav>
 
         <div class="login_container">
+            {% if user.is_authenticated %}
+            <a href="{% url 'participant_dashboard' %}"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button></a>
+            {% else %}
             <a href="register"><button type="submit" id="login_btn" class="submit_btn">Register</button></a>
             <a href="login"><button type="submit" id="login_btn" class="submit_btn">Sign In</button></a>
+            {% endif %}
         </div>
     </div>
 

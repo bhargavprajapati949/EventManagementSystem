@@ -113,21 +113,23 @@ body {
 
 #reg_btn_container {
     position: absolute;
-    left: 94%;
-    top: 5%;
+    left: 50%;
+    top: 78%;
     transform: translate(-50%, -50%);
 }
 
 #reg_btn {
     background: #03a9f4;
     color: azure;
-    width: 150px;
+    width: 200px;
     height: 50px;
     border: 1px solid azure;
+    text-decoration: none;
     font-size: 15px;
     border-radius: 10px;
     transition: .5s;
     overflow: hidden;
+    padding: 5px 20px;
 }
 
 /*#reg_btn:focus {

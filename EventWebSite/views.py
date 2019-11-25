@@ -114,3 +114,6 @@ def register(request):
 
 def event_detail(request):
     return render(request, 'EventWebSite/event_detail.html')
+
+def participant_dashboard(request):
+    return render(request, 'EventWebSite/participant_dashboard.html')

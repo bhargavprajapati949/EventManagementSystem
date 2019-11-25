@@ -182,3 +182,13 @@ body{
     padding-bottom: 50px;
     padding-left: 100px;
 }
+
+#profile_btn {
+    width: 150px;
+    height: 50px;
+    font-size: 120%;
+    border-radius: 0;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    border: none;
+    color: white;
+}

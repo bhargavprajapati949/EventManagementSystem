@@ -1,0 +1,18 @@
+{% extends 'EventWebSite/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block loadcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/participant_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dropdown-profile-content">
+        <a href="{% url 'participant_dashboard' %}">Dashborad</a>
+        <a href="{% url 'participant_dashboard' %}">Log Out</a>  
+    </div>
+{% endblock %}
