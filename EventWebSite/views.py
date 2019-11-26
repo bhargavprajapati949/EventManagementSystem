@@ -112,9 +112,10 @@ def register(request):
         return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
-    context = {'events' : events}
-    return render(request, 'EventWebSite/event_detail.html', context)
+    return render(request, 'EventWebSite/event_detail.html')
+
+def participant_dashboard(request):
+    return render(request, 'EventWebSite/participant_dashboard.html')
 
 def participant_dashboard(request):
     return render(request, 'EventWebSite/participant_dashboard.html')
