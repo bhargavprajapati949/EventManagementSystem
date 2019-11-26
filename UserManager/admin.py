@@ -6,7 +6,6 @@ from UserManager.models import *
 admin.site.register(Stream)
 admin.site.register(Collages)
 admin.site.register(User)
-admin.site.register(Participant)
 admin.site.register(Event_Committee)
 admin.site.register(Volunteer)
 admin.site.register(Event_Head)

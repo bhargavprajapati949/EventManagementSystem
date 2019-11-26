@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('EventWebSite.urls')),
     path('administrator/', include('Administrator.urls')),
     path('EventCommittee/', include('UserManager.urls')),
+    path('eventHead/', include('EventHead.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

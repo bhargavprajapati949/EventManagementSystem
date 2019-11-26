@@ -25,7 +25,7 @@ class EventCommitteeRegForm(UserCreationForm):
         user = super(EventCommitteeRegForm, self).save(commit=False)
         user.fname = self.cleaned_data['fname']
         user.lname = self.cleaned_data['lname']
-        user.email = self.cleaned_data['email'] + "@nirmauni.ac.in"
+        user.email = self.cleaned_data['email']
         user.contect_no = self.cleaned_data['contect_no']
         user.clg_id = self.cleaned_data['clg_id']
         # user.password = self.cleaned_data['password']

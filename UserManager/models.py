@@ -111,13 +111,6 @@ class Event_Committee(models.Model):
     in_graphics = models.BooleanField(default=False)
     in_eventManagement = models.BooleanField(default=False)
 
-    
-class Participant(models.Model):
-    reg_no = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
-
-    def __str__(self):
-        return User.objects.get(participant__reg_no = self.reg_no).email
-
 class Volunteer(models.Model):
     reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     payment_hold = models.IntegerField(default = 0)
@@ -135,3 +128,4 @@ class Coordinator(models.Model):
 class Admin(models.Model):
     reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     isActive = models.BooleanField(default = False)
+

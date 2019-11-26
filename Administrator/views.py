@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.generic import DetailView
 from UserManager.models import Collages, Stream
-from EventWebSite.models import news, Event
+from EventWebSite.models import news, Event, Registers
 from Administrator.forms import *
 # Create your views here.
 
@@ -32,7 +32,35 @@ def admin_dashboard(request):
     return render(request, 'Administrator/admin_dashboard.html')
 
 def participant_manager(request):
-    return render(request, 'Administrator/participant_manager.html')
+    participant_list = Registers.objects.values('reg_no', 'reg_no__fname', 'reg_no__lname', 'reg_no__email', 'reg_no__contect_no', 'reg_no__clg_id__clg_name', 'reg_no__stream__stream_name', 'remark', 'total_payment', 'remaining_payment', 'paid_payment', 'filled_by__reg_no__committee_id', 'is_paid')
+    context = {'participant_list' : participant_list}
+    return render(request, 'Administrator/participant_manager.html', context)
+
+def participant_detail(request, reg_no):
+    print(reg_no)
+    participant = Registers.objects.filter(reg_no = reg_no).values('reg_no', 'reg_no__fname', 'reg_no__lname', 'reg_no__email', 'reg_no__contect_no', 'reg_no__clg_id__clg_name', 'reg_no__stream__stream_name', 'remark', 'total_payment', 'remaining_payment', 'paid_payment', 'filled_by__reg_no__committee_id', 'is_paid')[0]
+    context = {'participant' : participant, 'detail_form' : True}
+    return render(request, 'Administrator/participant_details.html', context)
+
+def participant_edit(request, reg_no):
+    print('participant_edit called')
+    participant_user = User.objects.get(reg_no = reg_no)
+    registration = Registers.objects.get(reg_no = reg_no)
+    if request.method == 'POST':
+        participant_user_form = participant_user_model_form(data = request.POST, instance = participant_user)
+        registers_form = registers_model_form(data = request.POST, instance = registration)
+        if participant_user_form.is_valid() and registers_form.is_valid():
+            participant_user_form.save()
+            registers_form.save()
+            return redirect('participant_manager')
+        else:
+            context = {'participant_user_form' : participant_user_form, 'registers_form' : registers_form, 'edit_form' : True , 'participant' : registration}
+            return render(request, 'Administrator/participant_details.html', context)
+    else:
+        participant_user_form = participant_user_model_form(instance = participant_user)
+        registers_form = registers_model_form(instance = registration)
+        context = {'participant_user_form' : participant_user_form, 'registers_form' : registers_form, 'edit_form' : True , 'participant' : registration, 'reg_no':participant_user.reg_no}
+        return render(request, 'Administrator/participant_details.html', context)
 
 def volunteer_manager(request):
     volunteerlist = Event.objects.all()
