@@ -151,7 +151,7 @@ body{
 
 
 /* EVENT STATUS TABLE */
-* {
+.middle *{
 	margin: 0;
 	padding: 0;
 	font-family: sans-serif;
@@ -167,7 +167,7 @@ body{
 }
 
 .menu {
-	width: 800%;
+	width: 400%;
 	border-radius: 8px;
 	overflow: hidden;
 }
@@ -184,17 +184,6 @@ body{
 	color: white;
 }
 
-.btn:before {
-	content: "";
-	position: absolute;
-	width: 14px;
-	height: 14px;
-	background-color: #3498db;
-	left: 20px;
-	bottom: -7px;
-	transform: rotate(45deg);
-}
-
 .smenu {
 	background-color: #333;
 	overflow: hidden;
@@ -202,7 +191,7 @@ body{
 	max-height: 0;
 }
 
-.smenu a {
+.smenu p {
 	display: block;
 	padding: 16px 26px;
 	color: white;
@@ -211,7 +200,7 @@ body{
 	position: relative;
 }
 
-.smenu a:before {
+.smenu p:before {
 	content: "";
 	position: absolute;
 	width: 6px; 

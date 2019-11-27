@@ -11,42 +11,112 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if userinfo.remark %}
     <div class="remark_div">
         <p>Remark: </p>
         <p>There is nothing remark for you</p>
     </div>
+    {% endif %}
 
     <div class="Payment_div">
-        <p>Payment Status: </p>
+        <p>Payment Status</p>
+        <p>Total Amount : {{ userinfo.total_payment }}</p>
+        <p>Paid : {{ userinfo.paid_payment }}</p>
+        <a href="#">Click here to pay</a>
     </div>
 
     <div class="event_status_table_title" id="sponsers">Event Status</div>
 
     <div class="middle">
             <div class="menu">
-                <li class="item" id="profile">
-                    <a href="#profile" class="btn">Profile</a>
-                    <div class="smenu">
-                        <a href="#">Posts</a>
-                        <a href="#">Picture</a>
-                    </div>
-                </li>
-    
-                <li class="item" id="messages">
-                    <a href="#messages" class="btn">Messages</a>
-                    <div class="smenu">
-                        <a href="#">News</a>
-                        <a href="#">Sent</a>
-                    </div>
-                </li>
-    
-                <li class="item" id="settings">
-                    <a href="#settings" class="btn">Settings</a>
-                    <div class="smenu">
-                        <a href="#">Language</a>
-                        <a href="#">Password</a>
-                    </div>
-                </li>
+                    {% for event in events %}
+                    {% if event.reg_status == 'Not Paid' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>Payment Status: Not Paid</p>
+                            <p>Pay Fees for conform registration in event.</p>
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Paid' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>Payment Status : Paid</p>
+                            {% if event.event_id__date_time %}
+                            <p>Event Date & Time : {{event.event_id__date_time}}</p>
+                            {% endif %}
+                            {% if event.event_id__venue %}
+                            <p>Venue : {{event.event_id__venue}}</p>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Comform' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>You Registration for event is conform.</p>
+                            {% if event.event_id__date_time %}
+                            <p>Event Date & Time : {{event.event_id__date_time}}</p>
+                            {% endif %}
+                            {% if event.event_id__venue %}
+                            <p>Venue : {{event.event_id__venue}}</p>
+                            {% endif %}
+                            {% if event.attendance_otp %}
+                            <p>OTP for Attendance : {{event.attendance_otp }}</p>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Attended' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>You have Successfully attended the event {{event.event_id__event_name}}.</p>
+                            <p>OTP for Certificate : {{event.certi_otp }}</p>
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Attended Winner' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>Congratulations, You are winner of the event {{event.event_id__event_name}}.</p>
+                            <p>Winning Position : {{winner.position}}</p>
+                            <p>OTP for Winner Certificate : {% if event.winner_reg_no__winning_certi_otp %}{{event.winner_reg_no__winning_certi_otp }}{% endif %}</p>
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Certificate Issued' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>Congratulations, Your Certificate for the event {{event.event_id__event_name}} is Issued.</p>
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Winner Certificate Issued' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>Congratulations, You are winner of the event {{event.event_id__event_name}}.</p>
+                            <p>Winning Position : {{winner.position}}</p>
+                            <p>You winning Certificate is Issued Successfully.</p>
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Scrapped' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>This event is Scrapped due to less participantion. </p>
+                        </div>
+                    </li>
+                    {% elif event.reg_status == 'Delete' %}
+                    <li class="item" id="id_{{event.event_id__event_name}}">
+                        <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
+                        <div class="smenu">
+                            <p>This Event is Deleted</p>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
 {% endblock %}

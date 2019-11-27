@@ -21,8 +21,8 @@ class Event(models.Model):
         ('Full', 'Full')
     ]
     event_status = models.CharField(max_length = 30, choices = event_statuses, verbose_name = "Event Status")
-    venue = models.CharField(max_length = 50, verbose_name = "Venue")
-    date_time = models.DateTimeField(blank = True, verbose_name = "Event Date & Time")
+    venue = models.CharField(max_length = 50, verbose_name = "Venue", null=True)
+    date_time = models.DateTimeField(blank = True, null=True, verbose_name = "Event Date & Time")
     # parent_event = models.ForeignKey(Parent_event, on_delete = models.SET_DEFAULT, default = 0)
 
 class news(models.Model):
@@ -50,17 +50,19 @@ class Participation(models.Model):
     reg_no = models.ForeignKey(Registers, on_delete = models.CASCADE)
     event_id = models.ForeignKey(Event, on_delete = models.SET_DEFAULT, default = 0)
     allowed_event_status = [
-        ('Not_paid', 'Not Paid'),
+        ('Not Paid', 'Not Paid'),
         ('Paid', 'Paid'),
         ('Comform', 'Conform'), 
         ('Attended', 'Attended'),
-        ('Certificate_issued', 'Certificate Issued'),
-        ('Attended_winner', 'Attended Winner'),
+        ('Attended Winner', 'Attended Winner'),
+        ('Certificate Issued', 'Certificate Issued'),
+        ('Winner Certificate Issued', 'Winner Certificate Issued'),
         ('Scrapped', 'Scrapped'),
         ('Delete', 'Delete')
     ]
     reg_status = models.CharField(max_length = 50, choices = allowed_event_status)
     certi_otp = models.IntegerField()
+    attendance_otp = models.IntegerField()
     # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
     # amount = models.IntegerField()
 
@@ -73,9 +75,9 @@ class Winner(models.Model):
         ('3', 'Third')
     ]
     position = models.IntegerField(choices = allowed_positions)
-    winner_reg_no = models.ForeignKey(Registers, on_delete = models.SET_DEFAULT, default = 0)
+    winner_reg_no = models.ForeignKey(Participation, on_delete = models.SET_DEFAULT, default = 0)
     winning_certificate_issue = models.BooleanField(default = False)
-    certi_otp = models.IntegerField()
+    winning_certi_otp = models.IntegerField()
     event_head_id = models.ForeignKey(Event_Head, null=True, on_delete = models.SET_NULL)
 
 class to_whome_paid(models.Model):

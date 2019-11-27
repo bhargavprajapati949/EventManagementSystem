@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from EventWebSite.models import news, Event, Registers, Participation
+from EventWebSite.models import news, Event, Registers, Participation, Winner
 from EventWebSite.form import ParticipantRegForm
 from UserManager.models import User
 
@@ -66,9 +66,9 @@ def register(request):
                 Participation.objects.create(
                     reg_no = reg,
                     event_id = selected_event_obj[event],
-                    reg_status = 'Not_paid',
-                    certi_otp = random.randrange(1, 9999)
-                    # amount = selected_event_obj[event].fees
+                    reg_status = 'Not Paid',
+                    certi_otp = random.randrange(1000, 9999),
+                    attendance_otp = random.randrange(1000, 9999)
                 )
                 
             return redirect('homepage')
@@ -93,9 +93,9 @@ def register(request):
                     Participation.objects.create(
                         reg_no = reg,
                         event_id = selected_event_obj[event],
-                        reg_status = 'Not_paid',
-                        certi_otp = random.randrange(1, 9999)
-                        # amount = selected_event_obj[event].fees
+                        reg_status = 'Not Paid',
+                        certi_otp = random.randrange(1, 9999),
+                        attendance_otp = random.randrange(1000, 9999)
                     )
 
                 print('done')
@@ -112,13 +112,19 @@ def register(request):
         return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    return render(request, 'EventWebSite/event_detail.html')
+    events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
+    context = {'events' : events}
+    return render(request, 'EventWebSite/event_detail.html', context)
 
-def participant_dashboard(request):
-    return render(request, 'EventWebSite/participant_dashboard.html')
-
-def participant_dashboard(request):
-    return render(request, 'EventWebSite/participant_dashboard.html')
+def participant_dashboard(request, reg_no):
+    user_details_obj = Registers.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment')[0]
+    events = Participation.objects.filter(reg_no = reg_no).values('reg_status', 'event_id__event_name', 'event_id__date_time', 'event_id__venue', 'attendance_otp', 'certi_otp' )
+    context = {'userinfo' : user_details_obj, 'events' : events, 'status' : 'status'}
+    winner = Winner.objects.filter(winner_reg_no = reg_no)
+    if winner:
+        winner.values('position', 'winning_certificate_issue', 'winning_certi_otp', 'event_head_id')
+        context['winner'] = winner
+    return render(request, 'EventWebSite/participant_dashboard.html', context)
 
 def participant_logout(request):
     auth_logout(request)
