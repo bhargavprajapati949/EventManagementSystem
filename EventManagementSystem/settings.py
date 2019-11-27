@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'UserManager.apps.UsermanagerConfig',
     'EventWebSite.apps.EventwebsiteConfig',
     'Administrator.apps.AdministratorConfig',
+    'EventHead.apps.EventheadConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,6 +1,16 @@
 from django import forms
-from EventWebSite.models import news, Event
-from UserManager.models import Collages, Stream, Volunteer
+from EventWebSite.models import news, Event, Registers
+from UserManager.models import Collages, Stream, User, Volunteer
+
+class registers_model_form(forms.ModelForm):
+    class Meta:
+        model = Registers
+        fields = ('remark',)
+
+class participant_user_model_form(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('fname', 'lname', 'contect_no', 'email', 'clg_id', 'stream')
 
 class event_model_form(forms.ModelForm):
     class Meta:

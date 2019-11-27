@@ -6,7 +6,10 @@ urlpatterns = [
    path('', views.redirectToAdmin_login, name='redirectToAdmin_login'),
    path('admin_login', views.admin_login, name='admin_login'),
    path('admin_dashboard', views.admin_dashboard, name='admin_dashboard'),
+
    path('participant_manager', views.participant_manager, name='participant_manager'),
+   path('participant_edit/<?P<reg_no>', views.participant_edit, name='participant_edit'),
+   path('participant_detail/<?P<reg_no>', views.participant_detail, name='participant_detail'),
 
    path('volunteer_manager', views.volunteer_manager, name='volunteer_manager'),
    path('volunteer_add', views.volunteer_add, name='volunteer_add'),

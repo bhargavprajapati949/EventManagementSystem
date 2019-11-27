@@ -62,7 +62,7 @@ class Participation(models.Model):
     reg_status = models.CharField(max_length = 50, choices = allowed_event_status)
     certi_otp = models.IntegerField()
     # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
-    amount = models.IntegerField()
+    # amount = models.IntegerField()
 
 
 class Winner(models.Model):

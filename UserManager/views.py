@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from UserManager.form import EventCommitteeRegForm, EventCommitteeDetailForm
-from UserManager.models import User, Participant
+from UserManager.models import User
 
 from Administrator.forms import news_model_form
 from EventWebSite.models import news

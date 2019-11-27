@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from EventWebSite.models import news, Event, Registers, Participation
 from EventWebSite.form import ParticipantRegForm
-from UserManager.models import User, Participant
+from UserManager.models import User
 
 import random
 
@@ -48,7 +48,6 @@ def register(request):
         regform = ParticipantRegForm(data=request.POST)
         usercheck = User.objects.filter(email = request.POST.get('email'))
         if usercheck and len(usercheck) == 1:
-            Participant.objects.create(reg_no = usercheck[0])
 
             selected_events = request.POST.getlist('select_event')
 
@@ -68,8 +67,8 @@ def register(request):
                     reg_no = reg,
                     event_id = selected_event_obj[event],
                     reg_status = 'Not_paid',
-                    certi_otp = random.randrange(1, 9999), 
-                    amount = selected_event_obj[event].fees
+                    certi_otp = random.randrange(1, 9999)
+                    # amount = selected_event_obj[event].fees
                 )
                 
             return redirect('homepage')
@@ -95,8 +94,8 @@ def register(request):
                         reg_no = reg,
                         event_id = selected_event_obj[event],
                         reg_status = 'Not_paid',
-                        certi_otp = random.randrange(1, 9999), 
-                        amount = selected_event_obj[event].fees
+                        certi_otp = random.randrange(1, 9999)
+                        # amount = selected_event_obj[event].fees
                     )
 
                 print('done')
@@ -114,6 +113,9 @@ def register(request):
 
 def event_detail(request):
     return render(request, 'EventWebSite/event_detail.html')
+
+def participant_dashboard(request):
+    return render(request, 'EventWebSite/participant_dashboard.html')
 
 def participant_dashboard(request):
     return render(request, 'EventWebSite/participant_dashboard.html')
