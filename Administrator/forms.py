@@ -1,5 +1,5 @@
 from django import forms
-from EventWebSite.models import news, Event, Registers
+from EventWebSite.models import news, Event, Registers, Event_Head
 from UserManager.models import Collages, Stream, User, Volunteer
 
 class registers_model_form(forms.ModelForm):
@@ -39,3 +39,19 @@ class volunteer_model_form(forms.ModelForm):
     class Meta:
         model = Volunteer
         fields = ('reg_no',)
+
+class event_head_model_form(forms.ModelForm):
+    class Meta:
+        model = Event_Head
+        fields = ('reg_no', 'event')
+
+    def save(self):
+        event_head = super(event_head_model_form, self).save(commit=False)
+        event_head.isActive = True
+        event_head.save()
+        return event_head
+
+class event_head_isActive_form(forms.ModelForm):
+    class Meta:
+        model = Event_Head
+        fields = ('isActive',)

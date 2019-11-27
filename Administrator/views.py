@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.generic import DetailView
-from UserManager.models import Collages, Stream
-from EventWebSite.models import news, Event, Registers
+from UserManager.models import Collages, Stream, Event_Committee
+from EventWebSite.models import news, Event, Registers, Event_Head
 from Administrator.forms import *
 # Create your views here.
 
@@ -27,6 +27,9 @@ def admin_login(request):
         msg = ""
         context = {'message' : msg , "email" : ""}
         return render(request, 'Administrator/admin_login.html')
+
+def admin_login_require(request):
+    return render(request, 'Administrator/admin_login_require.html')
 
 def admin_dashboard(request):
     return render(request, 'Administrator/admin_dashboard.html')
@@ -80,10 +83,47 @@ def volunteer_add(request):
         pass
 
 def event_head_manager(request):
-    return render(request, 'Administrator/event_head_manager.html')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            addeventhead_form = event_head_model_form(request.POST)
+            if addeventhead_form.is_valid():
+                if not Event_Head.objects.filter(reg_no = request.POST['reg_no'], event = request.POST['event']):
+                    eventhead = addeventhead_form.save()
+                return redirect(event_head_manager)
+            else:
+                eventhead_list = Event_Head.objects.all().values('reg_no', 'event__event_name', 'reg_no__reg_no__fname', 'reg_no__reg_no__lname', 'reg_no__reg_no__contect_no', 'reg_no__reg_no__email', 'isActive', 'event__event_id')
+                context = {'eventhead_list' : eventhead_list, 'addeventhead_form' : addeventhead_form}
+                return render(request, 'Administrator/event_head_manager.html', context)
+        else:
+            eventhead_list = Event_Head.objects.all().values('reg_no', 'event__event_name', 'reg_no__reg_no__fname', 'reg_no__reg_no__lname', 'reg_no__reg_no__contect_no', 'reg_no__reg_no__email', 'isActive', 'event__event_id')
+            addeventhead_form = event_head_model_form()
+            context = {'eventhead_list' : eventhead_list, 'addeventhead_form' : addeventhead_form}
+            return render(request, 'Administrator/event_head_manager.html', context)
+    else:
+        return redirect('admin_login_require')
+    
 
-def event_head_add(request):
-    return render(request, 'Administrator/event_head_manager.html')
+def eventhead_active(request, reg_no, event):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            eh = Event_Head.objects.filter(reg_no = reg_no, event = event)
+            for item in eh:
+                item.isActive = True
+                item.save()
+            return redirect('event_head_manager')
+    else:
+        return redirect('admin_login_require')
+
+def eventhead_disable(request, reg_no, event):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            eh = Event_Head.objects.filter(reg_no = reg_no, event = event)
+            for item in eh:
+                item.isActive = False
+                item.save()
+            return redirect('event_head_manager')
+    else:
+        return redirect('admin_login_require')
 
 def coordinator_add(request):
     return render(request, 'Administrator/coordinator_manager.html')
@@ -135,6 +175,7 @@ def event_edit(request, event_id):
     print("news_edit called")
     if request.method == 'POST':
         print("post called")
+        print(request.FILES[''])
         editevent_form = event_model_form(request.POST, request.FILES , instance = event_obj)
         if editevent_form.is_valid():
             print("valid data")
@@ -329,6 +370,12 @@ def news_delete(request, news_id):
 
 def collect_money(request):
     return render(request, 'Administrator/collect_money.html')
+
+def profile_administrator(request, reg_no):
+    userinfo = User.objects.filter(reg_no = reg_no).values('reg_no', 'fname', 'lname', 'email', 'contect_no', 'clg_id__clg_name', 'stream__stream_name')[0]
+    committeeinfo = Event_Committee.objects.filter(reg_no = reg_no).values('committee_id', 'yearOfStudy')
+    context = {'userinfo' : userinfo, 'committeeinfo' : committeeinfo}
+    return render(request, 'Administrator/profile.html', context)
 
 def logout(request):
     auth_logout(request)

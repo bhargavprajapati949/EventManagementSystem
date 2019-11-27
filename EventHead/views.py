@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.views.generic import DetailView
 from django.contrib.auth.decorators import login_required
 from UserManager.models import Event_Committee
+from EventWebSite.models import Participation
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ def eventHead_login(request):
             msg = "Email or Password is not valid"
             print(msg)
             context = {'message' : msg, 'email' : email}
-            return render(request, 'Administrator/eventHead_login.html', context)
+            return render(request, 'EventHead/eventHead_login.html', context)
     else:
         msg = ""
         context = {'message' : msg , "email" : ""}
@@ -30,8 +31,40 @@ def eventHead_login(request):
 
 #only login
 def eventHead_dashboard(request):
-    print(request.user)
     if request.user.is_authenticated:
         return render(request, 'EventHead/eventHead_dashboard.html')
     else:
         return redirect('eventHead_login')
+
+def attendance(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            pass
+        else:
+            pass
+    else:
+        return redirect('eventHead_login')
+
+def participation_info(request):
+    if request.user.is_authenticated:
+        participation_data = Participation.objects.filter()
+        print('pass')
+    else:
+        return redirect('eventHead_login')
+
+def enter_result(request):
+    if request.user.is_authenticated:
+        pass
+    else:
+        return redirect('eventHead_login')
+        
+
+def event_head_profile(request):
+    if request.user.is_authenticated:
+        pass
+    else:
+        return redirect('eventHead_login')
+
+def logout(request):
+    auth_logout(request)
+    return redirect('eventHead_login')

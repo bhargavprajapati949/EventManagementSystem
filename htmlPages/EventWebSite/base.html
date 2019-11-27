@@ -40,7 +40,7 @@
                     <a href="#"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
                 <div>
                     <a href="{% url 'participant_dashboard' reg_no=user.reg_no %}">Dashborad</a>
-                    <a href="{% url 'profile'%}">Profile</a>
+                    <a href="{% url 'profile_participant' reg_no=user.reg_no %}">Profile</a>
                     <a href="{% url 'participant_logout' %}">Log Out</a>  
                 </div>
             </div>

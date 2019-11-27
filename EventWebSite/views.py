@@ -126,9 +126,11 @@ def participant_dashboard(request, reg_no):
         context['winner'] = winner
     return render(request, 'EventWebSite/participant_dashboard.html', context)
 
+def profile_participant(request, reg_no):
+    userinfo = User.objects.filter(reg_no = reg_no).values('reg_no', 'fname', 'lname', 'email', 'contect_no', 'clg_id__clg_name', 'stream__stream_name')[0]
+    context = {'userinfo' : userinfo}
+    return render(request, 'EventWebSite/profile.html', context)
+
 def participant_logout(request):
     auth_logout(request)
     return redirect('homepage')
-
-def profile(request):
-    return render(request, 'EventWebsite/profile.html')

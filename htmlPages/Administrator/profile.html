@@ -1,4 +1,4 @@
-{% extends 'EventWebSite/base.html' %}
+{% extends 'Administrator/base.html' %}
 
 {% load static %}
 
@@ -41,9 +41,15 @@
         <p id="stream" class="attribute">Stream : </p>
         <p id="stream_value" class="value">{{userinfo.stream__stream_name}}</p>
     </div>
-        <!-- <div class="detail_container">
-        <p id="email" class="attribute">Name</p>
-        <p id="email_value" class="value">Niral</p>
-    </div> -->
+
+    <div class="detail_container">
+        <p id="Committee_id" class="attribute">Committee Id : </p>
+        <p id="Committee_id_value" class="value">{{committeeinfo.committee_id}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="yearOfStudy" class="attribute">Year of Study : </p>
+        <p id="yearOfStudy_value" class="value">{{committeeinfo.yearOfStudy}}</p>
+    </div>
 </div>
 {% endblock %}

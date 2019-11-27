@@ -104,8 +104,7 @@
             <div>    
                 <label for="event_logo">Event Logo</label>
                 <img id="editevent_logo" src="{{ editevent_form.initial.event_logo.url }}" height="400px" width="400px">
-                <!-- <p id="event_logof">{{ editevent_form.event_logo }}</p> -->
-                <input type="file" name="{{ eventdetail.event_logo.html_name }}" id="{{ eventdetail.event_logo.id_for_label }}" accept="image/*" onchange="changeLogo(this)">
+                <input type="file" name="event_logo" id="{{ eventdetail.event_logo.id_for_label }}" accept="image/*" onchange="changeLogo(this)">
             </div>
             
             <div>    

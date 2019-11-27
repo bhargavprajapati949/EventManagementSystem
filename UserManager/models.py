@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+
 # Create your models here.
 
 class Collages(models.Model):
@@ -114,10 +115,6 @@ class Event_Committee(models.Model):
 class Volunteer(models.Model):
     reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     payment_hold = models.IntegerField(default = 0)
-    isActive = models.BooleanField(default = False)
-
-class Event_Head(models.Model):
-    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     isActive = models.BooleanField(default = False)
 
 class Coordinator(models.Model):

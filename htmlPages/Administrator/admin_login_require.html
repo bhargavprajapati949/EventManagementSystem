@@ -1,0 +1,35 @@
+{% extends 'Administrator/base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Login Require | Admin </title>
+{% endblock %}
+
+{% block loadcss %}
+
+{% endblock %}
+
+{% block content %}
+<p>You do not have access of this url.</p>
+<p>For that you need to verify your admin account by login.</p>
+<p>Wait... <span id="timer"></span>  you will be redirected to admin login page shortly.</p>
+<p>If you are not redirected automatically <a id="redirect_link" href="{% url 'admin_login_require' %}">click here</a></p>
+{% endblock %}
+
+{% block loadscript %}
+<script>
+    setTimeout(
+        function(){
+            window.location.replace("{% url 'admin_login' %}");
+        }
+        ,5000)
+    var timer = 4
+    setInterval(
+        function(){
+            document.getElementById('timer').innerHTML = timer
+            timer = timer - 1
+        }
+        ,1000)
+</script>
+{% endblock %}

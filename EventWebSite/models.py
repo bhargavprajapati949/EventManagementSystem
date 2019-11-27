@@ -1,5 +1,6 @@
 from django.db import models
-from UserManager.models import User, Event_Committee, Admin, Volunteer, Event_Head
+from UserManager.models import User, Event_Committee, Admin, Volunteer
+
 
 # Create your models here.
 
@@ -66,6 +67,10 @@ class Participation(models.Model):
     # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
     # amount = models.IntegerField()
 
+class Event_Head(models.Model):
+    reg_no = models.ForeignKey(Event_Committee, on_delete = models.CASCADE)
+    event = models.ForeignKey(Event, on_delete = models.CASCADE)
+    isActive = models.BooleanField(default = False)
 
 class Winner(models.Model):
     event_id = models.ForeignKey(Event, on_delete = models.CASCADE)
