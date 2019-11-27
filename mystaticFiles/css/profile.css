@@ -1,0 +1,21 @@
+body {
+    background-image: url(../media/bck_p_dash.jfif);
+}
+
+.detail_container p {
+    color: white;
+}
+
+.detail_container {
+    margin-top: 3%;
+    margin-left: 10%;
+    /* background-color: turquoise; */
+    width: 75%;
+    padding-left: 10%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border-style: none solid none solid;
+    border-color: white;
+}
+
+

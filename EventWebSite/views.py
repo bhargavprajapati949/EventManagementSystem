@@ -121,3 +121,6 @@ def participant_dashboard(request):
 def participant_logout(request):
     auth_logout(request)
     return redirect('homepage')
+
+def profile(request):
+    return render(request, 'EventWebsite/profile.html')

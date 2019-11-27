@@ -1,0 +1,23 @@
+{% extends 'EventWebSite/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Profile</title>
+{% endblock %}
+
+{% block loadcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="detail_container">
+        <p id="name" class="attribute">Name</p>
+        <p id="name_value" class="value">Niral</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="email" class="attribute">Name</p>
+        <p id="email_value" class="value">Niral</p>
+    </div>
+{% endblock %}

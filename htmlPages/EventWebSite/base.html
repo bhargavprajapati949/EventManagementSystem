@@ -7,6 +7,7 @@
     <meta name="description" content="NU-Sports">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
+    <link rel="stylesheet" href="{% static 'css/base_participant.css'%}">
     {% block loadcss %}
 
     {% endblock %}
@@ -38,7 +39,8 @@
             <div class="dropdown">
                     <a href="{% url 'participant_dashboard' %}"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
                 <div>
-                    <a href="{% url 'participant_dashboard' %}">Dashborad</a>
+                    <a href="{% url 'participant_dashboard' %}">Dashboard</a>
+                    <a href="{% url 'profile'%}">Profile</a>
                     <a href="{% url 'participant_logout' %}">Log Out</a>  
                 </div>
             </div>
