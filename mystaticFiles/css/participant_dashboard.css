@@ -34,12 +34,14 @@ body{
     float: left;
     padding: 0 50px;
     height: 80px;
+    margin-top: 20px;
 }
 
 #navBar a{
-    font-size: 17px;
+    font-size: 20px;
     text-decoration: none;
-    padding: 15px 10px;
+    margin-top: 20px;
+    padding: 15px 20px;
     height: 100%;
     text-align: center;
     vertical-align: middle;
