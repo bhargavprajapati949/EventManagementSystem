@@ -27,36 +27,60 @@
             {% endfor %}
         </ul>
     </div>
-
-
-    <div class="about" id="about" name="about">
-			<!-- Intro Item -->
-			<div class="intro_item">
+    <br>
+    <div class="aboutus_title" id="aboutus">About Us</div>
+    <!-- <div class="about" id="about" name="about">
+			 Intro Item 
+			 <div class="intro_item">
 				<div class="intro_image"><img src="{% static 'media/modi.jpg' %}" alt=""></div>
 				<div class="intro_body">
 					<div class="intro_title">Inaugaration by Chief Minister</div>
 					<div class="intro_subtitle">NuTech was inaugarated by Chief monister Mr. Narendra Modi</div>
 				</div>
 			</div>
-    </div>
+    </div> --> 
     
     
     <div class="sponsers_title" id="sponsers">Sponsers</div>    
     <div class="sponsers_container">
-        
-
+    
         <div class="sponser_item">
             <div class="sponser_image"><img src="{% static 'media/fasoos.png' %}"></div>
         </div>
 
         
         <div class="sponser_item">
-                <div class="sponser_image"><img src="{% static 'media/Paytm_logo.png' %}"></div>
-            </div>
+            <div class="sponser_image"><img src="{% static 'media/Paytm_logo.png' %}"></div>
+        </div>
 
-            <div class="sponser_item">
-                    <div class="sponser_image"><img src="{% static 'media/rebull.png' %}"></div>
-                </div>
+        <div class="sponser_item">
+            <div class="sponser_image"><img src="{% static 'media/rebull.png' %}"></div>
+        </div>
+
+        <div class="sponser_item">
+            <div class="sponser_image"><img src="{% static 'media/ibm.png' %}"></div>
+        </div>
     </div>
 
+
+    <div id="contact_us_container" class="contact_us_container" style="position: absolute; width: 95%;">
+            <div class="contact_tile">
+                <h1>Contact us</h1>
+                <hr color="#fff" width="60px">
+            </div>
+
+            <div class="contact">
+                <h2><p>Niral Pateliya</p></h2>
+                <h4><p class="email_contact">17bce091@nirmauni.ac.in</p>
+                <p class="contactno_contact">+91 70968 90142</p>
+                <p class="linkedin_contact"><a class="linkedin" href="https://www.linkedin.com/in/niralpatelia2913">https://www.linkedin.com/in/niralpatelia2913</a></p></h4>
+            </div>
+
+            <div class="contact" style="float: right; margin-top: -190px; margin-right: 50px;">
+                    <h2><p>Bhargav Prajapati</p></h2>
+                    <h4><p class="email_contact">17bce092@nirmauni.ac.in</p>
+                    <p class="contactno_contact">+91 85111 20401</p>
+                    <p class="linkedin_contact"><a  class="linkedin" href="https://www.linkedin.com/in/bhargavprajapati949">https://www.linkedin.com/in/bhargavprajapati949</a></p></h4>
+            </div>
+    </div>
     {% endblock %}

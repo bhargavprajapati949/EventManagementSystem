@@ -19,79 +19,67 @@
 <div class="main">
     
     <div class="main_detail_container" id="main_detail_container" style="padding-left: 130px; padding-right: 160px;">
-        <div class="add_bar" style="display: flex; float:left;">
+        <h1><p id="table_title">Event Head</p></h1> 
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in addeventhead_form %}
+            <div class="add_inbox_container" style="margin-right: 145px;">
+                {{field}}
+            </div>
+            {% endfor %}
+            <div class="search_button_container" style="margin-left:-145px; margin-right: 144px;">
+                <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/add_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
+            </div>
+        </form>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    <div class="manage_table_container" id="manage_table_container">
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Mobile No.</th>
+                <th>Email ID</th>
+                <th>Event</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
             
-        </div>
-        
-        <div class="search_bar">
-
-            <form method="POST">
-                {% csrf_token %}
-                {% for field in addeventhead_form %}
-                <div class="add_inbox_container" style="margin-right: 145px;">
-                    {{field}}
-                </div>
-                {% endfor %}
-                <div class="search_button_container" style="margin-left:-145px; margin-right: 144px;">
-                    <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/add_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
-                </div>
-            </form>
+            {% for eventhead in eventhead_list %}
+            <tr>
+                <td>{{eventhead.reg_no}}</td>
+                <td>{{eventhead.reg_no__reg_no__fname}} {{eventhead.reg_no__reg_no__lname}}</td>
+                <td>{{eventhead.reg_no__reg_no__contect_no}}</td>
+                <td>{{eventhead.reg_no__reg_no__email}}</td>
+                <td>{{eventhead.event__event_name}}</td>
+                {% if eventhead.isActive %}
+                <td>Active</td>
+                <td>
+                    <form method="POST" action="{% url 'eventhead_disable' reg_no=eventhead.reg_no event=eventhead.event__event_id %}">
+                        {% csrf_token %}
+                        <button type="submit">Disable</button>
+                    </form>    
+                </td>
+                {% else %}
+                <td>Disable</td>
+                <td>
+                    <form method="POST" action="{% url 'eventhead_active' reg_no=eventhead.reg_no event=eventhead.event__event_id %}">
+                        {% csrf_token %}
+                        <button type="submit">Active</button>
+                    </form>    
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}                        
             
-            
-     
-        </div>
-        
-        <br>
-        <br>
-        <br>
-        <div class="manage_table_container" id="manage_table_container">
-            <table id="manage_table" class="manage_table">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Mobile No.</th>
-                    <th>Email ID</th>
-                    <th>Event</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-                
-                {% for eventhead in eventhead_list %}
-                <tr>
-                    <td>{{eventhead.reg_no}}</td>
-                    <td>{{eventhead.reg_no__reg_no__fname}} {{eventhead.reg_no__reg_no__lname}}</td>
-                    <td>{{eventhead.reg_no__reg_no__contect_no}}</td>
-                    <td>{{eventhead.reg_no__reg_no__email}}</td>
-                    <td>{{eventhead.event__event_name}}</td>
-                    {% if eventhead.isActive %}
-                    <td>Active</td>
-                    <td>
-                        <form method="POST" action="{% url 'eventhead_disable' reg_no=eventhead.reg_no event=eventhead.event__event_id %}">
-                            {% csrf_token %}
-                            <button type="submit">Disable</button>
-                        </form>    
-                    </td>
-                    {% else %}
-                    <td>Disable</td>
-                    <td>
-                        <form method="POST" action="{% url 'eventhead_active' reg_no=eventhead.reg_no event=eventhead.event__event_id %}">
-                            {% csrf_token %}
-                            <button type="submit">Active</button>
-                        </form>    
-                    </td>
-                    {% endif %}
-                </tr>
-                {% endfor %}                        
-
-            </table>
-        </div>
+        </table>
     </div>
 </div>
-<form method="POST">
-    {% for field in isActiveform %}
-    {{field}}
-    {% endfor %}
-</form>
+</div>
+
 {% endblock %}
 
 {% block loadScript %}

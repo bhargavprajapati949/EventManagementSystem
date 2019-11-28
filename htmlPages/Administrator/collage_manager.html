@@ -20,12 +20,12 @@
     
     <div class="main_detail_container" id="main_detail_container" >
         <div class="search_bar">
-            
+            <h1><p id="table_title">Colleges</p></h1>
             {% if not addcollage_form %}
-            <a href="{% url 'collage_add' %}">Add College</a>
+            <a id="add_btn" href="{% url 'collage_add' %}">Add College</a>
             {% endif %}
 
-            <div class="search_inbox_container">
+            <!-- <div class="search_inbox_container">
                 <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
             </div>
             
@@ -38,16 +38,16 @@
                     <option value="a-z">A-Z</option>
                     <option value="z-a">Z-A</option>
                 </select>
-            </div>
+            </div> -->
         </div>
         
         {% if addcollage_form %}
-        <div id="add_collage_bar">
+        <div id="add_collage_bar" style="float: right;">
             <form method="POST" action="{% url 'collage_add' %}">
                 {% csrf_token %}
                 {% for field in addcollage_form %}
                 <div id="{{ field.label }}Wrapper">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <label for="{{ field.id_for_label }}" class="ip_name">{{ field.label }}</label>
                     {{ field }}
                     {% if field.help_text %}
                     <p>{{ field.help_text|safe }}</p>
@@ -81,7 +81,7 @@
                     <td>{{ clg.clg_name }}</td>
                     <td>
                         <a id="{{ clg.clg_id }}_editbtn" class="edit_btn" href="{% url 'collage_edit' clg_id=clg.clg_id %}">EDIT</a>
-                        <a href="{% url 'collage_delete' clg_id=clg.clg_id %}">DELETE</a>
+                        <a class="delete_btn" href="{% url 'collage_delete' clg_id=clg.clg_id %}">DELETE</a>
                     </td>
                 </tr>
                 {% else %}
@@ -92,7 +92,7 @@
                         <td>{{ editcollage_form.clg_name }}</td>
                         <td>
                             <button type="submit" class="edit_btn">SAVE</button>
-                            <a href="{% url 'collage_manager' %}">Cancal</a>
+                            <a href="{% url 'collage_manager' %}" class="cancel_btn">CANCEL</a>
                         </td>
                     </form>
                 </tr> 
@@ -109,9 +109,9 @@
 <form method="POST">
     {% csrf_token %}
     <div id="deleteConfDialogbox">
-        <p id="conftext">Are you sure you want to delete collage having collage id = {{ deletecollage_id }}</p>
-        <button type="submit" id="deletebtn">Delete</button>
-        <a id="cancalbtn" href="{% url 'collage_manager' %}">Cancal</a>
+        <p id="conftext">Are you sure you want to delete collage having college ID = {{ deletecollage_id }}</p>
+        <button type="submit" class="dialog_btn">Delete</button>
+        <a id="cancalbtn"  class="dialog_btn" href="{% url 'collage_manager' %}">Cancel</a>
     </div>
 </form>
     

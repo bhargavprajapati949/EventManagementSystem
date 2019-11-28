@@ -20,10 +20,11 @@
     
     <div class="main_detail_container" id="main_detail_container" >
         <div class="search_bar">
+            <h1><p id="table_title">News</p></h1>
             {% if not addnews_form %}
-            <a href="{% url 'news_add' %}">Add News</a>
+            <a id="add_btn" href="{% url 'news_add' %}">Add News</a>
             {% endif %}
-            <div class="search_inbox_container">
+            <!-- <div class="search_inbox_container">
                 <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
             </div>
             
@@ -36,7 +37,7 @@
                     <option value="a-z">A-Z</option>
                     <option value="z-a">Z-A</option>
                 </select>
-            </div>
+            </div> -->
         </div>
         {% if addnews_form %}
         <div id="add_news_bar">
@@ -83,7 +84,7 @@
                     <td id="{{ n.news_id }}_news_content" class="news_content">{{ n.news_content }}</td>
                     <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ n.hyperlink }}</td>
                     <td>
-                        <a id="{{ n.news_id }}_editbtn" class="edit_btn" href="{% url 'news_edit' news_id=n.news_id %}">EDIT</a>
+                        <a id="{{ n.news_id }}_editbtn" class="edit_btn" href="{% url 'news_edit' news_id=n.news_id %}">EDIT</a>&nbsp;&nbsp;
                         <a id="{{ n.news_id }}_deletebtn" class="delete_btn" href="{% url 'news_delete' news_id=n.news_id %}">DELETE</a>
                     </td>
                 </tr>
@@ -96,8 +97,8 @@
                         <td id="{{ n.news_id }}_news_content" class="news_content">{{ editnews_form.news_content }}</td>
                         <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ editnews_form.hyperlink }}</td>
                         <td>
-                            <button type="submit">SAVE</button>
-                            <a href="{% url 'news_manager' %}">Cancal</a>
+                            <button type="submit" class="edit_btn">SAVE</button>
+                            <a href="{% url 'news_manager' %}" class="cancel_btn">CANCEL</a>
                         </td>
                         
                     </form>
@@ -113,9 +114,9 @@
 <form method="POST">
     {% csrf_token %}
     <div id="deleteConfDialogbox">
-        <p id="conftext">Are you sure you want to delete news having news id = {{ delnews_id }}</p>
-        <button type="submit" id="deletebtn">Delete</button>
-        <a id="cancalbtn" href="{% url 'news_manager' %}">Cancal</a>
+        <p id="conftext">Are you sure you want to delete news having news ID = {{ delnews_id }}</p>
+        <button type="submit" id="deletebtn" class="dialog_btn">Delete</button>
+        <a id="cancalbtn" href="{% url 'news_manager' %}" class="dialog_btn">Cancel</a>
     </div>
 </form>
     

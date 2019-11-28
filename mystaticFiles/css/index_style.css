@@ -159,7 +159,7 @@ body{
 .sponsers_container {
     width: 100%;
 	background: #FFFFFF;
-	padding-top: 115px;
+	padding-top: 20px;
 	padding-bottom: 67px;
 	padding-left: 144px;
     padding-right: 144px;
@@ -230,4 +230,34 @@ body{
 }
 
 
+/*================== About Us====================*/
+
+.aboutus_title {
+    text-align: center;
+    font-size: 50px;
+    color: #696969;
+}
+
+/*======================Contact=======================*/
+
+hr{
+    border-style: solid;
+    border-width: 3px;
+    margin-left: 5px;
+}
+
+.contact_us_container {
+    background-color: #0652DD;
+    padding: 20px 50px 20px 50px;
+    color: #fff;
+}
+
+.contact {
+    background-color: #0652DD;
+}
+
+.linkedin {
+    text-decoration: none;
+    color: white;
+}
 

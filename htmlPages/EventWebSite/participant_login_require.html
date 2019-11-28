@@ -10,12 +10,12 @@
     <p>You do not have access of this url.</p>
     <p>For that you need to verify your account by login.</p>
     <p>Wait... <span id="timer"></span>  you will be redirected to login page shortly.</p>
-    <p>If you are not redirected automatically <a id="redirect_link" href="{% url 'eventHead_login' %}">click here</a></p>    
+    <p>If you are not redirected automatically <a id="redirect_link" href="{% url 'participant_login' %}">click here</a></p>    
 
     <script>
         setTimeout(
             function(){
-                window.location.replace("{% url 'eventHead_login' %}");
+                window.location.replace("{% url 'participant_login' %}");
             }
             ,5000
         )
