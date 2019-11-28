@@ -18,6 +18,7 @@ body{
     top: 0px;
     
 }
+
 .header_links_container {
     position: sticky;
     -webkit-sticky: 80px;
@@ -35,6 +36,9 @@ body{
     height: 80px;
 }
 
+.navigation {
+    padding-top: 13px;
+}
 #navBar a{
     font-size: 20px;
     text-decoration: none;
@@ -56,6 +60,7 @@ body{
     vertical-align: middle;
     float: right;
     margin-right: 100px;
+    padding-top: 13px;
 }
 
 #login_btn {

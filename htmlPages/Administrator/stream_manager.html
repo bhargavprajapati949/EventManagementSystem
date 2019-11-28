@@ -20,12 +20,12 @@
     
     <div class="main_detail_container" id="main_detail_container" >
         <div class="search_bar">    
-    
+            <h1><p id="table_title">Stream</p></h1>
             {% if not addstream_form %}
-            <a href="{% url 'stream_add' %}">Add Stream</a>
+            <a id="add_btn" href="{% url 'stream_add' %}">Add Stream</a>
             {% endif %}
             
-            <div class="search_inbox_container">
+            <!-- <div class="search_inbox_container">
                 <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
             </div>
             
@@ -38,11 +38,11 @@
                     <option value="a-z">A-Z</option>
                     <option value="z-a">Z-A</option>
                 </select>
-            </div>
+            </div> -->
         </div>
         
         {% if addstream_form %}
-        <div id="add_stream_bar">
+        <div id="add_stream_bar" style="float: right;">
             <form method="POST" action="{% url 'stream_add' %}">
                 {% csrf_token %}
                 {% for field in addstream_form %}
@@ -91,7 +91,7 @@
                     <td>{{ stream.stream_name }}</td>
                     <td>
                         <a id="{{ stream.stream_id }}_editbtn" class="edit_btn" href="{% url 'stream_edit' stream_id=stream.stream_id %}">EDIT</a>
-                        <a href="{% url 'stream_delete' stream_id=stream.stream_id %}">DELETE</a>
+                        <a class="delete_btn" href="{% url 'stream_delete' stream_id=stream.stream_id %}">DELETE</a>
                     </td>
                 </tr>
                 {% else %}
@@ -102,7 +102,7 @@
                         <td>{{ editstream_form.stream_name }}</td>
                         <td>
                             <button type="submit" class="edit_btn">SAVE</button>
-                            <a href="{% url 'stream_manager' %}">Cancal</a>
+                            <a href="{% url 'stream_manager' %}" class="cancel_btn">CANCEL</a>
                         </td>
                     </form>
                 </tr> 
@@ -117,9 +117,9 @@
 <form method="POST">
     {% csrf_token %}
     <div id="deleteConfDialogbox">
-        <p id="conftext">Are you sure you want to delete stream having stream id = {{ deletestream_id }}</p>
-        <button type="submit" id="deletebtn">Delete</button>
-        <a id="cancalbtn" href="{% url 'stream_manager' %}">Cancal</a>
+        <p id="conftext">Are you sure you want to delete stream having stream ID = {{ deletestream_id }}</p>
+        <button type="submit" id="deletebtn" class="dialog_btn">Delete</button>
+        <a id="cancalbtn" href="{% url 'stream_manager' %}" class="dialog_btn">Cancel</a>
     </div>
 </form>
 {% endif %}

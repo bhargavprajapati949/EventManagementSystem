@@ -2,26 +2,32 @@
 .main_detail_container {
   position: absolute;
   /* width: auto; */
-  top: 10%;
+  top: 200px;
   margin-right: 20px;
   box-sizing: border-box;
-  box-shadow: -10px 15px 20px rgba(0,0,0,.5);
+  box-shadow: 0px 15px 20px rgba(0,0,0,.5);
   border-radius: 10px;
-  margin-left: 280px;
-  padding-left: 40px;
-  padding-right: 80px;
+  margin-left: 250px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 20px;
-  padding-top: 20px;
+  min-width: 80%;
+  /* padding-top: 20px; */
+  /* background-color: #4867e0; */
 }
 
-#profile_image {
+#table_title {
+  text-align: center;
+}
+
+/* #profile_image {
   width: 80px;
   height: 80.px;
   padding-left: 50px;
   padding-top: 20px;
-}
+} */
 
-.search_bar {
+/* .search_bar {
   display: flex;
   float: right;
   clear: both;
@@ -69,7 +75,7 @@
     border-width: .5px;
     border-style: inset;
     font-size: 15px;
-}
+} */
 
 th, td {
   padding-left: 5px;
@@ -81,6 +87,7 @@ th, td {
   border-color: white;
   border-width: 2px;
   border-radius: 4px;
+  padding-bottom: 5px;
 }
 
 th {
@@ -101,16 +108,18 @@ table.manage_table {
     padding-right: 10px;
     width: 700px;
     table-layout: auto;
+    /* border-style: solid; */
 }
 
 .edit_btn {
   vertical-align: middle;
-  background-image: linear-gradient(to right, #4867e0, #329fec);
-  background-color: yellow;
+  background-color: #329fec;
   border-style: none;
   color: white;
   border-radius: 5px;
   font-size: 12px;
+  padding: 1px 5px;
+  text-decoration: none;
 }
 
 /* .status_container {
@@ -139,8 +148,53 @@ input:checked [type="checkbox"] {
   position: fixed;
   left: 40%;
   top: 40%;
-  background-color: #4867e0;
-  padding: 10px;
+  padding: 20px;
+  text-decoration: none;
+  border-radius: 10px;
+  background-color: #03a9f4;
+  border-color: black;
+  border-style: solid;
 }
 
+/*================ add & delete btn ========================*/
 
+#add_btn {
+  text-decoration: none;
+  background-color: #329fec;
+  padding: 5px 20px 5px 20px;
+  color: white;
+  border-radius: 10px;
+  top: 20px;
+  float: right;
+  margin-right: 90px;
+}
+
+.delete_btn {
+  text-decoration: none;
+  background-color: #329fec;
+  padding: 1px 15px 1px 15px;
+  color: white;
+  border-radius: 5px;
+  top: 20px;
+  font-size: 12px;
+}
+
+.cancel_btn {
+  text-decoration: none;
+  background-color: #329fec;
+  padding: 1px 15px 1px 15px;
+  color: white;
+  border-radius: 5px;
+  top: 20px;
+  font-size: 12px;
+}
+
+.dialog_btn {
+  text-decoration: none;
+  background-color: white;
+  padding: 1px 15px 1px 15px;
+  color: #4867e0;
+  border-radius: 5px;
+  top: 20px;
+  font-size: 12px;
+}
