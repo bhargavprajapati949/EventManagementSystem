@@ -25,6 +25,12 @@
                         <input name="passwordfield" type="password" required="required">
                         <label>Password</label>
                     </div>
+                    
+                    {% if message %}
+                    <div id="errormsg">
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endif %}
 
                     <div>
                         <div id="submit_btn_container">

@@ -1,0 +1,55 @@
+{% extends 'Administrator/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>Profile</title>
+{% endblock %}
+
+{% block loadcss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="detail_container">
+        <p id="reg_no" class="attribute">Registration No : </p>
+        <p id="reg_no_value" class="value">{{userinfo.reg_no}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="name" class="attribute">Name : </p>
+        <p id="name_value" class="value">{{userinfo.fname}} {{userinfo.lname}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="contect_no" class="attribute">Contect No : </p>
+        <p id="contect_no_value" class="value">{{userinfo.contect_no}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="email" class="attribute">Email Id : </p>
+        <p id="email_value" class="value">{{userinfo.email}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="clg" class="attribute">College Name : </p>
+        <p id="clg_value" class="value">{{userinfo.clg_id__clg_name}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="stream" class="attribute">Stream : </p>
+        <p id="stream_value" class="value">{{userinfo.stream__stream_name}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="Committee_id" class="attribute">Committee Id : </p>
+        <p id="Committee_id_value" class="value">{{committeeinfo.committee_id}}</p>
+    </div>
+
+    <div class="detail_container">
+        <p id="yearOfStudy" class="attribute">Year of Study : </p>
+        <p id="yearOfStudy_value" class="value">{{committeeinfo.yearOfStudy}}</p>
+    </div>
+</div>
+{% endblock %}

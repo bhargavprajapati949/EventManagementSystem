@@ -18,7 +18,7 @@
 
 {% if edit_form %}
 <div>
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}    
         <label for="reg_no">Id:</label>
         <p id="id_reg_no">{{reg_no}}</p>
@@ -84,6 +84,7 @@
             {% endif %}
         </p>
         <a href="{% url 'participant_edit' reg_no=participant.reg_no %}" class="edit_btn">Edit Details</a>        
+        <a href="{% url 'participant_manager' %}">Back To Participant Manager</a>
 </div>
 {% endif %}
 

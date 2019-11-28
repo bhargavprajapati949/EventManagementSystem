@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
    path('', views.redirectToAdmin_login, name='redirectToAdmin_login'),
    path('admin_login', views.admin_login, name='admin_login'),
+   path('admin_login_require',views.admin_login_require, name='admin_login_require'),
    path('admin_dashboard', views.admin_dashboard, name='admin_dashboard'),
 
    path('participant_manager', views.participant_manager, name='participant_manager'),
@@ -15,7 +16,8 @@ urlpatterns = [
    path('volunteer_add', views.volunteer_add, name='volunteer_add'),
 
    path('event_head_manager', views.event_head_manager, name='event_head_manager'),
-   path('event_head_add', views.event_head_add, name='event_head_add'),
+   path('eventhead_active/<?P<reg_no>/<?P<event>', views.eventhead_active, name='eventhead_active'),
+   path('eventhead_disable/<?P<reg_no>/<?P<event>', views.eventhead_disable, name='eventhead_disable'),
 
    path('coordinator_manager', views.coordinator_manager, name='coordinator_manager'),
    path('coordinator_add', views.coordinator_add, name='coordinator_add'),
@@ -42,6 +44,7 @@ urlpatterns = [
    path('news_edit/<?P<news_id>', views.news_edit, name='news_edit'),
    path('news_delete/<?P<news_id>', views.news_delete, name='news_delete'),
 
+   path('profile_administrator/<?P<reg_no>', views.profile_administrator, name='profile_administrator'),
    path('collect_money', views.collect_money, name='collect_money'),
-   path('logout', views.logout, name='logout'),
+   path('admin_logout', views.admin_logout, name='admin_logout'),
 ]

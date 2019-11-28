@@ -97,7 +97,59 @@
         {% elif editevent_form %}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+
+
+
+
+
             
+            <div>
+                    <label for="event_id" class="">Event Id</label>
+                    <p id="event_id">{{ editevent_form.event_id }}</p>
+                </div>
+                
+                <div>
+                    <label for="event_name">Event Name</label>    
+                    <p id="event_name">{{ editevent_form.event_name }}</p>
+                </div>
+                
+                <div>    
+                    <label for="event_logo">Event Logo</label>
+                    <img id="editevent_logo" src="{{ editevent_form.initial.event_logo.url }}" height="400px" width="400px">
+                    <input type="file" name="event_logo" id="{{ eventdetail.event_logo.id_for_label }}" accept="image/*" onchange="changeLogo(this)">
+                </div>
+                
+                <div>    
+                    <label for="event_detail">Event Detail</label>
+                    <p id="event_detail">{{ editevent_form.event_detail }}</p>
+                </div>
+                
+                <div>
+                    <label for="event_rules">Rules</label>
+                    <p id="event_rules">{{ editevent_form.rules }}</p>    
+                </div>
+                
+                <div>
+                    <label for="event_status">Event Status</label>
+                    <p id="event_status">{{ editevent_form.event_status }}</p>    
+                </div>
+                
+                <div>
+                    <label for="venue">Venue</label>
+                    <p id="venue">{{ editevent_form.venue }}</p>    
+                </div>
+                
+                <div>
+                    <label for="date_time">Date & Time</label>    
+                    <p id="date_time">{{ editevent_form.date_time }}</p>
+                </div>
+                
+                <div>
+                    <label for="fees">Fees</label>    
+                    <p id="fees">{{ editevent_form.fees }}</p>
+                </div>
+
+<!--             
             <table>
                 <tr>
                     <td><label for="event_id" class="">Event Id</label></td>
@@ -116,7 +168,7 @@
                     </td>
                     <td><input type="file" name="{{ eventdetail.event_logo.html_name }}" id="{{ eventdetail.event_logo.id_for_label }}" accept="image/*" onchange="changeLogo(this)"></td>
                 </tr>
-            </table>
+            </table> -->
             <button type="submit">SAVE</button>
             <a href="{% url 'event_info' event_id=editevent_id %}">Cancal</a>
         </form>

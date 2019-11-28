@@ -19,15 +19,16 @@
 
 <body>
     <div id="titleBar" class="basic">
-        <a href="homepage"><img id='logo' src="{% static 'media/logo.png' %}" alt="NU-Sport Logo"></a>
+        <a href="{% url 'homepage' %}"><img id='logo' src="{% static 'media/logo.png' %}" alt="NU-Sport Logo"></a>
     </div>
 
     <div class="header_links_container" id="header_links_container">
         <nav id="navBar">
+
             <ul class="navigation">
-                <a id="home" href="homepage">Home</a>
+                <a id="home" href="{% url 'homepage' %}">Home</a>
                 <a id="about" href="homepage#about">About</a>
-                <a id="event" href="event_detail">Events</a>
+                <a id="event" href="{% url 'event_detail' %}">Events</a>
                 <a id="our_team" href="#">Our Team</a>
                 <a id="sponsor" href="homepage#sponsers">Sponsors</a>
                 <a id="contact" href="homepage#contact_us_container">Contact</a>
@@ -37,16 +38,16 @@
         <div class="login_container">
             {% if user.is_authenticated %}
             <div class="dropdown">
-                    <a href="{% url 'participant_dashboard' %}"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
+                    <a href="#"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
                 <div>
-                    <a href="{% url 'participant_dashboard' %}">Dashboard</a>
-                    <a href="{% url 'profile'%}">Profile</a>
+                    <a href="{% url 'participant_dashboard' %}">Dashborad</a>
+                    <a href="{% url 'profile_participant' %}">Profile</a>
                     <a href="{% url 'participant_logout' %}">Log Out</a>  
                 </div>
             </div>
             {% else %}
-            <a href="register"><button type="submit" id="login_btn" class="submit_btn">Register</button></a>
-            <a href="login"><button type="submit" id="login_btn" class="submit_btn">Sign In</button></a>
+            <a href="{% url 'register' %}"><button type="submit" id="login_btn" class="submit_btn">Register</button></a>
+            <a href="{% url 'participant_login' %}"><button type="submit" id="login_btn" class="submit_btn">Log In</button></a>
             {% endif %}
         </div>
     </div>

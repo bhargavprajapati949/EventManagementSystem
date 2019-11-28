@@ -1,0 +1,43 @@
+{% extends 'EventHead/base.html' %}
+
+{% load static %}
+
+{% block title %} 
+<title>Attendance | Event Head</title>
+{% endblock %}
+
+{% block loadcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/attendance.css' %}">
+<!-- <link href="{% static 'select2.min.css' %}" rel="stylesheet" /> -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <p>Attendance</p>
+    <form method="POST">
+        {% csrf_token %}
+        <select id="participants" name="participant">
+            {% for no in participants%}
+            <option>{{no.reg_no}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Mark Present</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block loadScript %}
+<!-- <script src="{% static 'select2.min.js' %}"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() { 
+        $("#participants").select2({
+            placeholder: "Select a State",
+            allowClear: true
+        }); 
+    });
+</script>
+{% endblock %}

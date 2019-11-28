@@ -1,5 +1,6 @@
 from django.db import models
-from UserManager.models import User, Event_Committee, Admin, Volunteer, Event_Head
+from UserManager.models import User, Event_Committee, Admin, Volunteer
+
 
 # Create your models here.
 
@@ -21,8 +22,8 @@ class Event(models.Model):
         ('Full', 'Full')
     ]
     event_status = models.CharField(max_length = 30, choices = event_statuses, verbose_name = "Event Status")
-    venue = models.CharField(max_length = 50, verbose_name = "Venue")
-    date_time = models.DateTimeField(blank = True, verbose_name = "Event Date & Time")
+    venue = models.CharField(max_length = 50, verbose_name = "Venue", null=True)
+    date_time = models.DateTimeField(blank = True, null=True, verbose_name = "Event Date & Time")
     # parent_event = models.ForeignKey(Parent_event, on_delete = models.SET_DEFAULT, default = 0)
 
 class news(models.Model):
@@ -34,7 +35,6 @@ class news(models.Model):
     for_whome = models.CharField(max_length = 50, choices = news_receivers, verbose_name = 'News Viewers')
     news_content = models.CharField(max_length = 1000 ,verbose_name = 'News Content')
     hyperlink = models.CharField(verbose_name = 'hyperlink', max_length=50)
-
 
 class Registers(models.Model):
     reg_no = models.OneToOneField(User, primary_key = True, on_delete = models.CASCADE)
@@ -50,20 +50,26 @@ class Participation(models.Model):
     reg_no = models.ForeignKey(Registers, on_delete = models.CASCADE)
     event_id = models.ForeignKey(Event, on_delete = models.SET_DEFAULT, default = 0)
     allowed_event_status = [
-        ('Not_paid', 'Not Paid'),
+        ('Not Paid', 'Not Paid'),
         ('Paid', 'Paid'),
         ('Comform', 'Conform'), 
         ('Attended', 'Attended'),
-        ('Certificate_issued', 'Certificate Issued'),
-        ('Attended_winner', 'Attended Winner'),
+        ('Attended Winner', 'Attended Winner'),
+        ('Certificate Issued', 'Certificate Issued'),
+        ('Winner Certificate Issued', 'Winner Certificate Issued'),
         ('Scrapped', 'Scrapped'),
         ('Delete', 'Delete')
     ]
     reg_status = models.CharField(max_length = 50, choices = allowed_event_status)
     certi_otp = models.IntegerField()
+    attendance_otp = models.IntegerField()
     # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
     # amount = models.IntegerField()
 
+class Event_Head(models.Model):
+    reg_no = models.ForeignKey(Event_Committee, on_delete = models.CASCADE)
+    event = models.ForeignKey(Event, on_delete = models.CASCADE)
+    isActive = models.BooleanField(default = False)
 
 class Winner(models.Model):
     event_id = models.ForeignKey(Event, on_delete = models.CASCADE)
@@ -73,9 +79,9 @@ class Winner(models.Model):
         ('3', 'Third')
     ]
     position = models.IntegerField(choices = allowed_positions)
-    winner_reg_no = models.ForeignKey(Registers, on_delete = models.SET_DEFAULT, default = 0)
+    winner_reg_no = models.ForeignKey(Participation, on_delete = models.SET_DEFAULT, default = 0)
     winning_certificate_issue = models.BooleanField(default = False)
-    certi_otp = models.IntegerField()
+    winning_certi_otp = models.IntegerField()
     event_head_id = models.ForeignKey(Event_Head, null=True, on_delete = models.SET_NULL)
 
 class to_whome_paid(models.Model):

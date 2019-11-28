@@ -1,0 +1,79 @@
+.middle *, .middle {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	list-style: none;
+	text-decoration: none;
+}
+
+.middle {
+	position: absolute;
+	top: 105%;
+	left: 18.5%;
+	transform: translate(-50%, -50%);
+}
+
+.menu {
+	width: 600%;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.item {
+	border-top: 1px solid #2980b9;
+	overflow: hidden;
+}
+
+.btn {
+	display: block;
+	padding: 16px 20px;
+	background-color: #3498db;
+	color: white;
+}
+/* 
+.btn:before {
+	content: "";
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	background-color: #3498db;
+	left: 20px;
+	bottom: -7px;
+	transform: rotate(45deg);
+} */
+
+.smenu {
+	background-color: #333;
+	overflow: hidden;
+	transition: max-height 1s;
+	max-height: 0;
+}
+
+.smenu a {
+	display: block;
+	padding: 16px 26px;
+	color: white;
+	font-size: 14px;
+	margin: 4px;
+	position: relative;
+}
+
+.smenu a:before {
+	content: "";
+	position: absolute;
+	width: 6px; 
+	height: 100%;
+	background: #3498db;
+	left: 0;
+	top: 0;
+	transition: 0.01s;
+	opacity: 0;
+}
+
+.smenu a:hover:before {
+	opacity: 1;
+}
+
+.item:target .smenu {
+	max-height: 10em;
+}

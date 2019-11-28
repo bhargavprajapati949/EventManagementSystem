@@ -7,10 +7,32 @@
 {% endblock %}
 
 {% block loadcss %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/base_eventHead.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/eventhead_dashboard.css' %}">
 {% endblock %}
 
 {% block content %}
+
+
+<div class="middle">
+    <div>
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+    </div>
+    <p>Assigned Events</p>
+    <div class="menu">
+        {% for event in events %}
+        <li class="item" id="id_{{event.event__event_name}}">
+            <a href="#id_{{event.event__event_name}}" class="btn">{{event.event__event_name}}</a>
+            <div class="smenu">
+                <a href="{% url 'attendance' event_id=event.event__event_id %}">Attendance</a>
+                <a href="{% url 'participation_info' event_id=event.event__event_id %}">Participation Details</a>
+                <a href="{% url 'enter_result' event_id=event.event__event_id %}">Enter Result</a>
+            </div>
+        </li>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
 
