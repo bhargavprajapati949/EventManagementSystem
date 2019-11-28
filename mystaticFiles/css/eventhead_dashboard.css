@@ -14,7 +14,7 @@
 }
 
 .menu {
-	width: 800%;
+	width: 600%;
 	border-radius: 8px;
 	overflow: hidden;
 }
@@ -30,7 +30,7 @@
 	background-color: #3498db;
 	color: white;
 }
-
+/* 
 .btn:before {
 	content: "";
 	position: absolute;
@@ -40,7 +40,7 @@
 	left: 20px;
 	bottom: -7px;
 	transform: rotate(45deg);
-}
+} */
 
 .smenu {
 	background-color: #333;

@@ -11,40 +11,29 @@
 {% endblock %}
 
 {% block content %}
-<p>Assigned Events</p>
+
 
 <div class="middle">
+    <div>
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+    </div>
+    <p>Assigned Events</p>
     <div class="menu">
         {% for event in events %}
-        <li class="item" id="id_{{event.}}">
-            <a href="#profile" class="btn">Profile</a>
+        <li class="item" id="id_{{event.event__event_name}}">
+            <a href="#id_{{event.event__event_name}}" class="btn">{{event.event__event_name}}</a>
             <div class="smenu">
-                <a href="#">Posts</a>
-                <a href="#">Picture</a>
+                <a href="{% url 'attendance' event_id=event.event__event_id %}">Attendance</a>
+                <a href="{% url 'participation_info' event_id=event.event__event_id %}">Participation Details</a>
+                <a href="{% url 'enter_result' event_id=event.event__event_id %}">Enter Result</a>
             </div>
         </li>
         {% endfor %}
-        <!-- <li class="item" id="messages">
-            <a href="#messages" class="btn">Messages</a>
-            <div class="smenu">
-                <a href="#">News</a>
-                <a href="#">Sent</a>
-            </div>
-            
-        </li>
-
-        <li class="item" id="settings">
-            <a href="#settings" class="btn">Settings</a>
-            <div class="smenu">
-                <a href="#">Language</a>
-                <a href="#">Password</a>
-            </div>
-        </li> -->
     </div>
 </div>
-<a href="{% url 'attendance' %}">Attendance</a>
-<a href="{% url 'participation_info' %}">Participation Details</a>
-<a href="{% url 'enter_result' %}">Enter Result</a>
+
 {% endblock %}
 
 {% block loadScript %}

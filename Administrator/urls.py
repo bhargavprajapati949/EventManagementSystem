@@ -46,5 +46,5 @@ urlpatterns = [
 
    path('profile_administrator/<?P<reg_no>', views.profile_administrator, name='profile_administrator'),
    path('collect_money', views.collect_money, name='collect_money'),
-   path('logout', views.logout, name='logout'),
+   path('admin_logout', views.admin_logout, name='admin_logout'),
 ]

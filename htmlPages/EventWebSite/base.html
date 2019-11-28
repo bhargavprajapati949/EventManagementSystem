@@ -39,14 +39,14 @@
             <div class="dropdown">
                     <a href="#"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
                 <div>
-                    <a href="{% url 'participant_dashboard' reg_no=user.reg_no %}">Dashborad</a>
-                    <a href="{% url 'profile_participant' reg_no=user.reg_no %}">Profile</a>
+                    <a href="{% url 'participant_dashboard' %}">Dashborad</a>
+                    <a href="{% url 'profile_participant' %}">Profile</a>
                     <a href="{% url 'participant_logout' %}">Log Out</a>  
                 </div>
             </div>
             {% else %}
-            <a href="register"><button type="submit" id="login_btn" class="submit_btn">Register</button></a>
-            <a href="login"><button type="submit" id="login_btn" class="submit_btn">Sign In</button></a>
+            <a href="{% url 'register' %}"><button type="submit" id="login_btn" class="submit_btn">Register</button></a>
+            <a href="{% url 'participant_login' %}"><button type="submit" id="login_btn" class="submit_btn">Log In</button></a>
             {% endif %}
         </div>
     </div>

@@ -13,35 +13,35 @@ def redirectToHomepage(request):
     return HttpResponseRedirect('homepage')
 
 def homepage(request):
-
     newsObject = news.objects.filter(for_whome='Participants')
-
     return render(request, 'EventWebSite/homepage.html', {'news' : newsObject})
 
 
-def login(request):
-    if request.method == 'POST':
-        username = request.POST.get('usernamefield')
-        password = request.POST.get('passwordfield')
-        print('username = ', username)
-        print('password = ', password)
-        user = authenticate(username=username, password=password)
-        print('user object = ', user)
-        if user:
-            if user.is_participant:
-                auth_login(request, user)
-                print('login success')
-                return redirect('homepage')
-            else:
-                print('is_participant = false')
-                return HttpResponse('You are not registered. First Register yourself.')
-        else:
-            return HttpResponse('Invalid login details')
-            print('invalid details')
+def participant_login(request):
+    if request.user.is_authenticated and request.user.is_participant:
+        return redirect('participant_dashboard')
     else:
-        print('get method')
-        return render(request, 'EventWebSite/login.html')
+        if request.method == 'POST':
+            username = request.POST.get('usernamefield')
+            password = request.POST.get('passwordfield')
+            user = authenticate(username=username, password=password)            
+            if user:
+                if user.is_participant:
+                    auth_login(request, user)
+                    return redirect('participant_dashboard')
+                else:
+                    msg = 'You are not registered. First Register yourself.'
+                    context = {'message' : msg}
+                    return render(request, 'EventWebSite/login.html', context)
+            else:
+                msg = "Email or Password is not valid"
+                context = {'message' : msg}
+                return render(request, 'EventWebSite/login.html', context)
+        else:
+            return render(request, 'EventWebSite/login.html')
 
+def participant_login_require(request):
+    return render(request, 'EventWebSite/participant_login_require.html')
 
 def register(request):
     if request.method == 'POST':
@@ -71,7 +71,7 @@ def register(request):
                     attendance_otp = random.randrange(1000, 9999)
                 )
                 
-            return redirect('homepage')
+            return redirect('participant_login')
         else:
             if regform.is_valid():
                 user = regform.save()
@@ -99,10 +99,9 @@ def register(request):
                     )
 
                 print('done')
-                return redirect('homepage')
+                return redirect('participant_login')
             else:
                 events = Event.objects.values('event_name', 'fees')
-                print('invalid')
                 context = {'regform' : regform , 'events' : events}
                 return render(request, 'EventWebSite/registration.html', context)
     else:
@@ -116,20 +115,27 @@ def event_detail(request):
     context = {'events' : events}
     return render(request, 'EventWebSite/event_detail.html', context)
 
-def participant_dashboard(request, reg_no):
-    user_details_obj = Registers.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment')[0]
-    events = Participation.objects.filter(reg_no = reg_no).values('reg_status', 'event_id__event_name', 'event_id__date_time', 'event_id__venue', 'attendance_otp', 'certi_otp' )
-    context = {'userinfo' : user_details_obj, 'events' : events, 'status' : 'status'}
-    winner = Winner.objects.filter(winner_reg_no = reg_no)
-    if winner:
-        winner.values('position', 'winning_certificate_issue', 'winning_certi_otp', 'event_head_id')
-        context['winner'] = winner
-    return render(request, 'EventWebSite/participant_dashboard.html', context)
+def participant_dashboard(request):
+    if request.user.is_authenticated and request.user.is_participant:
+        reg_no = request.user.reg_no
+        user_details_obj = Registers.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment')[0]
+        events = Participation.objects.filter(reg_no = reg_no).values('reg_status', 'event_id__event_name', 'event_id__date_time', 'event_id__venue', 'attendance_otp', 'certi_otp' )
+        context = {'userinfo' : user_details_obj, 'events' : events, 'status' : 'status'}
+        winner = Winner.objects.filter(winner_reg_no = reg_no)
+        if winner:
+            winner.values('position', 'winning_certificate_issue', 'winning_certi_otp', 'event_head_id')
+            context['winner'] = winner
+        return render(request, 'EventWebSite/participant_dashboard.html', context)
+    else:
+        return redirect('participant_login_require')
 
-def profile_participant(request, reg_no):
-    userinfo = User.objects.filter(reg_no = reg_no).values('reg_no', 'fname', 'lname', 'email', 'contect_no', 'clg_id__clg_name', 'stream__stream_name')[0]
-    context = {'userinfo' : userinfo}
-    return render(request, 'EventWebSite/profile.html', context)
+def profile_participant(request):
+    if request.user.is_authenticated and request.user.is_participant:
+        userinfo = User.objects.filter(reg_no = request.user.reg_no).values('reg_no', 'fname', 'lname', 'email', 'contect_no', 'clg_id__clg_name', 'stream__stream_name')[0]
+        context = {'userinfo' : userinfo}
+        return render(request, 'EventWebSite/profile.html', context)
+    else:
+        return redirect('participant_login_require')
 
 def participant_logout(request):
     auth_logout(request)

@@ -36,7 +36,6 @@ class news(models.Model):
     news_content = models.CharField(max_length = 1000 ,verbose_name = 'News Content')
     hyperlink = models.CharField(verbose_name = 'hyperlink', max_length=50)
 
-
 class Registers(models.Model):
     reg_no = models.OneToOneField(User, primary_key = True, on_delete = models.CASCADE)
     remark = models.TextField(default = None, null=True)

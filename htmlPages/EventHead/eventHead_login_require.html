@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login Require | Admin </title>
+    <title>Login Require </title>
 </head>
 <body>
     <p>You do not have access of this url.</p>
-    <p>For that you need to verify your admin account by login.</p>
-    <p>Wait... <span id="timer"></span>  you will be redirected to admin login page shortly.</p>
-    <p>If you are not redirected automatically <a id="redirect_link" href="{% url 'admin_login_require' %}">click here</a></p>    
+    <p>For that you need to verify your event head account by login.</p>
+    <p>Wait... <span id="timer"></span>  you will be redirected to event head login page shortly.</p>
+    <p>If you are not redirected automatically <a id="redirect_link" href="{% url 'eventhead_login' %}">click here</a></p>    
 
     <script>
         setTimeout(
             function(){
-                window.location.replace("{% url 'admin_login' %}");
+                window.location.replace("{% url 'participant_login' %}");
             }
             ,5000
         )
