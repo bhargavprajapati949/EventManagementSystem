@@ -79,7 +79,7 @@ body{
 
 /*===== news =====*/
 #news{
-    background-color: #0652DD;
+    background-color: wheat;
 }
 
 #news ul{
@@ -182,7 +182,7 @@ body{
     padding-bottom: 50px;
     padding-left: 100px;
 }
-
+/*===============================================*/
 
 .dropdown {
     display: inline-block;

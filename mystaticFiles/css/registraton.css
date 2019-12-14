@@ -5,3 +5,14 @@ body {
     margin: 0;
     padding: 0;
 }
+
+#submit {
+    width: 150px;
+    height: 50px;
+    font-size: 120%;
+    border-radius: 0;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    border: none;
+    color: white;
+}
+

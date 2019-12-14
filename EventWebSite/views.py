@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
-from EventWebSite.models import news, Event, Registers, Participation, Winner
-from EventWebSite.form import ParticipantRegForm
+
+from EventWebSite.models import news, Event, Participants, Participation
+from EventHead.models import Winner
 from UserManager.models import User
+
+from EventWebSite.form import ParticipantRegForm
 
 import random
 
- # Create your views here.
+# Create your views here.
 
 def redirectToHomepage(request):
     return HttpResponseRedirect('homepage')
@@ -58,14 +61,14 @@ def register(request):
                 selected_event_obj[event] = Event.objects.get(event_name = event)
                 total_payment = total_payment + selected_event_obj[event].fees
 
-            reg = Registers(reg_no = usercheck[0])
+            reg = Participants(reg_no = usercheck[0])
             reg.total_payment = total_payment
             reg.remaining_payment = reg.total_payment
             reg.save()
             for event in selected_events:
                 Participation.objects.create(
                     reg_no = reg,
-                    event_id = selected_event_obj[event],
+                    event = selected_event_obj[event],
                     reg_status = 'Not Paid',
                     certi_otp = random.randrange(1000, 9999),
                     attendance_otp = random.randrange(1000, 9999)
@@ -84,7 +87,7 @@ def register(request):
                     selected_event_obj[event] = Event.objects.get(event_name = event)
                     total_payment = total_payment + selected_event_obj[event].fees
 
-                reg = Registers(reg_no = user)
+                reg = Participants(reg_no = user)
                 reg.total_payment = total_payment
                 reg.remaining_payment = reg.total_payment
                 reg.save()
@@ -92,7 +95,7 @@ def register(request):
                 for event in selected_events:
                     Participation.objects.create(
                         reg_no = reg,
-                        event_id = selected_event_obj[event],
+                        event = selected_event_obj[event],
                         reg_status = 'Not Paid',
                         certi_otp = random.randrange(1, 9999),
                         attendance_otp = random.randrange(1000, 9999)
@@ -118,10 +121,10 @@ def event_detail(request):
 def participant_dashboard(request):
     if request.user.is_authenticated and request.user.is_participant:
         reg_no = request.user.reg_no
-        user_details_obj = Registers.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment')[0]
+        user_details_obj = Participants.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment')[0]
         events = Participation.objects.filter(reg_no = reg_no).values('reg_status', 'event_id__event_name', 'event_id__date_time', 'event_id__venue', 'attendance_otp', 'certi_otp' )
         context = {'userinfo' : user_details_obj, 'events' : events, 'status' : 'status'}
-        winner = Winner.objects.filter(winner_reg_no = reg_no)
+        winner = Winner.objects.filter(winner = reg_no)
         if winner:
             winner.values('position', 'winning_certificate_issue', 'winning_certi_otp', 'event_head_id')
             context['winner'] = winner

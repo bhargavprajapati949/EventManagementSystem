@@ -20,17 +20,17 @@
 <body>
 
         <div id="titleBar" class="basic">
-                <a href="homepage"><img id='logo' src="{% static 'media/logo.png' %}" alt="NU-Sport Logo"></a>
+                <a href="{% url 'homepage' %}"><img id='logo' src="{% static 'media/logo.png' %}" alt="NU-Sport Logo"></a>
             </div>
         
             <div class="header_links_container" id="header_links_container">
                 <nav id="navBar">
                     <ul>
-                        <a id="home" href="homepage">Home</a>
-                        <a id="about" href="homepage#about">About</a>
-                        <a id="event" href="event_detail">Events</a>
-                        <a id="our_team" href="#">Our Team</a>
-                        <a id="sponsor" href="homepage#sponsers">Sponsors</a>
+                        <a id="home" href="{% url 'homepage' %}">Home</a>
+                        <a id="about" href="{% url 'homepage' %}#about">About</a>
+                        <a id="event" href="{% url 'event_detail' %}">Events</a>
+                        <!-- <a id="our_team" href="#">Our Team</a> -->
+                        <a id="sponsor" href="{% url 'homepage' %}#sponsers">Sponsors</a>
                         <a id="contact" href="#">Contact</a>
                     </ul>
                 </nav>
@@ -38,11 +38,11 @@
                 <div class="login_container">
                     {% if user.is_authenticated %}
                     <div class="dropdown">
-                            <a href="{% url 'participant_dashboard' %}"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
+                            <a href="{% url 'admin_dashboard' %}"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
                         <div>
-                            <a href="{% url 'participant_dashboard' %}">Dashboard</a>
-                            <a href="{% url 'profile'%}">Profile</a>
-                            <a href="{% url 'participant_logout' %}">Log Out</a>  
+                            <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+                            <a href="{% url 'profile_administrator' %}">Profile</a>
+                            <a href="{% url 'admin_logout' %}">Log Out</a>  
                         </div>
                     </div>
                     {% else %}
@@ -77,7 +77,7 @@
                 </div> -->
             <!-- </li>
             <li id="collect_money_label" style="list-style-type: none;"><a id="Collect_Money" href="collect_money">&nbsp;Collect Money</a></li><br>
-            <li id="sign_out_label" style="list-style-type: none;"><a id="Sign_Out" href="{% url 'logout' %}">&nbsp;LogOut</a></li> -->
+            <li id="sign_out_label" style="list-style-type: none;"><a id="Sign_Out" href="{% url 'admin_logout' %}">&nbsp;LogOut</a></li> -->
             <!-- <li id="sign_out_label" style="list-style-type: none;"><a id="Sign_Out" href="{% url 'admin_logout' %}">&nbsp;LogOut</a></li> -->
         </ul>
     </div>

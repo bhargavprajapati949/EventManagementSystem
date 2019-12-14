@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from UserManager.models import  User, Event_Committee
-# 
+
 class EventCommitteeRegForm(UserCreationForm):
     # fname = forms.CharField(max_length=50)
     # lname = forms.CharField(max_length=50)
@@ -19,7 +19,7 @@ class EventCommitteeRegForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ( 'fname', 'lname', 'clg_id', 'stream', 'email', 'contect_no' )
+        fields = ( 'fname', 'lname', 'clg', 'stream', 'email', 'contect_no' )
 
     def save(self):
         user = super(EventCommitteeRegForm, self).save(commit=False)
@@ -27,7 +27,7 @@ class EventCommitteeRegForm(UserCreationForm):
         user.lname = self.cleaned_data['lname']
         user.email = self.cleaned_data['email']
         user.contect_no = self.cleaned_data['contect_no']
-        user.clg_id = self.cleaned_data['clg_id']
+        user.clg = self.cleaned_data['clg']
         # user.password = self.cleaned_data['password']
         user.stream = self.cleaned_data['stream']
         user.is_event_commitee = True

@@ -5,10 +5,5 @@ from EventWebSite.models import *
 
 admin.site.register(Event)
 admin.site.register(news)
-admin.site.register(Registers)
+admin.site.register(Participants)
 admin.site.register(Participation)
-admin.site.register(Event_Head)
-admin.site.register(Winner)
-admin.site.register(to_whome_paid)
-admin.site.register(vol_to_admin_pay)
-admin.site.register(Sponsers)

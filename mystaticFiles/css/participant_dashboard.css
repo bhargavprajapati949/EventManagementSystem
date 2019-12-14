@@ -1,4 +1,4 @@
-body{
+ body{
     margin: 0px;
     padding: 0px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -6,14 +6,14 @@ body{
     background-image: url(../media/bck_p_dash.jfif);
     z-index: 0;
 }
-
+/*
 .basic{
     background: #fff;    
     padding: 5px;
 }
 
 /*===== title Bar=====*/
-#titleBar{
+/* #titleBar{
     padding: 20px 100px;
     height: 50px;
     top: 0px;
@@ -59,7 +59,7 @@ body{
     vertical-align: middle;
     float: right;
     margin-right: 100px;
-}
+} */
 
 
 
@@ -107,7 +107,7 @@ body{
 
 .dropdown div a:hover {
     color: #329fec;
-}
+} */
 
 
 

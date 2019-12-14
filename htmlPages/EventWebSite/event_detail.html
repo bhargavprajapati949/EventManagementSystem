@@ -16,22 +16,26 @@
             <div class="event_title_container">
                 <p id="event_detail">Events</p>
             </div>
-            
+            <br>
+            <br>
+            <br>
             {% for event in events %}
-            <div class="eventbox">
-                <img src="media/{{ event.event_logo }}" height="300px" width="300px">
-                <p>{{event.event_name}}</p>
-                <p>{{event.event_status}}</p>
-                <p>{{event.event_detail}}</p>
-            </div>
-            <div class="eventDetailWrapper">
-                <button>X</button>
-                <img src="media/{{ event.event_logo }}" height="300px" width="300px">
-                <p>{{event.event_name}}</p>
-                <p>{{event.event_status}}</p>
-                <p>{{event.event_detail}}</p>
-                <p>{{event.rules}}</p>
-                <p>{{event.fees}}</p>
+            <div class="main">
+                    <div class="eventbox" style="display: inline;">
+                            <img src="media/{{ event.event_logo }}" height="300px" width="300px">
+                            <p>{{event.event_name}}</p>
+                            <p>{{event.event_status}}</p>
+                            <p>{{event.event_detail}}</p>
+                        </div>
+                        <!-- <div class="eventDetailWrapper">
+                            <button>X</button>
+                            <img src="media/{{ event.event_logo }}" height="300px" width="300px">
+                            <p>{{event.event_name}}</p>
+                            <p>{{event.event_status}}</p>
+                            <p>{{event.event_detail}}</p>
+                            <p>{{event.rules}}</p>
+                            <p>{{event.fees}}</p>
+                        </div> -->
             </div>
             {% endfor %}
 {% endblock %}

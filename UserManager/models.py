@@ -4,16 +4,16 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
-class Collages(models.Model):
-    clg_id = models.CharField(max_length = 4, unique=True)
-    clg_name = models.CharField(max_length = 100)
+class College(models.Model):
+    clg_id = models.CharField(verbose_name = 'Collage Id', max_length = 4, unique=True)
+    clg_name = models.CharField(verbose_name = 'Collage Name', max_length = 100)
 
     def __str__(self):
         return self.clg_name
 
 class Stream(models.Model):
-    stream_id = models.CharField(max_length = 5, unique=True)
-    stream_name = models.CharField(max_length = 100)
+    stream_id = models.CharField(verbose_name = 'Stream Id', max_length = 5, unique=True)
+    stream_name = models.CharField(verbose_name = 'Stream Name', max_length = 100)
 
     def __str__(self):
         return self.stream_name
@@ -67,9 +67,7 @@ class User(AbstractBaseUser):
     contect_no = models.IntegerField(verbose_name = "Contect No")
     email = models.EmailField(verbose_name = "Email ID", unique=True)
     
-    # password = models.CharField(max_length = 20)
-    
-    clg_id = models.ForeignKey(Collages, verbose_name = "Collage", on_delete=models.SET_NULL, null=True, default = None)
+    clg = models.ForeignKey(College, verbose_name = "Collage", on_delete=models.SET_NULL, null=True, default = None)
     stream = models.ForeignKey(Stream, verbose_name = "Stream", on_delete=models.SET_NULL, null=True, default = None)
 
     is_participant = models.BooleanField(default=False, verbose_name = "Participant")
@@ -112,17 +110,24 @@ class Event_Committee(models.Model):
     in_graphics = models.BooleanField(default=False)
     in_eventManagement = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.committee_id
+
 class Volunteer(models.Model):
     reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
     payment_hold = models.IntegerField(default = 0)
     isActive = models.BooleanField(default = False)
 
-class Coordinator(models.Model):
-    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
-    payment_hold = models.IntegerField()
-    isActive = models.BooleanField(default = False)
+    def __str__(self):
+        return super().__str__()
 
-class Admin(models.Model):
-    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
-    isActive = models.BooleanField(default = False)
+# class Coordinator(models.Model):
+#     reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
+#     payment_hold = models.IntegerField()
+#     isActive = models.BooleanField(default = False)
+
+#     def __str__(self):
+#         return super().__str__()
+
+
 

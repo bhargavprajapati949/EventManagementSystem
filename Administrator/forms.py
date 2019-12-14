@@ -1,16 +1,18 @@
 from django import forms
-from EventWebSite.models import news, Event, Registers, Event_Head
-from UserManager.models import Collages, Stream, User, Volunteer
+
+from EventWebSite.models import news, Event, Participants
+from EventHead.models import Event_Head
+from UserManager.models import College, Stream, User, Volunteer
 
 class registers_model_form(forms.ModelForm):
     class Meta:
-        model = Registers
+        model = Participants
         fields = ('remark',)
 
 class participant_user_model_form(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('fname', 'lname', 'contect_no', 'email', 'clg_id', 'stream')
+        fields = ('fname', 'lname', 'contect_no', 'email', 'clg', 'stream')
 
 class event_model_form(forms.ModelForm):
     class Meta:
@@ -27,7 +29,7 @@ class news_model_form(forms.ModelForm):
 
 class collage_model_form(forms.ModelForm):
     class Meta:
-        model = Collages
+        model = College
         fields = ('clg_id','clg_name')
 
 class stream_model_form(forms.ModelForm):

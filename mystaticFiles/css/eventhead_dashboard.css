@@ -1,3 +1,9 @@
+/* #eventhead{
+	position: fixed	;
+	top: 20px;
+	left: 20px;
+} */
+
 .middle *, .middle {
 	margin: 0;
 	padding: 0;
@@ -8,7 +14,7 @@
 
 .middle {
 	position: absolute;
-	top: 105%;
+	top: 50%;
 	left: 18.5%;
 	transform: translate(-50%, -50%);
 }

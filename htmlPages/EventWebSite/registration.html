@@ -1,9 +1,33 @@
-<!-- {% extends  'EventWebSite/base.html' %} -->
+{% extends  'EventWebSite/base.html' %}
 
 {% load static %}
 
 {% block loadcss %}
     <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">  
+    <style>
+        body {
+            background-image: url('../media/nirma_bck.jpg');
+        }
+        .eventWrapper{
+            display: inline-block;
+            border: 2px solid black;
+            padding: 10px 30px;
+            margin-top: 30px;
+        }
+
+        #submit {
+            width: 150px;
+            height: 50px;
+            font-size: 120%;
+            border-radius: 0;
+            background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+            border: none;
+            color: white;
+            margin-top: 20px;
+            margin-left: 50px;
+        }
+        
+    </style>
 {% endblock %}
 
 {% block title %}
@@ -19,19 +43,21 @@
     {% endfor %}
 </ul>
 {% endif %}
-    <form method="POST" style="background-color: blue;">
+    <form method="POST" >
         {% csrf_token %}
-
-        {% for field in regform %}
-        <div id="{{ field.label }}Wrapper">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <table id="regtabale">
+        {{regform.as_table}}
+    </table>
+        <!-- {% for field in regform %}
+        <div id="{{ field.label }}Wrapper" class="wrapper">
+            <label class="labelOfForm" for="{{ field.id_for_label }}">{{ field.label }}</label>
             {{ field }}
             {% if field.help_text %}
-                <p>{{ field.help_text|safe }}</p>
+                <p class="inputOfForm">{{ field.help_text|safe }}</p>
             {% endif %}
             {{ field.errors }}
         </div>
-        {% endfor %}
+        {% endfor %} -->
 
         {% for event in events %}
         <div class="eventWrapper">
@@ -40,14 +66,14 @@
             <p>Fees : <span id="fees_{{event.event_name}}">{{event.fees}}</span></p>
         </div>
         {% endfor %}
-
-        <button type="submit">Submit</button>
+        <br>
+        <button id="submit" type="submit">Submit</button>
     </form>
     <div>
         <label for="total_fees">Total Fees</label>
         <p id="total_fees">0</p>
     </div>
-        
+
 {% endblock %}
     
 {% block loadScript %}

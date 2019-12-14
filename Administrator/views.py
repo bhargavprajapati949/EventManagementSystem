@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.views.generic import DetailView
-from UserManager.models import Collages, Stream, Event_Committee
-from EventWebSite.models import news, Event, Registers, Event_Head
+
+from UserManager.models import College, Stream, Event_Committee
+from EventWebSite.models import news, Event, Participants
+from EventHead.models import Event_Head
 from Administrator.forms import *
 # Create your views here.
 
@@ -41,7 +43,7 @@ def admin_dashboard(request):
 
 def participant_manager(request):
     if request.user.is_authenticated and request.user.is_admin:
-        participant_list = Registers.objects.values('reg_no', 'reg_no__fname', 'reg_no__lname', 'reg_no__email', 'reg_no__contect_no', 'reg_no__clg_id__clg_name', 'reg_no__stream__stream_name', 'remark', 'total_payment', 'remaining_payment', 'paid_payment', 'filled_by__reg_no__committee_id', 'is_paid')
+        participant_list = Participants.objects.values('reg_no', 'reg_no__fname', 'reg_no__lname', 'reg_no__email', 'reg_no__contect_no', 'reg_no__clg_id__clg_name', 'reg_no__stream__stream_name', 'remark', 'total_payment', 'remaining_payment', 'paid_payment', 'filled_by__reg_no__committee_id', 'is_paid')
         context = {'participant_list' : participant_list}
         return render(request, 'Administrator/participant_manager.html', context)
     else:
@@ -49,7 +51,7 @@ def participant_manager(request):
 
 def participant_detail(request, reg_no):
     if request.user.is_authenticated and request.user.is_admin:
-        participant = Registers.objects.filter(reg_no = reg_no).values('reg_no', 'reg_no__fname', 'reg_no__lname', 'reg_no__email', 'reg_no__contect_no', 'reg_no__clg_id__clg_name', 'reg_no__stream__stream_name', 'remark', 'total_payment', 'remaining_payment', 'paid_payment', 'filled_by__reg_no__committee_id', 'is_paid')[0]
+        participant = Participants.objects.filter(reg_no = reg_no).values('reg_no', 'reg_no__fname', 'reg_no__lname', 'reg_no__email', 'reg_no__contect_no', 'reg_no__clg_id__clg_name', 'reg_no__stream__stream_name', 'remark', 'total_payment', 'remaining_payment', 'paid_payment', 'filled_by__reg_no__committee_id', 'is_paid')[0]
         context = {'participant' : participant, 'detail_form' : True}
         return render(request, 'Administrator/participant_details.html', context)
     else:
@@ -58,7 +60,7 @@ def participant_detail(request, reg_no):
 def participant_edit(request, reg_no):
     if request.user.is_authenticated and request.user.is_admin:
         participant_user = User.objects.get(reg_no = reg_no)
-        registration = Registers.objects.get(reg_no = reg_no)
+        registration = Participants.objects.get(reg_no = reg_no)
         if request.method == 'POST':
             participant_user_form = participant_user_model_form(data = request.POST, instance = participant_user)
             registers_form = registers_model_form(data = request.POST, instance = registration)
@@ -109,6 +111,9 @@ def event_head_manager(request):
             if addeventhead_form.is_valid():
                 if not Event_Head.objects.filter(reg_no = request.POST['reg_no'], event = request.POST['event']):
                     eventhead = addeventhead_form.save()
+                    committee_obj = Event_Committee.objects.get(reg_no = request.POST['reg_no'])
+                    committee_obj.is_event_head = True
+                    committee_obj.save()
                 return redirect(event_head_manager)
             else:
                 eventhead_list = Event_Head.objects.all().values('reg_no', 'event__event_name', 'reg_no__reg_no__fname', 'reg_no__reg_no__lname', 'reg_no__reg_no__contect_no', 'reg_no__reg_no__email', 'isActive', 'event__event_id')
@@ -251,7 +256,7 @@ def event_delete(request, event_id):
 def collage_manager(request):
     if request.user.is_authenticated and request.user.is_admin:
         print('collage_manager called')
-        clg = Collages.objects.values('clg_id', 'clg_name')
+        clg = College.objects.values('clg_id', 'clg_name')
         context = {'collages' : clg}
         return render(request, 'Administrator/collage_manager.html', context)
     else:
@@ -259,7 +264,7 @@ def collage_manager(request):
 
 def collage_add(request):
     if request.user.is_authenticated and request.user.is_admin:
-        clg = Collages.objects.values('clg_id', 'clg_name')
+        clg = College.objects.values('clg_id', 'clg_name')
         if request.method == 'POST':
             addcollage_form = collage_model_form(data = request.POST)
             if addcollage_form.is_valid():
@@ -278,7 +283,7 @@ def collage_add(request):
 
 def collage_edit(request, clg_id):
     if request.user.is_authenticated and request.user.is_admin:
-        clg_obj = Collages.objects.get(clg_id = clg_id)
+        clg_obj = College.objects.get(clg_id = clg_id)
         print("news_edit called")
         if request.method == 'POST':
             print("post called")
@@ -289,13 +294,13 @@ def collage_edit(request, clg_id):
                 return redirect('collage_manager')
             else:
                 print("invalid data")
-                clg = Collages.objects.values('clg_id', 'clg_name')
+                clg = College.objects.values('clg_id', 'clg_name')
                 context = {'collages' : clg, 'editcollage_form' : editcollage_form, 'clg_id': clg_id}
                 return render(request, 'Administrator/collage_manager.html', context)
         else:
             print("get called")
             editcollage_form = collage_model_form(instance = clg_obj)
-            clg = Collages.objects.values('clg_id', 'clg_name')
+            clg = College.objects.values('clg_id', 'clg_name')
             context = {'collages' : clg, 'editcollage_form' : editcollage_form, 'clg_id': clg_id}
             return render(request, 'Administrator/collage_manager.html', context)
     else:
@@ -304,10 +309,10 @@ def collage_edit(request, clg_id):
 def collage_delete(request, clg_id):
     if request.user.is_authenticated and request.user.is_admin:
         if request.method == 'POST':
-            Collages.objects.get(clg_id = clg_id).delete()
+            College.objects.get(clg_id = clg_id).delete()
             return redirect('collage_manager')
         else:
-            clg = Collages.objects.values('clg_id', 'clg_name')
+            clg = College.objects.values('clg_id', 'clg_name')
             context = {'collages' : clg, 'clg_id': 'None', 'deletecollage_id' : clg_id }
             return render(request, 'Administrator/collage_manager.html', context)
     else:
@@ -453,7 +458,8 @@ def collect_money(request):
     else:
         return redirect('admin_login_require')
 
-def profile_administrator(request, reg_no):
+def profile_administrator(request):
+    reg_no = request.user.reg_no
     if request.user.is_authenticated and request.user.is_admin:
         userinfo = User.objects.filter(reg_no = reg_no).values('reg_no', 'fname', 'lname', 'email', 'contect_no', 'clg_id__clg_name', 'stream__stream_name')[0]
         committeeinfo = Event_Committee.objects.filter(reg_no = reg_no).values('committee_id', 'yearOfStudy')

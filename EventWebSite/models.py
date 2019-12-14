@@ -1,5 +1,5 @@
 from django.db import models
-from UserManager.models import User, Event_Committee, Admin, Volunteer
+from UserManager.models import User, Event_Committee, Volunteer
 
 
 # Create your models here.
@@ -26,6 +26,9 @@ class Event(models.Model):
     date_time = models.DateTimeField(blank = True, null=True, verbose_name = "Event Date & Time")
     # parent_event = models.ForeignKey(Parent_event, on_delete = models.SET_DEFAULT, default = 0)
 
+    def __str__(self):
+        return self.event_name
+
 class news(models.Model):
     news_id = models.AutoField(primary_key = True)
     news_receivers = [
@@ -36,7 +39,11 @@ class news(models.Model):
     news_content = models.CharField(max_length = 1000 ,verbose_name = 'News Content')
     hyperlink = models.CharField(verbose_name = 'hyperlink', max_length=50)
 
-class Registers(models.Model):
+    def __str__(self):
+        return self.news_content
+    
+
+class Participants(models.Model):
     reg_no = models.OneToOneField(User, primary_key = True, on_delete = models.CASCADE)
     remark = models.TextField(default = None, null=True)
     total_payment = models.IntegerField()
@@ -46,9 +53,12 @@ class Registers(models.Model):
     # conformed = models.BooleanField(default = False)
     is_paid = models.BooleanField(default = False)
 
+    def __str__(self):
+        return super().__str__()
+
 class Participation(models.Model):
-    reg_no = models.ForeignKey(Registers, on_delete = models.CASCADE)
-    event_id = models.ForeignKey(Event, on_delete = models.SET_DEFAULT, default = 0)
+    reg_no = models.ForeignKey(Participants, on_delete = models.CASCADE)
+    event = models.ForeignKey(Event, on_delete = models.SET_DEFAULT, default = 0)
     allowed_event_status = [
         ('Not Paid', 'Not Paid'),
         ('Paid', 'Paid'),
@@ -66,40 +76,6 @@ class Participation(models.Model):
     # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
     # amount = models.IntegerField()
 
-class Event_Head(models.Model):
-    reg_no = models.ForeignKey(Event_Committee, on_delete = models.CASCADE)
-    event = models.ForeignKey(Event, on_delete = models.CASCADE)
-    isActive = models.BooleanField(default = False)
-
-class Winner(models.Model):
-    event_id = models.ForeignKey(Event, on_delete = models.CASCADE)
-    allowed_positions = [
-        ('1', 'First'),
-        ('2', 'Second'),
-        ('3', 'Third')
-    ]
-    position = models.IntegerField(choices = allowed_positions)
-    winner_reg_no = models.ForeignKey(Participation, on_delete = models.SET_DEFAULT, default = 0)
-    winning_certificate_issue = models.BooleanField(default = False)
-    winning_certi_otp = models.IntegerField()
-    event_head_id = models.ForeignKey(Event_Head, null=True, on_delete = models.SET_NULL)
-
-class to_whome_paid(models.Model):
-    reg_no = models.ForeignKey(Registers, on_delete = models.CASCADE)
-    to_paid = models.ForeignKey(User, on_delete = models.SET_DEFAULT, default = 0)
-    amount = models.IntegerField()
-    date_time = models.DateTimeField()
-
-class vol_to_admin_pay(models.Model):
-    a_id = models.ForeignKey(Admin, on_delete = models.SET_DEFAULT, default = 0)
-    vol_id = models.ForeignKey(Event_Committee, on_delete = models.SET_DEFAULT, default = 0)
-    amount = models.IntegerField(default = 0)
-    date_time = models.DateTimeField()
-
-class Sponsers(models.Model):
-    s_id = models.AutoField(primary_key = True)
-    name = models.CharField(max_length = 50)
-    logo = models.ImageField(upload_to = 'sponsers_logo')
-    amount = models.IntegerField(null = True)
-    done_by = models.ForeignKey(Event_Committee, on_delete = models.SET_DEFAULT, default = 0)
-    date = models.DateField()
+    def __str__(self):
+        str = reg_no + " Participated in " + event
+        return str

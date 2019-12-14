@@ -44,7 +44,7 @@ urlpatterns = [
    path('news_edit/<?P<news_id>', views.news_edit, name='news_edit'),
    path('news_delete/<?P<news_id>', views.news_delete, name='news_delete'),
 
-   path('profile_administrator/<?P<reg_no>', views.profile_administrator, name='profile_administrator'),
+   path('profile_administrator', views.profile_administrator, name='profile_administrator'),
    path('collect_money', views.collect_money, name='collect_money'),
    path('admin_logout', views.admin_logout, name='admin_logout'),
 ]
