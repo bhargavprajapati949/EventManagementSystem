@@ -9,6 +9,7 @@ from UserManager.models import User
 from EventWebSite.form import ParticipantRegForm
 
 import random
+from django.db.models import Q
 
 # Create your views here.
 
@@ -114,9 +115,16 @@ def register(request):
         return render(request, 'EventWebSite/registration.html', context)
 
 def event_detail(request):
-    events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
+    query = request.GET.get('q')
+    if query is not None:
+        events = Event.objects.filter(event_name=query)
+        # events = Event.objects.filter(Q('event_name=query'))
+    else:    
+        events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
+    
     context = {'events' : events}
     return render(request, 'EventWebSite/event_detail.html', context)
+
 
 def participant_dashboard(request):
     if request.user.is_authenticated and request.user.is_participant:

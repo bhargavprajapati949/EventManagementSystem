@@ -13,7 +13,14 @@
 {% endblock %}
 
 {% block content %}
-            <div class="event_title_container">
+    
+<form action="{% url 'event_detail' %}" method="GET">
+    {% csrf_token %}
+    <input type="text" name="q" placeholder="Search event">
+    <button type="submit">Search</button>
+</form>
+
+<div class="event_title_container">
                 <p id="event_detail">Events</p>
             </div>
             <br>
