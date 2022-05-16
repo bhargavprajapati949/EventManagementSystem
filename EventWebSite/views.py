@@ -140,6 +140,13 @@ def participant_dashboard(request):
     else:
         return redirect('participant_login_require')
 
+def do_payment(request):
+    if request.user.is_authenticated and request.user.is_participant:
+        reg_no = request.user.reg_no
+        
+    else:
+        return redirect('participant_login_require')
+
 def profile_participant(request):
     if request.user.is_authenticated and request.user.is_participant:
         userinfo = User.objects.filter(reg_no = request.user.reg_no).values('reg_no', 'fname', 'lname', 'email', 'contect_no', 'clg_id__clg_name', 'stream__stream_name')[0]

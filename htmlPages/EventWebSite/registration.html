@@ -4,30 +4,6 @@
 
 {% block loadcss %}
     <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">  
-    <style>
-        body {
-            background-image: url('../media/nirma_bck.jpg');
-        }
-        .eventWrapper{
-            display: inline-block;
-            border: 2px solid black;
-            padding: 10px 30px;
-            margin-top: 30px;
-        }
-
-        #submit {
-            width: 150px;
-            height: 50px;
-            font-size: 120%;
-            border-radius: 0;
-            background-image: linear-gradient(to right, #4867e0 60%, #329fec);
-            border: none;
-            color: white;
-            margin-top: 20px;
-            margin-left: 50px;
-        }
-        
-    </style>
 {% endblock %}
 
 {% block title %}
@@ -36,18 +12,23 @@
 
 {% block content %}
 
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+<div id="error_msg">
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+<div id="reg_form">
     <form method="POST" >
         {% csrf_token %}
+    
         <table id="regtabale">
-        {{regform.as_table}}
-    </table>
+            {{regform.as_table}}
+        </table>
         <!-- {% for field in regform %}
         <div id="{{ field.label }}Wrapper" class="wrapper">
             <label class="labelOfForm" for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -58,22 +39,26 @@
             {{ field.errors }}
         </div>
         {% endfor %} -->
-
-        {% for event in events %}
-        <div class="eventWrapper">
-            <input type="checkbox" id="{{ event.event_name }}_checkbox" name="select_event" value="{{event.event_name}}" onchange="changeToAmount('{{event.event_name}}', '{{event.fees}}')">
-            <label for="{{ event.event_name }}">{{ event.event_name }}</label>
-            <p>Fees : <span id="fees_{{event.event_name}}">{{event.fees}}</span></p>
+        <div id="events">
+            <div class="events_title">Events</div>
+            {% for event in events %}
+            <div class="eventWrapper">
+                <input type="checkbox" id="{{ event.event_name }}_checkbox" name="select_event" value="{{event.event_name}}" onchange="changeToAmount('{{event.event_name}}', '{{event.fees}}')">
+                <label for="{{ event.event_name }}">{{ event.event_name }}</label>
+                <p>Fees : <span id="fees_{{event.event_name}}">{{event.fees}}</span></p>
+            </div>
+            {% endfor %}
+            <div class="total_fees_container">
+                <label for="total_fees">Total Fees</label>
+                <p id="fee_amount">0</p>
+            </div>    
         </div>
-        {% endfor %}
-        <br>
-        <button id="submit" type="submit">Submit</button>
+        <div id="submit_box">
+            <button id="submit" type="submit">Submit</button>
+        </div>
     </form>
-    <div>
-        <label for="total_fees">Total Fees</label>
-        <p id="total_fees">0</p>
-    </div>
-
+</div>
+    
 {% endblock %}
     
 {% block loadScript %}

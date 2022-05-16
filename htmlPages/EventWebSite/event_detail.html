@@ -14,37 +14,37 @@
 
 {% block content %}
     
-<form action="{% url 'event_detail' %}" method="GET">
+<div class="event_title_container">
+    <p id="event_detail">Events</p>
+</div>
+<br>
+
+<form id="event_search" action="{% url 'event_detail' %}" method="GET">
     {% csrf_token %}
-    <input type="text" name="q" placeholder="Search event">
-    <button type="submit">Search</button>
+    <input class="textbox" type="text" name="q" placeholder="Search event">
+    <button class="submitbtn" type="submit">Search</button>
 </form>
 
-<div class="event_title_container">
-                <p id="event_detail">Events</p>
-            </div>
-            <br>
-            <br>
-            <br>
-            {% for event in events %}
-            <div class="main">
-                    <div class="eventbox" style="display: inline;">
-                            <img src="media/{{ event.event_logo }}" height="300px" width="300px">
-                            <p>{{event.event_name}}</p>
-                            <p>{{event.event_status}}</p>
-                            <p>{{event.event_detail}}</p>
-                        </div>
-                        <!-- <div class="eventDetailWrapper">
-                            <button>X</button>
-                            <img src="media/{{ event.event_logo }}" height="300px" width="300px">
-                            <p>{{event.event_name}}</p>
-                            <p>{{event.event_status}}</p>
-                            <p>{{event.event_detail}}</p>
-                            <p>{{event.rules}}</p>
-                            <p>{{event.fees}}</p>
-                        </div> -->
-            </div>
-            {% endfor %}
+<div class="event_container">
+{% for event in events %}    
+        <div class="eventbox" style="display: inline;">
+            <img src="media/{{ event.event_logo }}" height="300px" width="300px">
+            <p>{{event.event_name}}</p>
+            <p>{{event.event_status}}</p>
+            <p>{{evnet.fees}}</p>
+            <p>{{event.event_detail}}</p>
+        </div>
+            <!-- <div class="eventDetailWrapper">
+                <button>X</button>
+                <img src="media/{{ event.event_logo }}" height="300px" width="300px">
+                <p>{{event.event_name}}</p>
+                <p>{{event.event_status}}</p>
+                <p>{{event.event_detail}}</p>
+                <p>{{event.rules}}</p>
+                <p>{{event.fees}}</p>
+            </div> -->
+{% endfor %}
+</div>
 {% endblock %}
 
 {% block loadScript %}

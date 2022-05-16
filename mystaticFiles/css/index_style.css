@@ -1,85 +1,18 @@
-/*====== globle =====*/
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    box-sizing: border-box;
-}
-
-.basic{
-    background: #fff;    
-    padding: 5px;
-}
-
-/*===== title Bar=====*/
-#titleBar{
-    padding: 20px 100px;
-    height: 50px;
-    top: 0px;
-    
-}
-.header_links_container {
-    position: sticky;
-    -webkit-sticky: 80px;
-    height: 80px;
-    top: 0px;
-    background-color: white;
-}
-#logo{
-    height: 100%;
-}
-
-#navBar{
-    float: left;
-    padding: 0 50px;
-    height: 80px;
-}
-
-#navBar a{
-    font-size: 20px;
-    text-decoration: none;
-    padding: 15px 20px;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    color: #696969;
-}
-
-#navbar a:hover {
-    background-image: linear-gradient(to right, #4867e0, #329fec);
-    color: white;
-    overflow: hidden;
-}
-
-.login_container {
-    text-align: center;
-    vertical-align: middle;
-    float: right;
-    margin-right: 100px;
-}
-
-#login_btn {
-    width: 150px;
-    height: 50px;
-    font-size: 120%;
-    border-radius: 0;
-    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
-    border: none;
-    color: white;
-}
 /*===== slideshow =====*/
-/*#slideshow{
+#slideshow{
     width: 100%;
     height: 50px;
 }
 
 #slideshow img{
     width: 200px;
-}*/
+}
+
 
 /*===== news =====*/
 #news{
     background-color: wheat;
+    padding: 10px 30px;
 }
 
 #news ul{
@@ -92,66 +25,18 @@ body{
     color: #000000;
 }
 
-/*===== about nirma =====*/
-.intro
-{
-	width: 100%;
-	background: #FFFFFF;
-	padding-top: 115px;
-	padding-bottom: 67px;
-	padding-left: 144px;
-	padding-right: 144px;
-}
-.intro_content
-{
-	flex-grow: 1;
-}
-.intro_item
-{   width: 500px;
-	background: #f3f7f9;
-    padding-top: 200px;
-    padding-left: 150px;
-}
-.intro_image img
-{
-    width: 500px;
-}
+/*================== About Us====================*/
 
-.intro_body
-{
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 5px;
-    text-align: left;
-    vertical-align: middle;
-    outline: none;
+.aboutus_title {
+    text-align: center;
+    font-size: 50px;
     color: #696969;
-    padding-right: 5px;
 }
 
-.intro_title {
-    font-size: 25px;
-    padding-bottom: 5px;
-}
-
-.intro_subtitle {
-    font-size: 15px;
-}
-
-.intro_item:hover .intro_body::after
-{
-	opacity: 1;
-}
-
-.intro_item:hover .intro_title,
-.intro_item:hover .intro_subtitle
-{
-	color: #FFFFFF;
-}
-
-.intro_body:hover {
-    background-image: linear-gradient(to right, #4867c0, #329fec);
+.aboutus_title #aboutus_content{
+    width: 100%;
+    font-size: 25px; 
+    color:black;
 }
 
 /*====sponsers====*/
@@ -159,12 +44,10 @@ body{
 .sponsers_container {
     width: 100%;
 	background: #FFFFFF;
-	padding-top: 20px;
-	padding-bottom: 67px;
-	padding-left: 144px;
-    padding-right: 144px;
+	padding: 20px;
     display: flex;
-    flex-flow: wrap; 
+    flex-flow: wrap;
+    justify-content: center; 
 }   
 
 .sponsers_title {
@@ -181,61 +64,6 @@ body{
     padding-top: 50px;
     padding-bottom: 50px;
     padding-left: 100px;
-}
-/*===============================================*/
-
-.dropdown {
-    display: inline-block;
-    position: relative;
-}
-
-.dropdown button {
-    border: none;
-    padding: 15px 40px;
-    background-color: #329fec;
-    color: white;
-    transition: .3s;
-    font-size: 20px;
-}
-
-.dropdown button:hover {
-    background-color: #329fec;
-}
-
-.dropdown div a {
-    display: block;
-    text-decoration: none;
-    padding: 8px;
-    color: #000;
-}
-
-.dropdown div {
-    background-color: #fff;
-    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    visibility: hidden;
-    position: absolute;
-    min-width: 100%;
-    opacity: 0;
-    transition: .3s;
-}
-
-.dropdown:hover div {
-    visibility: visible;
-    opacity: 1;
-}
-
-.dropdown div a:hover {
-    color: #329fec;
-}
-
-
-/*================== About Us====================*/
-
-.aboutus_title {
-    text-align: center;
-    font-size: 50px;
-    color: #696969;
 }
 
 /*======================Contact=======================*/

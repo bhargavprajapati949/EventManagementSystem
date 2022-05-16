@@ -4,6 +4,8 @@ body{
     padding: 0px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .basic{
@@ -73,19 +75,7 @@ body{
     color: white;
 }
 
-#news{
-    background-color: #0652DD;
-}
-
-#news ul{
-    list-style: square;
-}
-
-#news ul li a{
-    text-decoration: none;
-    text-decoration: none;
-    color: #000000;
-}
+/*================= Title bar dropdown ==============================*/
 
 .dropdown {
     display: inline-block;

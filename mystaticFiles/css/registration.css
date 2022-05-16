@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Error Msg */
+
+#error_msg,
+.helptext,
+errorlist{
+    color: red;
+}
+
+
+/* Reg Form */
+
+#reg_form{
+    padding: 50px;
+}
+
+#reg_form th, td{
+    text-align: left;
+    padding: 5px 0px;
+}
+
+#reg_form td input,
+#reg_form td select{
+    height: 25px;
+    border-radius: 3px;
+}
+
+#events{
+    /* border: 2px solid black; */
+    padding: 5px 15px 5px 0px;
+}
+
+#events .events_title{
+    padding: 10px 0px;
+    font-weight: bold;
+}
+
+#events .eventWrapper{
+    display: inline-block;
+    border: 2px solid black;
+    padding: 10px 30px;
+    margin: 10px;
+}
+
+#events .total_fees_container label, 
+#events .total_fees_container #fee_amount
+{
+    display: inline;
+}
+
+#submit_box{
+    display: flex;
+    align-items: center;
+}
+
+#submit {
+    width: 150px;
+    height: 50px;
+    font-size: 120%;
+    border-radius: 0;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    border: none;
+    color: white;
+    margin: 30px auto;
+}

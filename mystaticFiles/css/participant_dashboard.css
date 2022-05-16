@@ -6,61 +6,6 @@
     background-image: url(../media/bck_p_dash.jfif);
     z-index: 0;
 }
-/*
-.basic{
-    background: #fff;    
-    padding: 5px;
-}
-
-/*===== title Bar=====*/
-/* #titleBar{
-    padding: 20px 100px;
-    height: 50px;
-    top: 0px;
-    
-}
-.header_links_container {
-    position: sticky;
-    -webkit-sticky: 80px;
-    height: 80px;
-    top: 0px;
-    background-color: white;
-}
-#logo{
-    height: 100%;
-}
-
-#navBar{
-    float: left;
-    padding: 0 50px;
-    height: 80px;
-    margin-top: 20px;
-}
-
-#navBar a{
-    font-size: 20px;
-    text-decoration: none;
-    margin-top: 20px;
-    padding: 15px 20px;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    color: #696969;
-}
-
-#navbar a:hover {
-    background-image: linear-gradient(to right, #4867e0, #329fec);
-    color: white;
-    overflow: hidden;
-}
-
-.login_container {
-    text-align: center;
-    vertical-align: middle;
-    float: right;
-    margin-right: 100px;
-} */
-
 
 
 /* DASHBOARD AND LOGOUT DROPDOWN */
@@ -162,14 +107,17 @@
 }
 
 .middle {
-	position: absolute;
-	top: 105%;
-	left: 18.5%;
-	transform: translate(-50%, -50%);
+	/* position: absolute; */
+	/* top: 105%; */
+	/* left: 18.5%; */
+	/* transform: translate(-50%, -50%); */
+    margin: 50px 30px;
+    margin-bottom: 200px;
+
 }
 
 .menu {
-	width: 400%;
+	/* width: 400%; */
 	border-radius: 8px;
 	overflow: hidden;
 }

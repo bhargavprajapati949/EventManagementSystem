@@ -2,8 +2,13 @@ body {
     background-image: url(../media/bck_p_dash.jfif);
 }
 
+#profile_main{
+    margin: 30px 30px 200px 30px;
+}
+
 .detail_container p {
     color: white;
+    display: inline;
 }
 
 .detail_container {

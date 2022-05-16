@@ -1,4 +1,4 @@
-var amount = document.getElementById('total_fees')
+var amount = document.getElementById('fee_amount')
 
 function changeToAmount(event_name, fees){    
     var id = event_name + "_checkbox"
