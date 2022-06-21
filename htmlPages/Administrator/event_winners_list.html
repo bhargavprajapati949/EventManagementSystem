@@ -1,0 +1,59 @@
+{% extends 'Administrator/administrator_base.html'%}
+
+{% load static %}
+
+{% block title %}
+    
+    <title>Event Winners</title>
+
+{% endblock %}
+
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+
+{% endblock%}
+
+{% block content %}
+
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+
+        <h1><p id="table_title">Event Winners - {{event_name}}</p></h1>
+
+        <table id="manage_table" class="manage_table">
+
+            <tr>
+                <th>Reg No</th>                
+                <th>Name</th>
+                <th>Position</th>
+                <th>Certificate Issued</th>
+                <th>Event Head</th>
+            </tr>
+
+            {% for winner in winners %}
+            <tr>
+                <td>{{winner.winner__reg_no}}</td>
+                <td>{{winner.winner__reg_no__reg_no__fname}} {{winner.winner__reg_no__reg_no__lname}}</td>
+                <td>{{winner.position}}</td>
+                <td><input type="checkbox" disabled {% if winner.winning_certificate_issue %} checked {% endif %} ></td>
+                <td>{{winner.event_head__reg_no__committee_id}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'event_manager' %}">Back To Event Manager</a>
+            </button>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}
+
+{% block loadscript %}
+
+{% endblock %}

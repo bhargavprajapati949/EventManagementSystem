@@ -1,4 +1,4 @@
-{% extends 'EventHead/base.html' %}
+{% extends 'EventHead/eventHead_base.html' %}
 
 {% load static %}
 
@@ -7,34 +7,42 @@
 {% endblock %}
 
 {% block loadcss %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/eventhead_dashboard.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/EventHead/eventHead_dashboard.css' %}">
+<style>
+    body{
+        background-image: url("{% static 'media/bck_p_dash.jfif' %}");
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 
 <div id="eventhead">
-        <div class="middle">
-                <div>
-                    {% if message %}
-                    <p>{{message}}</p>
-                    {% endif %}
+    <div id="dashboard">
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <h1><p id="section_title">Assigned Events</p></h1>
+        <div class="menu">
+            {% for event in events %}
+            <li class="item" id="id_{{event.event__event_name}}">
+                <a href="#id_{{event.event__event_name}}" class="btn">{{event.event__event_name}}</a>
+                <div class="smenu">
+                    <a href="{% url 'attendance' event_id=event.event__event_id %}">Participation list and Attendance</a>                    
+                    <a href="{% url 'winner_entry' event_id=event.event__event_id %}">Enter Result</a>
                 </div>
-                <p style="text-align: center; font-size: 30px;">Assigned Events</p><br><br>
-                <div class="menu">
-                    {% for event in events %}
-                    <li class="item" id="id_{{event.event__event_name}}">
-                        <a href="#id_{{event.event__event_name}}" class="btn">{{event.event__event_name}}</a>
-                        <div class="smenu">
-                            <a href="{% url 'attendance' event_id=event.event__event_id %}">Attendance</a>
-                            <a href="{% url 'participation_info' event_id=event.event__event_id %}">Participation Details</a>
-                            <a href="{% url 'enter_result' event_id=event.event__event_id %}">Enter Result</a>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </div>
-            </div>
-            
+            </li>
+            {% endfor %}
+        </div>
+    </div>
 </div>
+            
 
 {% endblock %}
 

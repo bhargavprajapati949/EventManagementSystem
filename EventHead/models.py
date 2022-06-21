@@ -13,17 +13,17 @@ class Event_Head(models.Model):
 
 class Winner(models.Model):
     event = models.ForeignKey(Event, on_delete = models.CASCADE)
+    winner = models.ForeignKey(Participation, on_delete = models.SET_DEFAULT, default = 0)
     allowed_positions = [
         ('1', 'First'),
         ('2', 'Second'),
         ('3', 'Third')
     ]
     position = models.IntegerField(choices = allowed_positions)
-    winner = models.ForeignKey(Participation, on_delete = models.SET_DEFAULT, default = 0)
     winning_certificate_issue = models.BooleanField(default = False)
     winning_certi_otp = models.IntegerField()
     event_head = models.ForeignKey(Event_Head, null=True, on_delete = models.SET_NULL)
 
     def __str__(self):
-        str = position + " in " + event + " " + winner
+        str = self.position + " in " + self.event + " " + self.winner
         return str

@@ -1,0 +1,51 @@
+{% extends 'Coordinator/coordinator_base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title> Coordinator | DashBoard</title>
+{% endblock %}
+
+{% block loadcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/Coordinator/coordinator_dashboard.css' %}">
+<style>
+    body{
+        background-image: url("{% static 'media/bck_p_dash.jfif' %}");
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div id="eventhead">
+    <div id="dashboard">
+        <div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <h1><p id="section_title">Coordinator Dashboard</p></h1>
+        <div class="menu">
+            <li class="item" id="id_{{event.event__event_name}}">
+                <a href="{% url 'coordinator_confirm_participation' %}" class="btn">Confirm Participants</a>
+            </li>
+            <li class="item" id="id_{{event.event__event_name}}">
+                <a href="{% url 'coordinator_participation_certi_issue' %}" class="btn">Participation Certificate Issue</a>
+            </li>
+            <li class="item" id="id_{{event.event__event_name}}">
+                <a href="{% url 'coordinator_winner_certi_issue' %}" class="btn">Winner Certificate Issue</a>
+            </li>
+        </div>
+    </div>
+</div>
+            
+
+{% endblock %}
+
+{% block loadScript %}
+
+{% endblock %}

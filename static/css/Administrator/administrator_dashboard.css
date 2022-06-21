@@ -1,0 +1,23 @@
+
+/* .partcipant_detail_container {
+  position: absolute;
+  /* width: auto; */
+  /* top: 10%;
+  margin-right: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.5);
+  border-radius: 10px;
+  margin-left: 300px;
+  padding-left: 40px;
+  padding-right: 80px;
+  padding-bottom: 20px;
+  padding-top: 200px;
+} */ 
+
+.main{
+  height: calc(100vh - 90px);
+  width: calc(100vw - 250px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

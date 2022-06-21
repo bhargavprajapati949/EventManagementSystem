@@ -1,0 +1,84 @@
+{% extends 'Administrator/administrator_base.html'%}
+
+{% load static %}
+
+{% block title %}
+    
+    <title>Event Committee</title>
+
+{% endblock %}
+
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+<style>
+    table#manage_table{
+        display: block;
+        overflow-x: auto;
+    }
+</style>
+
+{% endblock%}
+
+{% block content %}
+
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+
+        <h1><p id="table_title">Event Committee</p></h1>
+
+        <table id="manage_table" class="manage_table">
+
+            <tr>
+                <th>Reg No</th>
+                <th>Committee ID</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th>College</th>
+                <th>Stream</th>
+                <th>Year</th>
+                <th>Sponsorship</th>
+                <th>Publicity</th>
+                <th>Creative</th>
+                <th>Technical</th>
+                <th>Volunteering</th>
+                <th>Logistics</th>
+                <th>Graphics</th>
+                <th>Event Management</th>
+            </tr>
+
+            {% for member in committee %}
+            <tr>
+                <!-- <td><input type="checkbox" checked disabled></td>
+                <td><input type="checkbox" disabled></td> -->
+                <td>{{member.reg_no}}</td>
+                <td>{{member.committee_id}}</td>
+                <td>{{member.reg_no__fname}} {{member.reg_no__lname}}</td>
+                <td>{{member.reg_no__contect_no}}</td>
+                <td>{{member.reg_no__email}}</td>
+                <td>{{member.reg_no__clg__clg_name}}</td>
+                <td>{{member.reg_no__stream__stream_name}}</td>
+                <td>{{member.yearOfStudy}}</td>
+                <td><input type="checkbox" disabled {% if member.in_sponsorship %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_publicity %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_criative %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_technical %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_volunteering %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_logistics %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_graphics %} checked {% endif %} ></td>
+                <td><input type="checkbox" disabled {% if member.in_eventManagement %} checked {% endif %} ></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+</div>
+    
+
+{% endblock %}
+
+{% block loadscript %}
+
+{% endblock %}

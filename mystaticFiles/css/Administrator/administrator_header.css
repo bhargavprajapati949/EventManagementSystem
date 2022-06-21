@@ -1,0 +1,74 @@
+#titleBar{
+    position: sticky;
+    -webkit-sticky: 50px;
+    height: 50px;
+    top: 0px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 50px;    
+    box-shadow: 0px 0px 3px gray;
+}
+
+#logo{
+    height: 100%;
+}
+
+.links{
+    display: inline-block;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dropdown #profile_btn {
+    border: none;
+    padding: 15px 40px;
+    background-color: #329fec;
+    transition: .3s;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.dropdown #profile_btn a{
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown .options {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 100%;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    /* transition: .3s;
+    visibility: hidden;
+    opacity: 0; */
+}
+
+.dropdown .options a {
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    color: #000;
+}
+
+.options a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .options {
+  display: block;
+}
+
+.options:hover, 
+.options a:hover{
+    display: block;
+}

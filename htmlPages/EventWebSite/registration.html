@@ -4,6 +4,11 @@
 
 {% block loadcss %}
     <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">  
+    <style>
+        body{
+            background-image: url("{% static 'media/nirma_bck.jpg' %}");
+        }
+    </style>
 {% endblock %}
 
 {% block title %}
@@ -12,16 +17,6 @@
 
 {% block content %}
 
-<div id="error_msg">
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
-
 <div id="reg_form">
     <form method="POST" >
         {% csrf_token %}
@@ -29,6 +24,15 @@
         <table id="regtabale">
             {{regform.as_table}}
         </table>
+        <div id="error_msg">
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
         <!-- {% for field in regform %}
         <div id="{{ field.label }}Wrapper" class="wrapper">
             <label class="labelOfForm" for="{{ field.id_for_label }}">{{ field.label }}</label>

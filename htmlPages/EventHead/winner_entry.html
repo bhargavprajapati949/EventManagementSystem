@@ -1,0 +1,137 @@
+{% extends 'EventHead/eventHead_base.html' %}
+
+{% load static %}
+
+{% block title %} 
+<title>Result Entry | Event Head</title>
+{% endblock %}
+
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+<style>
+    .help{
+        color: red;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container">
+        <h1><p id="table_title">Winner Entry</p></h1> 
+
+        <form method="POST" class="inline_form">
+            {% csrf_token %}
+            <div class="inlineFieldWrapper">
+                <label for="firstPosition">1<sup>st</sup> Position : </label>
+            </div>
+            <div class="inlineFieldWrapper">
+                <input type="hidden" name="position" value="1">
+                <select name="reg_no" id="firstPosition" required>
+                    {% for participant in participants %}
+                    <option value="{{participant.reg_no}}">{{participant.reg_no}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="inlineFieldWrapper">
+                <button class="inline_form_btn" type="submit">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    <span>Add 1<sup>st</sup> Postion Winner</span>
+                </button>
+            </div>
+        </form>
+
+        <form method="POST" class="inline_form">
+            {% csrf_token %}
+            <div class="inlineFieldWrapper">
+                <label for="secondPosition">2<sup>nd</sup> Position : </label>
+            </div>
+            <div class="inlineFieldWrapper">
+                <input type="hidden" name="position" value="2">
+                <select name="reg_no" id="secondPosition" required>
+                    {% for participant in participants %}
+                    <option value="{{participant.reg_no}}">{{participant.reg_no}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="inlineFieldWrapper">
+                <button class="inline_form_btn" type="submit">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    <span>Add 2<sup>nd</sup> Postion Winner</span>
+                </button>
+            </div>
+        </form>
+
+        <form method="POST" class="inline_form">
+            {% csrf_token %}
+            <div class="inlineFieldWrapper">
+                <label for="thirdPosition">3<sup>rd</sup> Position : </label>
+            </div>
+            <div class="inlineFieldWrapper">
+                <input type="hidden" name="position" value="3">
+                <select name="reg_no" id="thirdPosition" required>
+                    {% for participant in participants %}
+                    <option value="{{participant.reg_no}}">{{participant.reg_no}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="inlineFieldWrapper">
+                <button class="inline_form_btn" type="submit">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    <span>Add 3<sup>rd</sup> Postion Winner</span>
+                </button>
+            </div>
+        </form>
+
+        {% if winner_messages %}
+        {% for message in winner_messages %}
+        <div class="inline_form justify-flex-start">
+            <!-- <div class="fieldWrapper"> -->
+                <p class="help">{{message}}</p>
+            <!-- </div> -->
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Reg No</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Winner Certificate Issued</th>
+            </tr>
+            
+            {% for winner in winners %}
+            <tr>
+                <td>{{winner.winner__reg_no}}</td>
+                <td>{{winner.winner__reg_no__reg_no__fname}} {{winner.winner__reg_no__reg_no__lname}}</td>
+                <td>{{winner.winner__reg_no__reg_no__contect_no}}</td>
+                <td>{{winner.winner__reg_no__reg_no__email}}</td>
+                <td>{{winner.position}}</td>
+                <td><input type="checkbox" disabled {% if winner.winning_certificate_issue %} checked {% endif %} ></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'eventHead_dashboard' %}">Back To Dashboard</a>
+            </button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block loadScript %}
+
+{% endblock %}

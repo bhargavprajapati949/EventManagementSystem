@@ -1,0 +1,261 @@
+/* body {
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;
+} */
+
+/* header {
+  position: absolute;
+  box-sizing: border-box;
+  box-shadow: -10px 15px 20px red;
+  border-radius: 10px;
+  margin-left: 280px;
+  /* padding-left: 40px;
+  padding-right: 80px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+} */
+
+
+
+/* .dashboard_detail {
+    height: 100vh;
+    width: 20%;
+    margin: 0;
+    background-color: #343434;
+    box-shadow: 5px 0 5px #000;
+    float: left;
+}
+
+.profile_name  {
+    font-size: 30px;
+    text-align: center;
+    padding-top: 10px;
+    color: #fff;
+}*/
+
+.admin_links {
+    color: white;
+    padding-top: 40px;
+} 
+
+.admin_links li{
+  padding-bottom: 5px;
+  list-style-type: none;
+  padding-left: 60px;
+}
+
+.admin_links li a {
+  text-decoration: none;
+  font-size: 20px;
+  font-family: sans-serif;
+  color: black;
+}
+
+.dashboard_detail {
+  /* margin-left: -40px;
+  margin-top: -50px; */
+  /* padding-bottom: 500px; */
+  /* width: 20%; */
+  box-shadow: 5px 0px 2px gray;
+  /* background-color: lightseagreen; */
+}
+/* .link_container {
+  margin-bottom: 5px;
+  background-color: rgba(0,0,0,0.1);
+} */
+
+/* .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #343434;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #334343;
+    color: #03a9f4;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropbtn {
+    background-color: transparent;
+    border: none;
+    width: 97%;
+    text-align: left;
+    font-size: 20px;
+    color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+     padding-top: 10px;
+    padding-bottom: 10px;
+    /* border-style: none none solid none;
+    border-width: 1px; */
+    /* box-shadow: -2px 2px 5px #696969; 
+  }*/
+
+
+  /* #Collect_Money { 
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    height: 110px; */
+    /* padding-right: 115px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 2px 2px #000; */
+    /* margin-bottom: 10px; */
+    /* border-style: none none solid none;
+    border-width: 1px; }
+    */
+
+
+
+/*====== globle =====*/
+body{
+  margin: 0px;
+  padding: 0px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+
+.basic{
+  background: #fff;    
+  padding: 5px;
+}
+
+/*===== title Bar=====*/
+#titleBar{
+  padding: 20px 100px;
+  height: 50px;
+  top: 0px;
+  
+}
+.header_links_container {
+  position: sticky;
+  -webkit-sticky: 80px;
+  height: 80px;
+  top: 0px;
+  background-color: white;
+  border-bottom: solid;
+  border-width: .5px;
+  border-color: grey;
+  z-index: 1;
+}
+#logo{
+  height: 100%;
+}
+
+#navBar{
+  float: left;
+  padding: 0 50px;
+  height: 80px;
+}
+
+#navBar a{
+  font-size: 20px;
+  text-decoration: none;
+  padding: 15px 20px;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  color: #696969;
+}
+
+#navbar a:hover {
+  background-image: linear-gradient(to right, #4867e0, #329fec);
+  color: white;
+  overflow: hidden;
+}
+
+.login_container {
+  text-align: center;
+  vertical-align: middle;
+  float: right;
+  margin-right: 100px;
+}
+
+#login_btn {
+  width: 150px;
+  height: 50px;
+  font-size: 120%;
+  border-radius: 0;
+  background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+  border: none;
+  color: white;
+}
+
+#news{
+  background-color: #0652DD;
+}
+
+#news ul{
+  list-style: square;
+}
+
+#news ul li a{
+  text-decoration: none;
+  text-decoration: none;
+  color: #000000;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown button {
+  border: none;
+  padding: 15px 40px;
+  background-color: #329fec;
+  color: white;
+  transition: .3s;
+  font-size: 20px;
+}
+
+.dropdown button:hover {
+  background-color: #329fec;
+}
+
+.dropdown div a {
+  display: block;
+  text-decoration: none;
+  padding: 8px;
+  color: #000;
+}
+
+.dropdown div {
+  background-color: #fff;
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  visibility: hidden;
+  position: absolute;
+  min-width: 100%;
+  opacity: 0;
+  transition: .3s;
+}
+
+.dropdown:hover div {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dropdown div a:hover {
+  color: #329fec;
+}

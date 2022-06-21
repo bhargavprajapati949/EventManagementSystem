@@ -1,0 +1,51 @@
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+#main_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    padding: 25px;
+    border-radius: 25px;
+}
+
+#login a{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 120%;
+}
+
+#Registration{
+    text-align: center;
+    vertical-align: middle;    
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    border: none;
+    margin-top: 50px;
+    padding: 15px;
+}
+
+#Registration a{
+    color: white;
+    text-decoration: none;
+    font-size: 120%;
+}
+
+#login a:hover,
+#Registration:hover{
+    transform: scale(1.02,1.02);
+    transition: all 0.2s ease-out;
+}

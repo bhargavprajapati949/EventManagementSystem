@@ -1,4 +1,4 @@
-{% extends 'Administrator/base.html'%}
+{% extends 'Administrator/administrator_base.html'%}
 
 {% load static %}
 
@@ -10,19 +10,26 @@
     
 {% block loadcss %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
 
 {% endblock%}
 
 {% block content %}
 
 <div class="main">
-    
     <div class="main_detail_container" id="main_detail_container" >
-        <div class="search_bar">
-            <h1><p id="table_title">News</p></h1>
+        
+        <h1><p id="table_title">News</p></h1>
+
+        <div class="inline_form">
+            
             {% if not addnews_form %}
-            <a id="add_btn" href="{% url 'news_add' %}">Add News</a>
+            
+            <a class="inline_form_btn" href="{% url 'news_add' %}">
+                <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                Add News
+            </a>
+            
             {% endif %}
             <!-- <div class="search_inbox_container">
                 <input type="text" placeholder="search" id="search_bar">&nbsp;&nbsp;
@@ -39,74 +46,82 @@
                 </select>
             </div> -->
         </div>
-        {% if addnews_form %}
-        <div id="add_news_bar">
-            <form method="POST" action="{% url 'news_add' %}">
-                {% csrf_token %}
-                {% for field in addnews_form %}
-                <div id="{{ field.label }}Wrapper">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.help_text %}
-                    <p>{{ field.help_text|safe }}</p>
-                    {% endif %}
-                    {{ field.errors }}
-                </div>
-                {% endfor %}
-                {{ form.non_field_errors }}
-                <button type="submit">Add News</button>
-                <a href="{% url 'news_manager' %}">Cancal</a>
-            </form>
-        </div>
-        {% endif %}
 
-        <br/>
-        <br/>
-        <br/>
+    {% if addnews_form %}
         
-        <div class="manage_table_container" id="manage_table_container">
-            <table id="manage_table" class="manage_table">
-                
-                <tr>
-                    <th>Id</th>
-                    <th>Receivers</th>
-                    <th>News</th>
-                    <th>Hyperlink</th>
-                    <!-- <th>Status</th> -->
-                    <th></th>
-                </tr>
-                
-                {% for n in news %}
-                {% if n.news_id != news_id %}
-                <tr id="{{ n.news_id }}_Record">
-                    <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
-                    <td id="{{ n.news_id }}_for_whome" class="for_whome">{{ n.for_whome }}</td>
-                    <td id="{{ n.news_id }}_news_content" class="news_content">{{ n.news_content }}</td>
-                    <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ n.hyperlink }}</td>
-                    <td>
-                        <a id="{{ n.news_id }}_editbtn" class="edit_btn" href="{% url 'news_edit' news_id=n.news_id %}">EDIT</a>&nbsp;&nbsp;
-                        <a id="{{ n.news_id }}_deletebtn" class="delete_btn" href="{% url 'news_delete' news_id=n.news_id %}">DELETE</a>
-                    </td>
-                </tr>
-                {% else %}
-                <tr id="{{ n.news_id }}_Record">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
-                        <td id="{{ n.news_id }}_for_whome" class="for_whome">{{ editnews_form.for_whome }}</td>
-                        <td id="{{ n.news_id }}_news_content" class="news_content">{{ editnews_form.news_content }}</td>
-                        <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ editnews_form.hyperlink }}</td>
-                        <td>
-                            <button type="submit" class="edit_btn">SAVE</button>
-                            <a href="{% url 'news_manager' %}" class="cancel_btn">CANCEL</a>
-                        </td>
-                        
-                    </form>
-                </tr>
+        <form method="POST" action="{% url 'news_add' %}" class="inline_form">
+            {% csrf_token %}
+            {% for field in addnews_form %}
+            <div id="{{ field.label }}Wrapper" class="inlineFieldWrapper">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <p>{{ field.help_text|safe }}</p>
                 {% endif %}
-                {% endfor %}
-            </table>
-        </div>        
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            {{ form.non_field_errors }}
+            <div class="inlineFieldWrapper">
+                <button type="submit" class="inline_form_btn">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    Add News
+                </button>
+            </div>
+            <div class="inlineFieldWrapper">
+                <a href="{% url 'news_manager' %}" class="inline_form_btn">Cancal</a>
+            </div>
+        </form>
+        
+    {% endif %}
+        
+        <table id="manage_table" class="manage_table">    
+            <tr>
+                <th>Id</th>
+                <th>News</th>
+                <th>Hyperlink</th>
+                <th></th>
+                <th></th>
+            </tr>
+            
+            {% for n in news %}
+            {% if n.news_id != news_id %}
+            <tr id="{{ n.news_id }}_Record">
+                <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
+                <td id="{{ n.news_id }}_news_content" class="news_content">{{ n.news_content }}</td>
+                <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ n.hyperlink }}</td>
+                <td>
+                    <button class="small_btn">
+                        <a id="{{ n.news_id }}_editbtn" href="{% url 'news_edit' news_id=n.news_id %}">Edit</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="small_btn">
+                        <a id="{{ n.news_id }}_deletebtn" href="{% url 'news_delete' news_id=n.news_id %}">Delete</a>
+                    </button>
+                </td>
+            </tr>
+            {% else %}
+            <tr id="{{ n.news_id }}_Record">
+                <form method="POST">
+                    {% csrf_token %}
+                    <td id="{{ n.news_id }}_id" class="news_id" >{{ n.news_id }}</td>
+                    <td id="{{ n.news_id }}_news_content" class="news_content">{{ editnews_form.news_content }}</td>
+                    <td id="{{ n.news_id }}_hyperlink" class="hyperlink">{{ editnews_form.hyperlink }}</td>
+                    <td>
+                        <button type="submit" class="small_btn">Save</button>
+                    </td>
+                    <td>
+                        <button class="small_btn">
+                            <a href="{% url 'news_manager' %}">Cancel</a>
+                        </button>
+                    </td>
+                    
+                </form>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>        
     </div>
 </div>
 
@@ -115,8 +130,12 @@
     {% csrf_token %}
     <div id="deleteConfDialogbox">
         <p id="conftext">Are you sure you want to delete news having news ID = {{ delnews_id }}</p>
-        <button type="submit" id="deletebtn" class="dialog_btn">Delete</button>
-        <a id="cancalbtn" href="{% url 'news_manager' %}" class="dialog_btn">Cancel</a>
+        <div class="fieldWrapper">
+            <button type="submit" class="small_btn">Delete</button>
+            <button class="small_btn">
+                <a href="{% url 'news_manager' %}">Cancel</a>
+            </button>
+        </div>
     </div>
 </form>
     
@@ -125,7 +144,5 @@
 {% endblock %}
 
 {% block loadscript %}
-
-<script src="{% static 'script/manage.js' %}"></script>
 
 {% endblock %}

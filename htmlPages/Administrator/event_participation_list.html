@@ -1,0 +1,61 @@
+{% extends 'Administrator/administrator_base.html'%}
+
+{% load static %}
+
+{% block title %}
+    
+    <title>Event Committee</title>
+
+{% endblock %}
+
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+<!-- <style>
+    table#manage_table{
+        display: block;
+        overflow-x: auto;
+    }
+</style> -->
+
+{% endblock%}
+
+{% block content %}
+
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+
+        <h1><p id="table_title">Event Participation - {{event_name}}</p></h1>
+
+        <table id="manage_table" class="manage_table">
+
+            <tr>
+                <th>Reg No</th>                
+                <th>Name</th>
+                <th>Reg Status</th>
+            </tr>
+
+            {% for member in participation %}
+            <tr>
+                <td>{{member.reg_no}}</td>
+                <td>{{member.reg_no__reg_no__fname}} {{member.reg_no__reg_no__lname}}</td>
+                <td>{{member.reg_status}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'event_manager' %}">Back To Event Manager</a>
+            </button>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}
+
+{% block loadscript %}
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'Administrator/administrator_base.html'%}
+
+{% load static %}
+
+{% block title %}
+    
+    <title>Payments</title>
+
+{% endblock %}
+
+{% block loadcss %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+
+{% endblock%}
+
+{% block content %}
+
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+
+        <h1><p id="table_title">Payments</p></h1>
+
+        <table id="manage_table" class="manage_table">
+
+            <tr>
+                <th>Payment ID</th>
+                <th>Participant Reg No</th>
+                <th>Participant Name</th>
+                <th>Amount</th>
+                <th>Date Time</th>
+            </tr>
+
+            {% for payment in payments %}
+            <tr>
+                <td>{{payment.payment_id}}</td>
+                <td>{{payment.reg_no}}</td>
+                <td>{{payment.reg_no__reg_no__fname}} {{payment.reg_no__reg_no__lname}}</td>
+                <td>{{payment.amount}}</td>
+                <td>{{payment.date_time}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+</div>
+    
+
+{% endblock %}
+
+{% block loadscript %}
+
+{% endblock %}

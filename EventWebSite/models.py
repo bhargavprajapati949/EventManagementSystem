@@ -1,5 +1,5 @@
 from django.db import models
-from UserManager.models import User, Event_Committee, Volunteer
+from UserManager.models import User, Event_Committee
 
 
 # Create your models here.
@@ -31,25 +31,19 @@ class Event(models.Model):
 
 class news(models.Model):
     news_id = models.AutoField(primary_key = True)
-    news_receivers = [
-        ('Participants', 'Participants'),
-        ('Volunteer', 'Volunteer')
-    ]
-    for_whome = models.CharField(max_length = 50, choices = news_receivers, verbose_name = 'News Viewers')
     news_content = models.CharField(max_length = 1000 ,verbose_name = 'News Content')
     hyperlink = models.CharField(verbose_name = 'hyperlink', max_length=50)
 
     def __str__(self):
         return self.news_content
     
-
 class Participants(models.Model):
     reg_no = models.OneToOneField(User, primary_key = True, on_delete = models.CASCADE)
     remark = models.TextField(default = None, null=True)
     total_payment = models.IntegerField()
     remaining_payment = models.IntegerField()
     paid_payment = models.IntegerField(default = 0)
-    filled_by = models.ForeignKey(Volunteer, null=True, on_delete = models.SET_NULL, default = None)
+    # filled_by = models.ForeignKey(Volunteer, null=True, on_delete = models.SET_NULL, default = None)
     # conformed = models.BooleanField(default = False)
     is_paid = models.BooleanField(default = False)
 
@@ -62,7 +56,7 @@ class Participation(models.Model):
     allowed_event_status = [
         ('Not Paid', 'Not Paid'),
         ('Paid', 'Paid'),
-        ('Comform', 'Conform'), 
+        ('Confirm', 'Confirm'), 
         ('Attended', 'Attended'),
         ('Attended Winner', 'Attended Winner'),
         ('Certificate Issued', 'Certificate Issued'),
@@ -74,8 +68,7 @@ class Participation(models.Model):
     certi_otp = models.IntegerField()
     attendance_otp = models.IntegerField()
     # event_attendance_qr = models.ImageField(upload_to = 'event_attendance_qr')
-    # amount = models.IntegerField()
 
-    def __str__(self):
-        str = reg_no + " Participated in " + event
-        return str
+    # def __str__(self):
+    #     str = self.reg_no + " Participated in " + self.event
+    #     return str

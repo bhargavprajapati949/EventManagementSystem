@@ -1,0 +1,92 @@
+{% extends 'Coordinator/coordinator_base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title> Coordinator | Participation Certificate Issue</title>
+{% endblock %}
+
+{% block loadcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+        <h1><p id="table_title">Participation Certificate Issue</p></h1>
+
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Reg No</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Email Id</th>
+                <th>Event</th>
+                <th>Event Id</th>
+                <th></th>
+            </tr>
+
+            {% for participation in participation_list %}
+            <tr>
+                <td>{{participation.reg_no}}</td>
+                <td>{{participation.reg_no__reg_no__fname}} {{participation.reg_no__reg_no__lname}}</td>
+                <td>{{participation.reg_no__reg_no__contect_no}}</td>
+                <td>{{participation.reg_no__reg_no__email}}</td>
+                <td>{{participation.event__event_name}}</td>
+                <td>{{participation.event}}</td>
+                <td>    
+                    {% if participation.reg_status == 'Attended' %}
+                    <button class="small_btn">
+                        <a href="{% url 'issue_participation_certi' reg_no=participation.reg_no event_id=participation.event %}">Issue Certificate</a>
+                    </button>
+                    {% else %}
+                        {{participation.reg_status}}
+                    {% endif %}
+                    </td>    
+            </tr>
+            {% endfor %}
+            
+        </table>
+        
+        <br>
+        <br>
+        <br>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'coordinator_dashboard' %}">Back To Dashboard</a>
+            </button>
+        </div>
+
+        {% if issue_certificate %}
+        <form method="POST">
+            {% csrf_token %}
+            <div id="deleteConfDialogbox">
+                <p id="conftext">Issue Certificate to participant with id {{issue_certificate.reg_no}} for the event with id {{issue_certificate.event_id}}</p>
+                <div class="fieldWrapper">
+                    <input type="text" name="certi_otp" placeholder="Certificate OTP" required>
+                </div>
+                <div class="fieldWrapper">
+                    {% if issue_certificate.otp_msg %}
+                    <p class="help">{{issue_certificate.otp_msg}}</p>
+                    {% endif %}
+                </div>
+                <div class="fieldWrapper">
+                    <button type="submit" class="small_btn">Issue Certificate</button>
+                    <button class="small_btn">
+                        <a href="{% url 'coordinator_participation_certi_issue' %}">Cancal</a>
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block loadScript %}
+
+{% endblock %}

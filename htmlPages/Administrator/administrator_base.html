@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/comman.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Administrator/administrator_base.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Administrator/administrator_header.css'%}">
+    {% block title %}
+
+    {% endblock %}
+
+    {% block loadcss %}
+
+    {% endblock %}
+
+</head>
+<body>
+    
+    {% include 'Administrator/administrator_header.html' %}  
+
+    <div class="dashboard_detail">        
+
+        <ul id="admin_links">    
+            <hr>
+            <div class="section">User Management</div><hr>
+            <li><a href="{% url 'participant_manager' %}">Participant</a></li><hr>
+            <li><a href="{% url 'event_head_manager' %}">Event Head</a></li><hr>
+            <li><a href="{% url 'coordinator_manager' %}">Co-ordinator</a></li><hr>
+            <li><a href="{% url 'event_committee_list' %}">Event Committee</a></li><hr>
+            <div class="section">Management</div><hr>
+            <li><a href="{% url 'event_manager' %}">Events</a></li><hr>
+            <li><a href="{% url 'payments_list' %}">Payment</a></li><hr>
+            <div class="section">Website Meta</div><hr>
+            <li><a href="{% url 'news_manager' %}">News</a></li><hr>
+            <li><a href="{% url 'collage_manager' %}">Colleges</a></li><hr>
+            <li><a href="{% url 'stream_manager' %}">Stream</a></li><hr>
+        </ul>
+        
+        <div id="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>    
+    </div>
+    
+    {% block loadscript %}
+
+    {% endblock %}
+</body>
+</html>

@@ -1,4 +1,4 @@
-{% extends 'Administrator/base.html'%}
+{% extends 'Administrator/administrator_base.html'%}
 
 {% load static %}
 
@@ -10,88 +10,142 @@
     
 {% block loadcss %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
 
 {% endblock%}
 
 {% block content %}
 
 {% if edit_form %}
-<div>
-    <form method="POST" enctype='multipart/form-data'>
-        {% csrf_token %}    
-        <label for="reg_no">Id:</label>
-        <p id="id_reg_no">{{reg_no}}</p>
-        <label for="{{participant_user_form.fname.id_for_label}}">Name:</label>
-        <p>{{participant_user_form.fname}} {{participant_user_form.lname}}</p>
-        <label for="{{participant_user_form.email.id_for_label}}">Email:</label>
-        <p>{{participant_user_form.email}}</p>
-        <label for="{{participant_user_form.contect.id_for_label}}">Contect No:</label>
-        <p>{{participant_user_form.contect_no}}</p>
-        <label for="{{participant_user_form.Collage.id_for_label}}">Collage:</label>
-        <p>{{participant_user_form.clg_id}}</p>
-        <label for="{{participant_user_form.Stream.id_for_label}}">Stream:</label>
-        <p>{{participant_user_form.stream}}</p>
-        <label for="{{registers_form.remark.id_for_label}}">Remark:</label>
-        <p>{{registers_form.remark}}</p>
-        <label for="id_total_payment">Total Payment:</label>
-        <p id="id_total_payment">{{participant.total_payment}}</p>
-        <label for="id_remaining_payment">Remaining Payment:</label>
-        <p id="id_remaining_payment">{{participant.remaining_payment}}</p>
-        <label for="id_paid_payment">Paid Amount:</label>
-        <p id="id_paid_payment">{{participant.paid_payment}}</p>
-        <label for="id_filled_by">Filled By:</label>
-        <p id="id_filled_by">
-            {% if participant.filled_by %}
-            {{participant.filled_by__reg_no__committee_id}}
-            {% else %}
-            self
-            {% endif %}
-        </p>
-        <button type="submit" class="edit_btn">SAVE</button>
-        <a href="{% url 'participant_detail' reg_no=reg_no %}" class="edit_btn">Cancal</a>
-    </form>
-</div>
-
+    <div class="main">
+        <div class="main_detail_container">
+            <h1><p id="table_title">Edit Participant</p></h1>
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}    
+                <div class="fieldWrapper">
+                    <label for="reg_no">Id:</label>
+                    <p id="id_reg_no">{{reg_no}}</p>
+                </div>
+                <div class="fieldWrapper">
+                    <label for="{{participant_user_form.fname.id_for_label}}">Name:</label>
+                    {{participant_user_form.fname}} {{participant_user_form.lname}}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="{{participant_user_form.email.id_for_label}}">Email:</label>
+                    {{participant_user_form.email}}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="{{participant_user_form.contect.id_for_label}}">Contect No:</label>
+                    {{participant_user_form.contect_no}}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="{{participant_user_form.Collage.id_for_label}}">Collage:</label>
+                    {{participant_user_form.clg}}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="{{participant_user_form.Stream.id_for_label}}">Stream:</label>
+                    {{participant_user_form.stream}}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="{{registers_form.remark.id_for_label}}">Remark:</label>
+                    {{registers_form.remark}}
+                </div>
+                <div class="fieldWrapper">
+                    <label for="id_total_payment">Total Payment:</label>
+                    <p id="id_total_payment">{{participant.total_payment}}</p>
+                </div>
+                <div class="fieldWrapper">
+                    <label for="id_remaining_payment">Remaining Payment:</label>
+                    <p id="id_remaining_payment">{{participant.remaining_payment}}</p>
+                </div>
+                <div class="fieldWrapper">
+                    <label for="id_paid_payment">Paid Amount:</label>
+                    <p id="id_paid_payment">{{participant.paid_payment}}</p>
+                </div>
+                <div class="fieldWrapper">
+                    <label for="id_event_participated">Events Participated:</label>
+                    <p id="id_event_participated">
+                        {% for event in events %}
+                        <span class="event_tag">{{ event.event__event_name }} - {{ event.reg_status}}</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="fieldWrapper">
+                    <button type="submit" class="small_btn">Save</button>
+                    <button class="small_btn">
+                        <a href="{% url 'participant_detail' reg_no=reg_no %}">Cancal</a>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
 {% elif detail_form %}
-<div>
-        <label for="reg_no">Id:</label>
-        <p id="reg_no">{{participant.reg_no}}</p>
-        <label for="name">Name:</label>
-        <p id="name">{{participant.reg_no__fname}} {{participant.reg_no__lname}}</p>
-        <label for="email">Email:</label>
-        <p id="email">{{participant.reg_no__email}}</p>
-        <label for="contect_no">Contect No:</label>
-        <p id="contect_no">{{participant.reg_no__contect_no}}</p>
-        <label for="collage">Collage:</label>
-        <p id="collage">{{participant.reg_no__clg_id__clg_name}}</p>
-        <label for="stream">Stream:</label>
-        <p id="stream">{{participant.reg_no__stream__stream_name}}</p>
-        <label for="remark">Remark:</label>
-        <p id="remark">{{participant.remark}}</p>
-        <label for="total_payment">Total Payment:</label>
-        <p id="total_payment">{{participant.total_payment}}</p>
-        <label for="remaining_payment">Remaining Payment:</label>
-        <p id="remaining_payment">{{participant.remaining_payment}}</p>
-        <label for="paid_payment">Paid Amount:</label>
-        <p id="paid_payment">{{participant.paid_payment}}</p>
-        <label for="filled_by">Filled By:</label>
-        <p id="filled_by">
-            {% if participant.filled_by %}
-            {{participant.filled_by__reg_no__committee_id}}
-            {% else %}
-            self
-            {% endif %}
-        </p>
-        <a href="{% url 'participant_edit' reg_no=participant.reg_no %}" class="edit_btn">Edit Details</a>        
-        <a href="{% url 'participant_manager' %}">Back To Participant Manager</a>
-</div>
+    <div class="main">
+        <div class="main_detail_container">
+            <h1><p id="table_title">Participant Details</p></h1>
+            <div class="fieldWrapper">
+                <label for="reg_no">Id:</label>
+                <p id="reg_no">{{participant.reg_no}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="name">Name:</label>
+                <p id="name">{{participant.reg_no__fname}} {{participant.reg_no__lname}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="email">Email:</label>
+                <p id="email">{{participant.reg_no__email}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="contect_no">Contect No:</label>
+                <p id="contect_no">{{participant.reg_no__contect_no}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="collage">Collage:</label>
+                <p id="collage">{{participant.reg_no__clg_id__clg_name}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="stream">Stream:</label>
+                <p id="stream">{{participant.reg_no__stream__stream_name}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="remark">Remark:</label>
+                <p id="remark">{{participant.remark}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="total_payment">Total Payment:</label>
+                <p id="total_payment">{{participant.total_payment}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="remaining_payment">Remaining Payment:</label>
+                <p id="remaining_payment">{{participant.remaining_payment}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="paid_payment">Paid Amount:</label>
+                <p id="paid_payment">{{participant.paid_payment}}</p>
+            </div>
+            <div class="fieldWrapper">
+                <label for="id_event_participated">Events Participated:</label>
+                <p id="id_event_participated">
+                    {% for event in events %}
+                    <span class="event_tag">{{ event.event__event_name }} - {{ event.reg_status}}</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="fieldWrapper">
+                <button class="small_btn">
+                    <a href="{% url 'participant_edit' reg_no=participant.reg_no %}">Edit Details</a>
+                </button>
+                <button class="small_btn">
+                    <a href="{% url 'participant_manager' %}">Back To Participant Manager</a>
+                </button>
+            </div>
+        </div>
+    </div>    
 {% endif %}
 
 {% endblock %}
 
 {% block loadscript %}
-
-<script src="{% static 'script/manage.js' %}"></script>
 
 {% endblock %}

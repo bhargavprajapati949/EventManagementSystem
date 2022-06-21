@@ -1,0 +1,84 @@
+.event_title_container {    
+    height: 400px;
+    width: 100%;
+    position: relative;   
+}
+
+#event_detail {
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 50px;
+    color: white;
+    text-shadow: 5px 0 black;
+
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+/* ========== Evnet Search ===========*/
+
+#event_search{
+    display: flex;
+    padding: 10px 30px;
+    margin: 10px -10px;
+}
+
+#event_search .textbox{
+    width: 70%;
+    height: 50px;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: auto 10px;
+    flex-grow: 1;
+}
+
+#event_search .submitbtn{
+    height: 50px;
+    width: 25%;
+    text-align: center;
+    vertical-align: middle;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    margin: auto 10px;
+}
+
+#event_search .submitbtn a{
+    text-decoration: none;
+    color: white;
+}
+
+/*================= Events List ============== */
+
+.event_container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.eventbox{
+    padding: 30px 30px;
+    margin: 30px;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    border-radius: 10px;
+}
+
+.eventbox img{
+    border: 5px ridge #329fec;
+}
+
+.eventbox p{
+    margin-bottom: 0px;
+}
+
+.eventbox .title{
+    font-size: 1.3em;
+}
+
+.eventbox .label{
+    font-weight: bold;
+}

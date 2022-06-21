@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Require | Admin </title>
+</head>
+<body>
+    <p>You do not have access of this url.</p>
+    <p>For that you need to verify your admin account by login.</p>
+    <p>Wait... <span id="timer"></span>  you will be redirected to admin login page shortly.</p>
+    <p>If you are not redirected automatically <a id="redirect_link" href="{% url 'admin_login' %}">click here</a></p>    
+
+    <script>
+        setTimeout(
+            function(){
+                window.location.replace("{% url 'admin_login' %}");
+            }
+            ,15000
+        )
+        var timer = 14
+        setInterval(
+            function(){
+                document.getElementById('timer').innerHTML = timer
+                timer = timer - 1
+            }
+            ,1000
+        )
+    </script>
+</body>
+</html>
+

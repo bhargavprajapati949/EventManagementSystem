@@ -11,7 +11,7 @@ class College(models.Model):
     def __str__(self):
         return self.clg_name
 
-class Stream(models.Model):
+class Stream(models.Model):    
     stream_id = models.CharField(verbose_name = 'Stream Id', max_length = 5, unique=True)
     stream_name = models.CharField(verbose_name = 'Stream Name', max_length = 100)
 
@@ -95,7 +95,6 @@ class Event_Committee(models.Model):
     yearOfStudy = models.IntegerField()
 
     #Added as
-    is_vol = models.BooleanField(default=False)
     is_coordinator = models.BooleanField(default=False)
     is_event_head = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
@@ -112,22 +111,6 @@ class Event_Committee(models.Model):
 
     def __str__(self):
         return self.committee_id
-
-class Volunteer(models.Model):
-    reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
-    payment_hold = models.IntegerField(default = 0)
-    isActive = models.BooleanField(default = False)
-
-    def __str__(self):
-        return super().__str__()
-
-# class Coordinator(models.Model):
-#     reg_no = models.OneToOneField(Event_Committee, on_delete = models.CASCADE, primary_key = True)
-#     payment_hold = models.IntegerField()
-#     isActive = models.BooleanField(default = False)
-
-#     def __str__(self):
-#         return super().__str__()
 
 
 

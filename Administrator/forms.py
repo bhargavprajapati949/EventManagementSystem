@@ -1,8 +1,10 @@
+from dataclasses import field
 from django import forms
 
 from EventWebSite.models import news, Event, Participants
 from EventHead.models import Event_Head
-from UserManager.models import College, Stream, User, Volunteer
+from Coordinator.models import Coordinator
+from UserManager.models import College, Stream, User
 
 class registers_model_form(forms.ModelForm):
     class Meta:
@@ -25,7 +27,11 @@ class event_model_form(forms.ModelForm):
 class news_model_form(forms.ModelForm):    
     class Meta:
         model = news
-        fields = ('for_whome', 'news_content', 'hyperlink')
+        fields = ('news_content', 'hyperlink')
+    
+    def __init__(self, *args, **kwargs):
+        super(news_model_form, self).__init__(*args, **kwargs)
+        self.fields['hyperlink'].required = False
 
 class collage_model_form(forms.ModelForm):
     class Meta:
@@ -36,11 +42,6 @@ class stream_model_form(forms.ModelForm):
     class Meta:
         model = Stream
         fields = ('stream_id', 'stream_name')
-
-class volunteer_model_form(forms.ModelForm):
-    class Meta:
-        model = Volunteer
-        fields = ('reg_no',)
 
 class event_head_model_form(forms.ModelForm):
     class Meta:
@@ -56,4 +57,21 @@ class event_head_model_form(forms.ModelForm):
 class event_head_isActive_form(forms.ModelForm):
     class Meta:
         model = Event_Head
+        fields = ('isActive',)
+
+class coordinator_model_form(forms.ModelForm):
+
+    class Meta:
+        model = Coordinator
+        fields = ('reg_no',)
+
+    def save(self):
+        coordinator = super(coordinator_model_form, self).save(commit=False)
+        coordinator.isActive = True
+        coordinator.save()
+        return coordinator
+
+class coordinator_isActive_form(forms.ModelForm):
+    class Meta:
+        model = Coordinator
         fields = ('isActive',)

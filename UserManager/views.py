@@ -17,10 +17,8 @@ def eventCommitteeRegForm(request):
             mem = infoform.save(commit = False)
             mem.reg_no = user
             mem.save()
-            print('done')
             return redirect('successRegAsEventCommittee')
         else:
-            print('invalid data')
             context = {'regform' : regform , 'infoform': infoform}
             return render(request, 'UserManager/event_committee_reg_form.html', context)
     else:

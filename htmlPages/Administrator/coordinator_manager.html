@@ -1,4 +1,4 @@
-{% extends 'Administrator/base.html'%}
+{% extends 'Administrator/administrator_base.html'%}
 
 {% load static %}
 
@@ -10,79 +10,96 @@
     
 {% block loadcss %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
 
 {% endblock%}
 
 {% block content %}
 
-    <div class="main">
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" style="padding-left: 130px; padding-right: 160px;">
 
-            <div class="main_detail_container" id="main_detail_container" style="padding-left: 130px; padding-right: 160px;">
-                <div class="search_bar">
+        <h1><p id="table_title">Coordinator</p></h1> 
 
-                        <div class="add_inbox_container" style="margin-right: 145px;">
-                                <input type="text" placeholder="Add" id="add_bar">&nbsp;&nbsp;
-                            </div>
+        <form class="inline_form" method="POST">
+            {% csrf_token %}
+            {% for field in addCoordinator_form %}
+            <div class="inlineFieldWrapper">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                {{field}}
+            </div>
+            {% endfor %}
+            <div class="inlineFieldWrapper">
+                <button class="inline_form_btn" type="submit">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    Add Coordinator
+                </button>
+            </div>
+        </form>
         
-                            <div class="search_button_container" style="margin-left:-145px; margin-right: 144px;">
-                                    <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/add_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
-                            </div>
-
-                    <div class="search_inbox_container">
-                    <input type="text" placeholder="Search" id="search_bar">&nbsp;&nbsp;
-                    </div>
-    
-                    <div class="search_button_container">
-                        <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/search_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
-                    </div>
-    
-                    <div class="sortby_selection_container">
-                        <select id="sort_by_menu" class="sort_by_menu">
-                            <option value="a-z">A-Z</option>
-                            <option value="z-a">Z-A</option>
-                        </select>
-                    </div>
-                </div>
-    
-                <br>
-                <br>
-                <br>
-                <div class="manage_table_container" id="manage_table_container">
-                    <table id="manage_table" class="manage_table">
-                        <tr>
-                            <th>id</th>
-                            <th>Name</th>
-                            <th>Mobile No.</th>
-                            <th>Email ID</th>
-                            <th>Payment Hold</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-    
-                        <tr>
-                                <td>335</td>
-                                <td>Niral</td>
-                                <td>7096890142</td>
-                                <td>niralkpatelia@gmail.com</td>
-                                <td>1800</td>
-                                <td><div class="status_container"><input type="checkbox" id="status_checkbox"></div></td>
-                                <td><button class="edit_btn">EDIT</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td>2548</td>
-                            <td>Bhargav</td>
-                            <td>8511128457</td>
-                            <td>17BCE092@gmail.com</td>
-                            <td>1350</td>
-                            <td><div class="status_container"><input type="checkbox" id="status_checkbox"></div></td>
-                            <td><button class="edit_btn">EDIT</button></td>
-                    </tr>
-                    </table>
-                </div>
-    
+        <!-- <div class="inline_form">
+            <div class="inlineFieldWrapper">
+                <input type="text" placeholder="Search">
+            </div>
+            
+            <div class="inlineFieldWrapper">
+                <button class="inline_form_btn" type="submit">
+                    <img src="{% static 'media/search_logo.png' %}" class="inline_form_btn_logo">
+                    Search
+                </button>
             </div>
         </div>
+
+        <div class="inline_form">
+            <div class="inlineFieldWrapper">
+                <select>
+                    <option value="" disabled selected>Sort By</option>
+                    <option value="a-z">A-Z</option>
+                    <option value="z-a">Z-A</option>
+                </select>
+            </div>
+        </div> -->
+    
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Reg No</th>
+                <th>Committee ID</th>
+                <th>Name</th>
+                <th>Contact No.</th>
+                <th>Email ID</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+
+            {% for coordinator in coordinator_list %}
+            <tr>
+                <td>{{coordinator.reg_no}}</td>
+                <td>{{coordinator.reg_no__committee_id}}</td>
+                <td>{{coordinator.reg_no__reg_no__fname}} {{coordinator.reg_no__reg_no__lname}}</td>
+                <td>{{coordinator.reg_no__reg_no__contect_no}}</td>
+                <td>{{coordinator.reg_no__reg_no__email}}</td>
+                {% if coordinator.isActive %}
+                <td>Active</td>
+                <td>
+                    <form method="POST" action="{% url 'coordinator_disable' reg_no=coordinator.reg_no %}">
+                        {% csrf_token %}
+                        <button class="small_btn" type="submit">Disable</button>
+                    </form>    
+                </td>
+                {% else %}
+                <td>Disable</td>
+                <td>
+                    <form method="POST" action="{% url 'coordinator_active' reg_no=coordinator.reg_no%}">
+                        {% csrf_token %}
+                        <button class="small_btn" type="submit">Active</button>
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    
+    </div>
+</div>
 
 {% endblock %}

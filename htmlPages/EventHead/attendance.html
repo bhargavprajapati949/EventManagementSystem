@@ -1,4 +1,4 @@
-{% extends 'EventHead/base.html' %}
+{% extends 'EventHead/eventHead_base.html' %}
 
 {% load static %}
 
@@ -7,37 +7,108 @@
 {% endblock %}
 
 {% block loadcss %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/attendance.css' %}">
-<!-- <link href="{% static 'select2.min.css' %}" rel="stylesheet" /> -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/Eventhead/attendance.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<div>
-    <p>Attendance</p>
-    <form method="POST">
-        {% csrf_token %}
-        <select id="participants" name="participant">
-            {% for no in participants%}
-            <option>{{no.reg_no}}</option>
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+        <h1><p id="table_title">Attendance - {{event.event_name}}</p></h1>        
+        <!-- <form method="POST">
+            {% csrf_token %}
+            <select id="participants" name="participant">
+                {% for no in participants %}
+                <option>{{no.reg_no}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Mark Present</button>
+        </form> -->
+
+        <!-- <form method="POST">
+                    {% csrf_token %}
+                    <td>
+                        <input type="hidden" name="participant" value="{{participant.reg_no}}">
+                        <input type="text" name="attendance_otp" placeholder="Attendance OTP" required>
+                    </td>
+                    
+                    <td>
+                        <button type="submit" class="small_btn">Mark Present</button>
+                    </td>
+                </form> -->
+
+
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Reg No</th>
+                <th>Name</th>
+                <th>College</th>
+                <th>Stream</th>
+                <th>Contact No</th>
+                <th>Email</th>
+                <th colspan="2">Attendance</th>
+            </tr>
+
+            {% for participant in participants %}
+            <tr>
+                <td>{{participant.reg_no}}</td>
+                <td>{{participant.reg_no__reg_no__fname}} {{participant.reg_no__reg_no__lname}}</td>
+                <td>{{participant.reg_no__reg_no__clg__clg_name}}</td>
+                <td>{{participant.reg_no__reg_no__stream__stream_name}}</td>
+                <td>{{participant.reg_no__reg_no__contect_no}}</td>
+                <td>{{participant.reg_no__reg_no__email}}</td>
+                <td>    
+                {% if participant.reg_status == 'Confirm' %}
+                <button class="small_btn">
+                    <a href="{% url 'mark_attendance' reg_no=participant.reg_no event_id=event.event_id %}">Mark Present</a>
+                </button>
+                {% else %}
+                    {{participant.reg_status}}
+                {% endif %}
+                </td>    
+            </tr>
             {% endfor %}
-        </select>
-        <button type="submit">Mark Present</button>
-    </form>
+
+        </table>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'eventHead_dashboard' %}">Back To Dashboard</a>
+            </button>
+        </div>
+
+        {% if mark_attendance %}
+        <form method="POST">
+            {% csrf_token %}
+            <div id="deleteConfDialogbox">
+                <p id="conftext">Mark Attendance of participant with id {{mark_attendance.reg_no}} for the event {{event.event_name}}</p>
+                <div class="fieldWrapper">
+                    <input type="text" name="attendance_otp" placeholder="Attendance OTP" required>
+                </div>
+                <div class="fieldWrapper">
+                    {% if mark_attendance.otp_msg %}
+                    <p class="help">{{mark_attendance.otp_msg}}</p>
+                    {% endif %}
+                </div>
+                <div class="fieldWrapper">
+                    <button type="submit" class="small_btn">Mark Present</button>
+                    <button class="small_btn">
+                        <a href="{% url 'attendance' event_id=event.event_id %}">Cancal</a>
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+    </div>
 </div>
 
 {% endblock %}
 
 {% block loadScript %}
-<!-- <script src="{% static 'select2.min.js' %}"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() { 
-        $("#participants").select2({
-            placeholder: "Select a State",
-            allowClear: true
-        }); 
-    });
-</script>
+
 {% endblock %}

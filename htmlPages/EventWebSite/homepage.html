@@ -4,7 +4,7 @@
     
     {% block loadcss %}
     
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/EventWebSite/homepage.css' %}">
 
     {% endblock %}
 
@@ -24,7 +24,12 @@
         <h3>Announcements</h3>
         <ul>
             {% for n in news %}
-            <li><a href="{{n.hyperlink}}">{{n.news_content}}</a></li>
+            {% if n.hyperlink %}
+                <li><a href="{{n.hyperlink}}">{{n.news_content}}</a></li>
+            {% else %}
+                <li>{{n.news_content}}</li>
+            {% endif %}
+            
             {% endfor %}
         </ul>
     </div>

@@ -1,0 +1,147 @@
+ body{
+    margin: 0px;
+    padding: 0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-sizing: border-box;    
+    z-index: 0;
+}
+
+/* DASHBOARD AND LOGOUT DROPDOWN */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown button {
+    border: none;
+    padding: 15px 40px;
+    background-color: #329fec;
+    color: white;
+    transition: .3s;
+    font-size: 20px;
+}
+
+.dropdown button:hover {
+    background-color: #329fec;
+}
+
+.dropdown div a {
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    color: #000;
+}
+
+.dropdown div {
+    background-color: #fff;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    visibility: hidden;
+    position: absolute;
+    min-width: 100%;
+    opacity: 0;
+    transition: .3s;
+}
+
+.dropdown:hover div {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown div a:hover {
+    color: #329fec;
+} 
+
+
+
+/* REAMRK AND PAYMENT DIVISION  */
+
+
+.payment_div {
+    /* padding: 10px 80px; */
+    padding: 1% 8%;
+    margin: 5% 15%;
+    border-radius: 15px;
+    box-shadow: 0px 4px 2px white;
+    color: white;
+    font-size: 20px;
+}
+
+
+
+/* EVENT STATUS TITLE CONTAINER */
+.event_status_table_title {
+    text-align: center;
+    font-size: 50px;
+    color: #fff;
+    margin-top: 4%;
+}
+
+
+
+/* EVENT STATUS TABLE */
+
+.menu {
+    max-width: 1000px;
+    margin: 70px auto 200px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.menu li{
+	list-style: none;
+}
+
+.menu a{
+	text-decoration: none;
+}
+
+.item {
+	/* border-top: 1px solid #2980b9; */
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 2px;
+}
+
+.btn {
+	display: block;
+	padding: 16px 20px;
+	background-color: #3498db;
+	color: white;
+}
+
+.smenu {
+	background-color: #333;
+	overflow: hidden;
+	transition: max-height 1s;
+	max-height: 0;
+}
+
+.smenu p {
+	display: block;
+	padding: 16px 26px;
+	color: white;
+	font-size: 14px;
+	margin: 4px;
+	position: relative;
+}
+
+.smenu p:before {
+	content: "";
+	position: absolute;
+	width: 6px; 
+	height: 100%;
+	background: #3498db;
+	left: 0;
+	top: 0;
+	transition: 0.01s;
+	opacity: 0;
+}
+
+.smenu a:hover:before {
+	opacity: 1;
+}
+
+.item:target .smenu {
+	max-height: 500px;
+}

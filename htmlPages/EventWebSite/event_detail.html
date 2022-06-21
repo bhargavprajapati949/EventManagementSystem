@@ -9,7 +9,12 @@
 {% endblock %}
 
 {% block loadcss %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/event_detail.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/EventWebSite/event_detail.css' %}">
+    <style>
+        .event_title_container{
+            background-image: url("{% static 'media/event_title.jpg' %}");
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -19,34 +24,29 @@
 </div>
 <br>
 
-<form id="event_search" action="{% url 'event_detail' %}" method="GET">
+<form id="event_search" method="GET">
     {% csrf_token %}
     <input class="textbox" type="text" name="q" placeholder="Search event">
     <button class="submitbtn" type="submit">Search</button>
+    <button class="submitbtn">
+        <a href="{% url 'event_detail' %}">Clear Search</a>
+    </button>
 </form>
 
 <div class="event_container">
-{% for event in events %}    
-        <div class="eventbox" style="display: inline;">
-            <img src="media/{{ event.event_logo }}" height="300px" width="300px">
-            <p>{{event.event_name}}</p>
-            <p>{{event.event_status}}</p>
-            <p>{{evnet.fees}}</p>
+    {% for event in events %}    
+        <div class="eventbox">
+            <img src="{{ event.event_logo.url }}" height="300px" width="300px">
+            <p class="title">{{event.event_name}}</p>
             <p>{{event.event_detail}}</p>
+            <p><span class="label">Rules:</span> {{event.rules}}</p>
+            <p><span class="label">Fees:</span> {{event.fees}}</p>
+            <p><span class="label">Status:</span> {{event.event_status}}</p>
         </div>
-            <!-- <div class="eventDetailWrapper">
-                <button>X</button>
-                <img src="media/{{ event.event_logo }}" height="300px" width="300px">
-                <p>{{event.event_name}}</p>
-                <p>{{event.event_status}}</p>
-                <p>{{event.event_detail}}</p>
-                <p>{{event.rules}}</p>
-                <p>{{event.fees}}</p>
-            </div> -->
-{% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}
 
 {% block loadScript %}
-<script src="{% static 'script/event_detail.html' %}"></script>
+
 {% endblock %}

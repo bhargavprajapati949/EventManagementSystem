@@ -1,0 +1,94 @@
+{% extends 'Coordinator/coordinator_base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title> Coordinator | Winner Certificate Issue</title>
+{% endblock %}
+
+{% block loadcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    <div class="main_detail_container" id="main_detail_container" >
+        <h1><p id="table_title">Participation Certificate Issue</p></h1>
+
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Reg No</th>
+                <th>Name</th>
+                <th>Contact No</th>
+                <th>Email Id</th>
+                <th>Event</th>
+                <th>Event Id</th>
+                <th>Position</th>
+                <th></th>
+            </tr>
+
+            {% for winner in winners %}
+            <tr>
+                <td>{{winner.winner__reg_no}}</td>
+                <td>{{winner.winner__reg_no__reg_no__fname}} {{winner.winner__reg_no__reg_no__lname}}</td>
+                <td>{{winner.winner__reg_no__reg_no__contect_no}}</td>
+                <td>{{winner.winner__reg_no__reg_no__email}}</td>
+                <td>{{winner.event__event_name}}</td>
+                <td>{{winner.event}}</td>
+                <td>{{winner.position}}</td>
+                <td>    
+                    {% if winner.winner__reg_status == 'Attended Winner' %}
+                    <button class="small_btn">
+                        <a href="{% url 'issue_winner_certi' reg_no=winner.winner__reg_no event_id=winner.event %}">Issue Winning Certificate</a>
+                    </button>
+                    {% else %}
+                        {{winner.winner__reg_status}}
+                    {% endif %}
+                    </td>    
+            </tr>
+            {% endfor %}
+            
+        </table>
+        
+        <br>
+        <br>
+        <br>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'coordinator_dashboard' %}">Back To Dashboard</a>
+            </button>
+        </div>
+
+        {% if issue_certificate %}
+        <form method="POST">
+            {% csrf_token %}
+            <div id="deleteConfDialogbox">
+                <p id="conftext">Issue Winning Certificate to participant with id {{issue_certificate.reg_no}} for the event with id {{issue_certificate.event_id}}</p>
+                <div class="fieldWrapper">
+                    <input type="text" name="winning_certi_otp" placeholder="Certificate OTP" required>
+                </div>
+                <div class="fieldWrapper">
+                    {% if issue_certificate.otp_msg %}
+                    <p class="help">{{issue_certificate.otp_msg}}</p>
+                    {% endif %}
+                </div>
+                <div class="fieldWrapper">
+                    <button type="submit" class="small_btn">Issue Winning Certificate</button>
+                    <button class="small_btn">
+                        <a href="{% url 'coordinator_winner_certi_issue' %}">Cancal</a>
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+
+    </div>
+</div>            
+
+{% endblock %}
+
+{% block loadScript %}
+
+{% endblock %}

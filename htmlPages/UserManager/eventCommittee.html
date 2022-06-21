@@ -6,18 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
+    <link rel="stylesheet" href="{% static 'css/UserManager/event_committee.css' %}">
     <title>NU Tech | Event Committee </title>
+    <style>
+        body{
+            background-image: url("{% static 'media/nirma_bck.jpg' %}");
+        }
+    </style>
 </head>
 <body>
-    <div id="login">
-        <a href="#">Volunteer</a>
-        <a href="#">Co Ordinator</a>
-        <a href="{% url 'eventHead_login' %}">Event Head</a>
-        <a href="{% url 'admin_login' %}">Admin</a>
+    <div id="main_content">
+        <h1>Event Committee Dashboard</h1>
+        <div id="login">
+            <a href="{% url 'admin_login' %}">Admin</a>
+            <a href="{% url 'coordinator_login' %}">Co Ordinator</a>
+            <a href="{% url 'eventHead_login' %}">Event Head</a>
+        </div>
+        <a href="eventCommitteeRegForm" id="Registration">
+            Register
+        </a>
     </div>
-    <div id="Registration">
-        <a href="eventCommitteeRegForm">Register</a>
-    </div>
-
 </body>
 </html>

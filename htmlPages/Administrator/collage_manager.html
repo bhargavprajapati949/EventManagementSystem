@@ -1,4 +1,4 @@
-{% extends 'Administrator/base.html'%}
+{% extends 'Administrator/administrator_base.html'%}
 
 {% load static %}
 
@@ -10,19 +10,26 @@
 
 {% block loadcss %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
 
 {% endblock%}
 
 {% block content %}
 
 <div class="main">
-    
     <div class="main_detail_container" id="main_detail_container" >
-        <div class="search_bar">
-            <h1><p id="table_title">Colleges</p></h1>
+
+        <h1><p id="table_title">Colleges</p></h1>
+
+        <div class="inline_form">
+            
             {% if not addcollage_form %}
-            <a id="add_btn" href="{% url 'collage_add' %}">Add College</a>
+            
+            <a class="inline_form_btn" href="{% url 'collage_add' %}">
+                <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                Add College
+            </a>
+            
             {% endif %}
 
             <!-- <div class="search_inbox_container">
@@ -41,66 +48,81 @@
             </div> -->
         </div>
         
-        {% if addcollage_form %}
-        <div id="add_collage_bar" style="float: right;">
-            <form method="POST" action="{% url 'collage_add' %}">
-                {% csrf_token %}
-                {% for field in addcollage_form %}
-                <div id="{{ field.label }}Wrapper">
-                    <label for="{{ field.id_for_label }}" class="ip_name">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.help_text %}
-                    <p>{{ field.help_text|safe }}</p>
-                    {% endif %}
-                    {{ field.errors }}
-                </div>
-                {% endfor %}
-                {{ form.non_field_errors }}
-                <button type="submit">Add Collage</button>
-                <a href="{% url 'collage_manager' %}">Cancal</a>
-            </form>
-        </div>
-        {% endif %}
-        <br/>
-        <br/>
-        <br/>
+    {% if addcollage_form %}
         
-        <div class="manage_table_container" id="manage_table_container">
-            <table id="manage_table" class="manage_table">
-                
-                <tr>
-                    <th>Id</th>
-                    <th>College Name</th>
-                    <th></th>
-                </tr>
-                
-                {% for clg in collages %}
-                {% if clg.clg_id != clg_id %}
-                <tr>
-                    <td>{{ clg.clg_id }}</td>
-                    <td>{{ clg.clg_name }}</td>
-                    <td>
-                        <a id="{{ clg.clg_id }}_editbtn" class="edit_btn" href="{% url 'collage_edit' clg_id=clg.clg_id %}">EDIT</a>
-                        <a class="delete_btn" href="{% url 'collage_delete' clg_id=clg.clg_id %}">DELETE</a>
-                    </td>
-                </tr>
-                {% else %}
-                <tr>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <td>{{ editcollage_form.clg_id }}</td>
-                        <td>{{ editcollage_form.clg_name }}</td>
-                        <td>
-                            <button type="submit" class="edit_btn">SAVE</button>
-                            <a href="{% url 'collage_manager' %}" class="cancel_btn">CANCEL</a>
-                        </td>
-                    </form>
-                </tr> 
+        <form method="POST" action="{% url 'collage_add' %}" class="inline_form">
+            {% csrf_token %}
+            {% for field in addcollage_form %}
+            <div id="{{ field.label }}Wrapper" class="inlineFieldWrapper">
+                <label for="{{ field.id_for_label }}" class="ip_name">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <p>{{ field.help_text|safe }}</p>
                 {% endif %}
-                {% endfor %}
-                
-            </table>
-        </div>
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            {{ form.non_field_errors }}
+            <div class="inlineFieldWrapper">
+                <button type="submit" class="inline_form_btn">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    Add Collage
+                </button>
+            </div> 
+            <div class="inlineFieldWrapper">
+                <a href="{% url 'collage_manager' %}" class="inline_form_btn">Cancal</a>
+            </div>
+        </form>
+        
+    
+    {% endif %}
+                    
+        <table id="manage_table" class="manage_table">
+            
+            <tr>
+                <th>Id</th>
+                <th>College Name</th>
+                <th></th>
+                <th></th>
+            </tr>
+            
+            {% for clg in collages %}
+            {% if clg.clg_id != clg_id %}
+            <tr>
+                <td>{{ clg.clg_id }}</td>
+                <td>{{ clg.clg_name }}</td>
+                <td>
+                    <button class="small_btn">
+                        <a id="{{ clg.clg_id }}_editbtn" href="{% url 'collage_edit' clg_id=clg.clg_id %}">Edit</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="small_btn">
+                        <a  href="{% url 'collage_delete' clg_id=clg.clg_id %}">Delete</a>
+                    </button>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <form method="POST">
+                    {% csrf_token %}
+                    <td>{{ editcollage_form.clg_id }}</td>
+                    <td>{{ editcollage_form.clg_name }}</td>
+                    <td>
+                        <button type="submit" class="small_btn">Save</button>
+                    </td>
+                    <td>
+                        <button class="small_btn">
+                            <a href="{% url 'collage_manager' %}">Cancel</a>
+                        </button>
+                        
+                    </td>
+                </form>
+            </tr> 
+            {% endif %}
+            {% endfor %}
+            
+        </table>
         
     </div>
 </div>
@@ -110,8 +132,12 @@
     {% csrf_token %}
     <div id="deleteConfDialogbox">
         <p id="conftext">Are you sure you want to delete collage having college ID = {{ deletecollage_id }}</p>
-        <button type="submit" class="dialog_btn">Delete</button>
-        <a id="cancalbtn"  class="dialog_btn" href="{% url 'collage_manager' %}">Cancel</a>
+        <div class="fieldWrapper">
+            <button type="submit" class="small_btn">Delete</button>
+            <button class="small_btn">
+                <a href="{% url 'collage_manager' %}">Cancel</a>
+            </button>
+        </div>
     </div>
 </form>
     
@@ -120,5 +146,5 @@
 {% endblock %}
 
 {% block loadscript %}
-<script src="../../mystaticFiles/script/manage.js"></script>
+
 {% endblock %}

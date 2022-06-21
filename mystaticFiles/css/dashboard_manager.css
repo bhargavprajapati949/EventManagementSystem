@@ -1,0 +1,299 @@
+
+.main{
+  padding: 20px;
+}
+
+.main_detail_container {
+  box-sizing: border-box;
+  box-shadow: 0px 15px 20px rgba(0,0,0,.5);
+  border-radius: 10px;
+  padding: 20px;
+  min-width: 80%;
+  background-color: white;
+}
+
+
+/* #profile_image {
+  width: 80px;
+  height: 80.px;
+  padding-left: 50px;
+  padding-top: 20px;
+} */
+
+/*================ Inline Form ========================*/
+
+.inline_form{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  margin: 10px 0px;
+}
+
+.inline_form .inlineFieldWrapper{
+  display: inline-block;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.inline_form .inlineFieldWrapper input,
+.inline_form .inlineFieldWrapper textarea{
+  height: 25px;
+  border-radius: 2px;
+  border-color: #329fec;
+  font-size: 15px;
+}
+
+.inline_form .inlineFieldWrapper select {
+  display: inline-block;
+  width: 100px;
+  height: 25px;
+  border-radius: 2px;
+  border-color: #329fec;
+}
+
+.inline_form_btn{
+  display: flex;
+  height: 30px;
+  background-color: azure;
+  padding: 0px 10px 0px 10px;
+
+  border-radius: 10px;
+  border-style: solid;
+  border-color: #329fec;
+  border-width: .5px;
+  
+  cursor: pointer;
+  color: #329fec;
+  font-weight: bold;
+  font-size: 16px;
+
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline_form_btn .inline_form_btn_logo{
+  width: 15px;
+  height: 15px;
+  padding: 7.5px 7.5px 7.5px 0px;
+}
+
+
+/* Search Bar */
+
+/* 
+.search_bar {
+  display: flex;
+  float: right;
+  clear: both;
+} */
+
+/* #search_bar {
+    width: 200px;
+    height: 30px;
+    padding-left: 5px;
+    font-size: 15px;
+    border-radius: 10px;
+    border-style: inset;
+    border-color: #329fec;
+    border-width: .5px;
+} */
+
+/* #search_btn {
+  height: 30px;
+  width: 30px;
+  background-color: azure;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: #329fec;
+  border-width: .5px;
+}
+
+#search_logo {
+  width: 15px;
+  height: 15px;
+  padding-top: 2px;
+} */
+
+/* .inline_form .inlineFieldWrapper select {
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  border-color: #329fec;
+} */
+
+/* #add_bar {
+    height: 30px;
+    border-radius: 10px;
+    border-color: #329fec;
+    padding-left: 5px;
+    border-width: .5px;
+    border-style: inset;
+    font-size: 15px;
+} */
+
+/*================ Table ========================*/
+
+#table_title {
+  text-align: center;
+}
+
+table.manage_table {
+  border-radius: 10px;
+  border-collapse: collapse;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+  table-layout: auto;
+  border-style: solid;
+  border: #f1f0f0;
+  /* To Scroll Horizontaly */
+  /* display: block; */
+  /* overflow-x: auto; */
+  /* white-space: nowrap; */
+}
+
+th, td {
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-style: solid;
+  border-color: #f1f0f0;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+th {
+  background-image: linear-gradient(to bottom, #4867e0, #329fec);
+  color: white;
+  font-weight: normal;
+}
+
+td input{
+  height: 25px;
+  border-radius: 2px;
+  border-color: #329fec;
+  font-size: 15px;
+}
+
+.event_tag{
+ display: inline-block;
+  background-color: #03a9f4;
+ border-radius: 5px;
+ padding: 1px 3px;
+ margin: 2px;
+}
+
+input[type="checkbox"] {
+  width: 30px;
+  height: 15px;
+  -webkit-appearance: none;
+  background-color: #c6c6c6;
+  outline: none;
+  border-radius: 7.5px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+  transition: .5s;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #03a9f4;
+}
+
+#deleteConfDialogbox{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 10px;
+  /* border-color: black; */
+  /* border-style: solid; */
+  box-shadow: 0px 0px 5px 5px grey;
+}
+
+/*================ add & delete btn ========================*/
+
+.small_btn {
+  display: inline-block;
+  background-color: #329fec;
+  border-style: none;
+  border-radius: 2px;
+  padding: 5px 10px;
+  margin: auto;
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: white;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.small_btn a{
+  text-decoration: none;
+  color: white;
+}
+
+/*================ Edit and Details page ========================*/
+
+#formWrapper{
+  max-width: 1000px;
+  margin: auto;
+}
+
+.fieldWrapper{
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 15px auto ;
+  justify-content: space-evenly;
+}
+
+.fieldWrapper label{
+  display: inline-block;
+  flex: 0 0 40%;
+  font-size: 105%;
+}
+
+.fieldWrapper input,
+.fieldWrapper select,
+.fieldWrapper textarea,
+.fieldWrapper p,
+.fieldWrapper img{
+    display: inline-block;
+    flex: 55%;
+    height: 35px;
+    border-radius: 3px;
+}
+
+.fieldWrapper textarea,
+.fieldWrapper img{
+  height: min-content;
+  width: 50px;
+}
+
+.fieldWrapper p{
+  margin: 0px;
+}
+
+.fieldWrapper input[type="checkbox"]{
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.fieldWrapper .help, 
+.fieldWrapper ul{
+    flex: 0 1 55%;
+    margin: 5px 5px 5px auto;
+    color: red;
+}
+

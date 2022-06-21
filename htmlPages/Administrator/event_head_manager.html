@@ -1,4 +1,4 @@
-{% extends 'Administrator/base.html'%}
+{% extends 'Administrator/administrator_base.html'%}
 
 {% load static %}
 
@@ -10,36 +10,38 @@
 
 {% block loadcss %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/manage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
 
 {% endblock%}
 
 {% block content %}
 
 <div class="main">
-    
-    <div class="main_detail_container" id="main_detail_container" style="padding-left: 130px; padding-right: 160px;">
+    <div class="main_detail_container" id="main_detail_container">
         <h1><p id="table_title">Event Head</p></h1> 
-        <form method="POST">
+        
+        
+        <form method="POST" class="inline_form">
             {% csrf_token %}
             {% for field in addeventhead_form %}
-            <div class="add_inbox_container" style="margin-right: 145px;">
+            <div class="inlineFieldWrapper">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                 {{field}}
             </div>
             {% endfor %}
-            <div class="search_button_container" style="margin-left:-145px; margin-right: 144px;">
-                <button id="search_btn" class="search_btn" type="submit"><img src="{% static 'media/add_logo.png' %}" id="search_logo"></button>&nbsp;&nbsp;
+            <div class="inlineFieldWrapper">
+                <button class="inline_form_btn" type="submit">
+                    <img src="{% static 'media/add_logo.png' %}" class="inline_form_btn_logo">
+                    Add Event Head
+                </button>
             </div>
         </form>
-    </div>
-    
-    <br>
-    <br>
-    <br>
-    <div class="manage_table_container" id="manage_table_container">
+
+        
         <table id="manage_table" class="manage_table">
             <tr>
-                <th>Id</th>
+                <th>Reg No</th>
+                <th>Committee ID</th>
                 <th>Name</th>
                 <th>Mobile No.</th>
                 <th>Email ID</th>
@@ -51,6 +53,7 @@
             {% for eventhead in eventhead_list %}
             <tr>
                 <td>{{eventhead.reg_no}}</td>
+                <td>{{eventhead.reg_no__committee_id}}</td>
                 <td>{{eventhead.reg_no__reg_no__fname}} {{eventhead.reg_no__reg_no__lname}}</td>
                 <td>{{eventhead.reg_no__reg_no__contect_no}}</td>
                 <td>{{eventhead.reg_no__reg_no__email}}</td>
@@ -60,7 +63,7 @@
                 <td>
                     <form method="POST" action="{% url 'eventhead_disable' reg_no=eventhead.reg_no event=eventhead.event__event_id %}">
                         {% csrf_token %}
-                        <button type="submit">Disable</button>
+                        <button class="small_btn" type="submit">Disable</button>
                     </form>    
                 </td>
                 {% else %}
@@ -68,7 +71,7 @@
                 <td>
                     <form method="POST" action="{% url 'eventhead_active' reg_no=eventhead.reg_no event=eventhead.event__event_id %}">
                         {% csrf_token %}
-                        <button type="submit">Active</button>
+                        <button class="small_btn" type="submit">Active</button>
                     </form>    
                 </td>
                 {% endif %}
@@ -76,12 +79,13 @@
             {% endfor %}                        
             
         </table>
+        
     </div>
 </div>
-</div>
+
 
 {% endblock %}
 
 {% block loadScript %}
-<script src="{% static 'script/manage.js' %}"></script>
+
 {% endblock %}

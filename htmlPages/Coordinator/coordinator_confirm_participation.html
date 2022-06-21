@@ -1,0 +1,88 @@
+{% extends 'Coordinator/coordinator_base.html' %}
+
+{% load static %}
+
+{% block title %}
+<title> Coordinator | Confirm Participation </title>
+{% endblock %}
+
+{% block loadcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_manager.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="main">    
+    <div class="main_detail_container" id="main_detail_container">
+    
+        <h1><p id="table_title">Confirm Participation</p></h1>
+
+        <table id="manage_table" class="manage_table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email ID</th>
+                <th>Contact No</th>
+                <th>Clg Name</th>
+                <th>Stream Name</th>
+                <th>Remark</th>
+                <th>Total Payment</th>
+                <th>Remaining Payment</th>
+                <th>Paid Payment</th>
+                <th>Events Participanted</th>
+                <th>Confirm</th>
+            </tr>
+
+            {% for participant in participant_list %}
+            <tr>
+                <td>{{participant.reg_no}}</td>
+                <td>{{participant.reg_no__fname}} {{participant.reg_no__lname}}</td>
+                <td>{{participant.reg_no__email}}</td>
+                <td>{{participant.reg_no__contect_no}}</td>
+                <td>{{participant.reg_no__clg_id__clg_name}}</td>
+                <td>{{participant.reg_no__stream__stream_name}}</td>
+                <td>{{participant.remark}}</td>
+                <td>{{participant.total_payment}}</td>
+                <td>{{participant.remaining_payment}}</td>
+                <td>{{participant.paid_payment}}</td>
+                <td>
+                    {% for event in event_list|get_item:participant.reg_no %}
+                    <span class="event_tag">{{ event.event__event_name }} - {{ event.reg_status}}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if is_confirmed|get_item:participant.reg_no %}
+                        NA
+                    {% else %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="reg_no" value="{{participant.reg_no}}">
+                        <button type="submit" class="small_btn">
+                            Confirm
+                        </button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            
+            {% endfor %}
+        </table>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="fieldWrapper">
+            <button class="small_btn">
+                <a href="{% url 'coordinator_dashboard' %}">Back To Dashboard</a>
+            </button>
+        </div>
+    </div>
+</div>
+            
+
+{% endblock %}
+
+{% block loadScript %}
+
+{% endblock %}

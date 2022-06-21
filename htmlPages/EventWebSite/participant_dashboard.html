@@ -1,32 +1,36 @@
 {% extends 'EventWebSite/base.html' %}
 
 {% load static %}
+{% load custom_tags %}
 
 {% block title %}
     <title>Dashboard</title>
 {% endblock %}
 
 {% block loadcss %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/participant_dashboard.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/EventWebSite/participant_dashboard.css' %}">
+    <style>
+        body{
+            background-image: url("{% static 'media/bck_p_dash.jfif' %}");
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
 
-    {% if userinfo.remark %}
-    <div class="remark_div">
-        <p>Remark: </p>
-        <p>There is nothing remark for you</p>
-    </div>
-    {% endif %}
-
     <div class="Payment_div">
-        <p>Payment Status</p>
+        {% if userinfo.remark %}
+        <p>Remark: {{userinfo.remark}}</p>
+        {% endif %} 
+        <p>Payment Status:{% if userinfo.is_paid %} Paid {% else %} Not Paid {% endif %}</p>
         <p>Total Amount : {{ userinfo.total_payment }}</p>
         <p>Paid : {{ userinfo.paid_payment }}</p>
-        <a href="#">Click here to pay</a>
+        {% if not userinfo.is_paid %}
+        <a href="do_payment">Click here to pay</a>
+        {% endif %}
     </div>
 
-    <div class="event_status_table_title" id="sponsers">Event Status</div>
+    <div class="event_status_table_title">Event Status</div>
 
     <div class="middle">
         <div class="menu">
@@ -36,7 +40,7 @@
                     <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
                     <div class="smenu">
                         <p>Payment Status: Not Paid</p>
-                        <p>Pay Fees for conform registration in event.</p>
+                        <p>Pay Fees for confirm registration in event.</p>
                     </div>
                 </li>
                 {% elif event.reg_status == 'Paid' %}
@@ -52,11 +56,11 @@
                         {% endif %}
                     </div>
                 </li>
-                {% elif event.reg_status == 'Comform' %}
+                {% elif event.reg_status == 'Confirm' %}
                 <li class="item" id="id_{{event.event_id__event_name}}">
                     <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
                     <div class="smenu">
-                        <p>You Registration for event is conform.</p>
+                        <p>You Registration for event is Confirmed.</p>
                         {% if event.event_id__date_time %}
                         <p>Event Date & Time : {{event.event_id__date_time}}</p>
                         {% endif %}
@@ -64,7 +68,7 @@
                         <p>Venue : {{event.event_id__venue}}</p>
                         {% endif %}
                         {% if event.attendance_otp %}
-                        <p>OTP for Attendance : {{event.attendance_otp }}</p>
+                        <p>OTP for Attendance : {{event.attendance_otp}}</p>
                         {% endif %}
                     </div>
                 </li>
@@ -80,9 +84,11 @@
                 <li class="item" id="id_{{event.event_id__event_name}}">
                     <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
                     <div class="smenu">
+                        {% with win=winner|get_item:event.event_id %}
                         <p>Congratulations, You are winner of the event {{event.event_id__event_name}}.</p>
-                        <p>Winning Position : {{winner.position}}</p>
-                        <p>OTP for Winner Certificate : {% if event.winner_reg_no__winning_certi_otp %}{{event.winner_reg_no__winning_certi_otp }}{% endif %}</p>
+                        <p>Winning Position : {{ win.position }}</p>
+                        <p>OTP for Winner Certificate : {{win.winning_certi_otp}}</p>
+                        {% endwith %}
                     </div>
                 </li>
                 {% elif event.reg_status == 'Certificate Issued' %}
@@ -96,9 +102,11 @@
                 <li class="item" id="id_{{event.event_id__event_name}}">
                     <a href="#id_{{event.event_id__event_name}}" class="btn">{{event.event_id__event_name}}</a>
                     <div class="smenu">
+                        {% with win=winner|get_item:event.event_id %}
                         <p>Congratulations, You are winner of the event {{event.event_id__event_name}}.</p>
-                        <p>Winning Position : {{winner.position}}</p>
+                        <p>Winning Position : {{ win.position }}</p>
                         <p>You winning Certificate is Issued Successfully.</p>
+                        {% endwith %}
                     </div>
                 </li>
                 {% elif event.reg_status == 'Scrapped' %}

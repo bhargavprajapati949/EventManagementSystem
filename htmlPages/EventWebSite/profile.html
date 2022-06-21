@@ -8,10 +8,17 @@
 
 {% block loadcss %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <style>
+        body{
+            background-image: url("{% static 'media/bck_p_dash.jfif' %}");
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
 <div id="profile_main">
+    <div class="event_status_table_title">Profile</div>
+
     <div class="detail_container">
         <p id="reg_no" class="attribute">Registration No : </p>
         <p id="reg_no_value" class="value">{{userinfo.reg_no}}</p>

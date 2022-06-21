@@ -1,0 +1,19 @@
+{% load static %}
+
+<nav id="titleBar">
+    <div id="logo_container">
+        <a href="{% url 'homepage' %}"><img id='logo' src="{% static 'media/logo.png' %}" alt="NU-Sport Logo"></a>
+    </div>
+    <div class="links">
+        {% if user.is_authenticated %}
+        <div class="dropdown">
+            <button type="submit" id="profile_btn" class="submit_btn"><a href="{% url 'eventHead_dashboard' %}">Hi, {{user.fname}}</a></button>
+            <div class="options">
+                <a href="{% url 'eventHead_dashboard' %}">Dashboard</a>
+                <a href="{% url 'event_head_profile' %}">Profile</a>
+                <a href="{% url 'eventHead_logout' %}">Log Out</a>  
+            </div>
+        </div>
+        {% endif %}        
+    </div>
+</nav>
