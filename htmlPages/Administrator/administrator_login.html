@@ -19,31 +19,30 @@
         
                 <form method="POST">
                     {% csrf_token %}
-                    <div id="username" class="inputbox">
-                        <input type="text" name="email" value="{{ email }}" required="required">
-                        <label>Email ID</label>
+                    <div id="username" class="inputbox innerbox">
+                        <input type="text" name="email" {% if email %} value="{{ email }}" {% else %} value="bhargav.prajapati@gmail.com" {% endif %} required="required">
+                        <label>Email Id</label>
                     </div>
         
-                    <div id="password" class="inputbox">
-                        <input type="password" name="password" required="required">
+                    <div id="password" class="inputbox innerbox">
+                        <input type="password" name="password" {% if not email %} value="admin@123" {% endif %} required="required">
                         <label>Password</label>
                     </div>
-                    {% if message %}
-                    <div id="errormsg">
-                        <p>{{ message }}</p>
+                    <div id="errormsg" class="innerbox">
+                        <p>Default email and password are provided for Demo purpose</p>
+                        {% if message %}
+                            <p>{{ message }}</p>
+                        {% endif %}
                     </div>
-                    {% endif %}
-                    <div>
-                        <div id="submit_btn_container">
-                            <input type="submit" value="SIGN IN" id="submit_btn">
-                        </div>
-
-                        <!-- <div id="forgot_password_container">
-                            <a href="" id="forgot_password">Forgot Password?</a>
-                        </div> -->
+                    <div class="innerbox">                        
+                        <button type="submit">Sign In</button>
                     </div>
                 </form>
-
-         </div>
+        </div>  
+        <div class="outbtn_container">
+            <button class="form_btn">
+                <a href="{% url 'eventCommittee' %}">Back To Administrative Login</a>
+            </button>
+        </div>
 </body>
 </html>

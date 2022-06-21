@@ -22,7 +22,8 @@ body{
     padding: 20px 100px;
     height: 50px;
     top: 0px;
-    
+    display: flex;
+    justify-content: space-between;
 }
 
 .header_links_container {
@@ -32,7 +33,7 @@ body{
     top: 0px;
     background-color: white;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
 }
 
@@ -68,19 +69,21 @@ body{
 .login_container {
     text-align: center;
     vertical-align: middle;
-    float: right;
     margin-right: 100px;
     padding-top: 13px;
+    min-width: 307px;
 }
 
-#login_btn {
-    width: 150px;
+.submit_btn {
+    min-width: 150px;
     height: 50px;
     font-size: 120%;
     border-radius: 0;
     background-image: linear-gradient(to right, #4867e0 60%, #329fec);
     border: none;
     color: white;
+    padding: 1px 10px;
+    cursor: pointer;
 }
 
 /*================= Title bar dropdown ==============================*/

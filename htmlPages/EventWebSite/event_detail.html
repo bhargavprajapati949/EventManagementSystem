@@ -34,7 +34,7 @@
 </form>
 
 <div class="event_container">
-    {% for event in events %}    
+    {% for event in event_list %}    
         <div class="eventbox">
             <img src="{{ event.event_logo.url }}" height="300px" width="300px">
             <p class="title">{{event.event_name}}</p>

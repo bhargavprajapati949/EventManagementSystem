@@ -19,45 +19,35 @@
 {% block content %}
 <div id="reg_form_box" class="box">
     
-    <p id="signin" class="box_title">Sign In</p>
+    <p class="box_title">Sign In</p>
     
     <form method="POST">
         {% csrf_token %}
-        <div id="username" class="inputbox">
-            <input name="usernamefield" type="text" required="required">
-            <label>User Name</label>
+        <div id="username" class="inputbox innerbox">
+            <input name="usernamefield" type="email" value="yelena.belova@gmail.com" required="required">
+            <label>Email Id</label>
         </div>
         
-        <div id="password" class="inputbox">
-            <input name="passwordfield" type="password" required="required">
+        <div id="password" class="inputbox innerbox">
+            <input name="passwordfield" type="password" value="user@123" required="required">
             <label>Password</label>
         </div>
         
+        <div id="errormsg" class="innerbox">
+            <p>Default email and password are provided for Demo purpose</p>
         {% if message %}
-        <div id="errormsg">
             <p>{{ message }}</p>
-        </div>
         {% endif %}
-        
-        <div>
-            <div id="submit_btn_container">
-                <input type="submit" value="SIGN IN" id="submit_btn" >
-            </div>
-            
-            <!-- <div id="forgot_password_container">
-                <a href="" id="forgot_password">Forgot Password?</a>
-            </div> -->
         </div>
-    </form>
-    
-    <!-- <div class="first_time_login_container" id="first_time_login_container">
-        <p id="first_time_login" class="first_time_login">If you are signing in first time, then <a href="" id="first_time_login_link" class="first_time_login">click here</a></p>
-    </div> -->
-    
+        
+        <div class="innerbox">                        
+            <button type="submit">Sign In</button>
+        </div>
+    </form>    
 </div>
 
-<div class="reg_btn_container" id="reg_btn_container">
-    <a href="register" id="reg_btn" class="reg_btn">REGISTER</a>
+<div class="outbtn_container">
+    <a href="register" class="form_btn">REGISTER</a>
 </div>
 
 {% endblock %}

@@ -143,4 +143,4 @@ def event_head_profile(request):
 
 def eventHead_logout(request):
     auth_logout(request)
-    return redirect('eventHead_login')
+    return redirect('eventCommittee')

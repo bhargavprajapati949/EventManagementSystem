@@ -172,4 +172,4 @@ def coordinator_profile(request):
 
 def coordinator_logout(request):
     auth_logout(request)
-    return redirect('coordinator_login')
+    return redirect('eventCommittee')

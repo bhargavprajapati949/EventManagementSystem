@@ -1,7 +1,6 @@
 .event_title_container {    
     height: 400px;
     width: 100%;
-    position: relative;   
 }
 
 #event_detail {
@@ -65,6 +64,7 @@
     margin: 30px;
     background-image: linear-gradient(to right, #4867e0 60%, #329fec);
     border-radius: 10px;
+    max-width: 310px;
 }
 
 .eventbox img{

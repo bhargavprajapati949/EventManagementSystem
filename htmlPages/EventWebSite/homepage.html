@@ -42,6 +42,7 @@
     </div>
     <br>
     <br>
+
     <!-- <div class="about" id="about" name="about">
 			 Intro Item 
 			 <div class="intro_item">
@@ -77,23 +78,98 @@
 
 
     <div id="contact_us_container" class="contact_us_container" style="position: absolute; width: 95%;">
-            <div class="contact_tile">
-                <h1>Contact us</h1>
-                <hr color="#fff" width="60px">
-            </div>
-
-            <div class="contact">
-                <h2><p>Niral Pateliya</p></h2>
-                <h4><p class="email_contact">17bce091@nirmauni.ac.in</p>
-                <p class="contactno_contact">+91 70968 90142</p>
-                <p class="linkedin_contact"><a class="linkedin" href="https://www.linkedin.com/in/niralpatelia2913">https://www.linkedin.com/in/niralpatelia2913</a></p></h4>
-            </div>
-
-            <div class="contact" style="float: right; margin-top: -190px; margin-right: 50px;">
-                    <h2><p>Bhargav Prajapati</p></h2>
-                    <h4><p class="email_contact">17bce092@nirmauni.ac.in</p>
-                    <p class="contactno_contact">+91 85111 20401</p>
-                    <p class="linkedin_contact"><a  class="linkedin" href="https://www.linkedin.com/in/bhargavprajapati949">https://www.linkedin.com/in/bhargavprajapati949</a></p></h4>
-            </div>
+        <div class="contact_tile">
+            <h1>Contact us</h1>
+            <hr color="#fff" width="60px">
+        </div>
+        
+        <div class="contact">
+            <h2><p>Niral Pateliya</p></h2>
+            <h4><p class="email_contact">17bce091@nirmauni.ac.in</p>
+            <p class="contactno_contact">+91 70968 90142</p>
+            <p class="linkedin_contact"><a class="linkedin" href="https://www.linkedin.com/in/niralpatelia2913">https://www.linkedin.com/in/niralpatelia2913</a></p></h4>
+        </div>
+        
+        <div class="contact" style="float: right; margin-top: -190px; margin-right: 50px;">
+                <h2><p>Bhargav Prajapati</p></h2>
+                <h4><p class="email_contact">17bce092@nirmauni.ac.in</p>
+                <p class="contactno_contact">+91 85111 20401</p>
+                <p class="linkedin_contact"><a  class="linkedin" href="https://www.linkedin.com/in/bhargavprajapati949">https://www.linkedin.com/in/bhargavprajapati949</a></p></h4>
+        </div>
     </div>
+
+    <style>
+        .notice{
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+        }
+
+        .notice .main{
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .notice .align_center{
+            text-align: center;
+        }
+
+        .notice .closeNotice{
+            height: unset;
+            width: unset;
+            padding: 8px 25px;
+            border-radius: 10px;
+            font-size: 120%;
+            background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 1140px) {
+            #notice1 {
+                display: block;
+            }
+        }
+        #notice1{
+            z-index: 10;
+        }
+
+        /* #notice2{
+            display: block;
+        } */
+    </style>
+
+    <div id="notice1" class="notice">
+        <div class="main">
+            <h1 class="align_center">Notice</h1>
+            <p>This website is only designed for viewing on desktop browsers. So, to have good experience kindly open this on Desktop/Laptop Browser.</p>
+            <div class="align_center">
+                <button onclick="closeNotice1()" id="closeNoticebtn" class="closeNotice">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="notice2" class="notice">
+        <div class="main">
+            <p>For better understanding of project please visit <a href="https://github.com/bhargavprajapati949/EventManagementSystem" target="_blank">Documentation.</a></p>
+            <div class="align_center">
+                <button onclick="closeNotice2()" id="closeNoticebtn" class="closeNotice">Close</button>
+            </div>
+        </div>
+    </div> -->
+
+    <script>
+        function closeNotice1(){
+            document.getElementById('notice1').style.display = "none";
+        }
+
+        function closeNotice2(){
+            document.getElementById('notice2').style.display = "none";
+        }
+    </script>
     {% endblock %}

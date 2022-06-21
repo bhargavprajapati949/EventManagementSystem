@@ -7,7 +7,7 @@
     <meta name="description" content="NU-Sports">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
-    <link rel="stylesheet" href="{% static 'css/base_participant.css'%}">
+    <link rel="stylesheet" href="{% static 'css/EventWebSite/base_participant.css'%}">
     {% block loadcss %}
 
     {% endblock %}
@@ -20,6 +20,11 @@
 <body>
     <div id="titleBar" class="basic">
         <a href="{% url 'homepage' %}"><img id='logo' src="{% static 'media/logo.png' %}" alt="NU-Sport Logo"></a>
+        {% if not user.is_authenticated %}
+        
+        <a href="{% url 'eventCommittee' %}"><button id="login_btn" class="submit_btn">Administrative Login</button></a>
+        
+        {% endif %}
     </div>
 
     <div class="header_links_container" id="header_links_container">

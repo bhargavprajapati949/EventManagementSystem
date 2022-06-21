@@ -1,6 +1,7 @@
 body {
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
 }
@@ -12,7 +13,6 @@ body {
 #header_links_container{
     background-color: transparent;
 }
-
 
 .box {
     position: absolute;
@@ -27,26 +27,18 @@ body {
     border-radius: 10px; 
 }
 
-/*#logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    position: absolute;
-    //top: -50px;
-    left: calc(50% - 40px);
-}*/
-
 .box .box_title {
     padding: 0;
     margin: 0 0 30px; 
     color: #fff;
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
     font-size: 30px;
+    font-weight: 600;
 }
 
-.box .inputbox {
+.box .innerbox {
     position: relative;
+    text-align: center;
 }
 
 .box .inputbox input{
@@ -61,7 +53,11 @@ body {
     background: transparent;
 }
 
-.box .inputbox input:-internal-autofill-selected{
+.box .inputbox input:-internal-autofill-selected,
+.box .inputbox input:-webkit-autofill,
+.box .inputbox input:-webkit-autofill:hover, 
+.box .inputbox input:-webkit-autofill:focus, 
+.box .inputbox input:-webkit-autofill:active{
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -71,6 +67,8 @@ body {
     border-bottom: 1px solid #fff;
     outline: none;
     background: transparent !important;
+    transition: background-color 50000s;
+    -webkit-text-fill-color: #fff !important;
 }
 
 .box .inputbox label {
@@ -84,222 +82,48 @@ body {
     transition: .5s;
 }
 
-.box .inputbox input:focus ~ label, .box .inputbox input:valid ~ label {
+.box .inputbox input:focus ~ label,
+.box .inputbox input:valid ~ label {
     top: -18px;
     left: 0;
     color: #03a9f4;
     font-size: 12px;
 }
 
-.box input[type="submit"] {
-    background: transparent;
+#errormsg{
+    color: white;
+}
+
+#errormsg p{
+    margin: 0px;
+    margin-bottom: 15px;
+}
+
+.box .innerbox button,
+.form_btn{
     border: none;
     outline: none;
     color: #fff;
+    font-size: 1.02em;
+    font-weight: 600;
     background: #03a9f4;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 10px;
     transition: 0.6s ;
     overflow: hidden;
-    float: left;
+    text-decoration: none;
 }
 
-#forgot_password_container {
-    float: right;
-    margin-top: 5px;
-}
-
-#forgot_password {
-    color: white;
-    text-decoration: mediumblue;
-}
-
-#forgot_password:hover {
-    color: #03a9f4;
-}
-
-#errormsg{
+.box .innerbox button a,
+.form_btn a{
+    text-decoration: none;
     color: white;
 }
 
-#reg_btn_container {
+.outbtn_container {
     position: absolute;
     left: 50%;
     top: 78%;
     transform: translate(-50%, -50%);
 }
-
-#reg_btn {
-    background: #03a9f4;
-    color: azure;
-    width: 200px;
-    height: 50px;
-    border: 1px solid azure;
-    text-decoration: none;
-    font-size: 15px;
-    border-radius: 10px;
-    transition: .5s;
-    overflow: hidden;
-    padding: 5px 20px;
-}
-
-/*#reg_btn:focus {
-    outline: none;
-}
-
-#reg_btn:before {
-    content: '';
-    display: block;
-    position: absolute;
-    background: rgba(255, 255,  255, .5);
-    width: 60px;
-    height: 100px;
-    left: 0;
-    right: 0;
-    opacity: .5s;
-    filter: blur(30px);
-    transform: translateX(-130px) skewX(-15deg);
-}
-
-#reg_btn:after {
-    content: '';
-    display: block;
-    position: absolute;
-    background: rgba(255, 255, 255, .52);
-    width: 30px;
-    height: 100px;
-    left: 30px;
-    top: 0;
-    opacity: 0;
-    filter: blur(30px);
-    transform: translate(-100px) scaleX(-15deg);
-}*/
-
-#reg_btn:hover {
-    background: none;
-    cursor: pointer;
-    color: #03a9f4;
-    border: 1px solid #03a9f4;
-}
-
-.first_time_login_container {
-    margin-top: 18%;
-    margin-left: 12%;
-}
-
-.first_time_login {
-    color: azure;
-    font-size: 17px;
-}
-
-#first_time_login_link:hover {
-    color: #03a9f4;
-}
-/*#reg_btn:hover::before {
-    transform: translateX(300px) skewX(-15deg);
-    opacity: .6;
-    transition: .7s;
-}
-
-#reg_btn:hover::after {
-    transform: translateX(300px) skewX(-15deg);
-    opacity: 1;
-    transition: .7s;
-}*/
-
-
-
-.main .event_selection_title {
-    padding: 0;
-    margin: 0 0 30px; 
-    color: #fff;
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
-}
-.main {
-    padding: 40px;
-    background: rgba(0, 0, 0, .6);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.5);
-    border-radius: 10px;
-    margin-top: 50%;
-}
-
-.event_selection_container {
-    width: 100%;
-    height: auto;
-    background: white;
-    box-shadow: 5px 5px 3px rgba(0,0,0,.5);
-    /* add flex-box style*/
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-flow: wrap; 
-}
-
-.main_event {
-    width: 20%;
-    height: 250px;
-    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.911);
-    background: rgba(0, 0, 0, .6);
-    margin: 20px;
-    font-size: 25px;
-    box-sizing: border-box; 
-    min-width: 250px; 
-}
-
-.event_info {
-    width: 25px;
-    height: 25px;
-}
-.main .selected_event_payment_container .selected_events {
-    background: #03a9a4;
-    width: 100%;
-    height: auto;
-}
-
-.main .selected_event_payment_container .total_payment_container {
-    width: 240px;
-    height: auto;
-    background: #fff;
-    text-align: left;
-}
-
-.main .selected_event_payment_container .total_payment {
-    font-size: 30px;
-    padding-left: 10%;
-}
-@media screen and (max-width:1200px) {
-    .box {
-        width: 40%;
-
-    }
-}
-
-@media screen and (max-width:600px) {
-    .box {
-        width: 90%;
-
-    }
-}
-
-.main .submit_container {
-    display: block;
-}
-.main .submit {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #fff;
-    background: #03a9f4;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 0.6s ;
-    overflow: hidden;
-    float: left;
-}
-

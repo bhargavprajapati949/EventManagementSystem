@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         return user
 
-    def create_user(self, fname, lname, contect_no, email, password=None):
+    def create_user(self, fname, lname, contect_no, email, password):
         user = self._create_user(
             fname = fname,
             lname = lname,
@@ -42,13 +42,13 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password = None):
+    def create_superuser(self, email, password, fname='Bhargav', lname='Prajapati', contect_no=9876543210):
         user = self._create_user(
-            fname = 'Bhargav', 
-            lname = 'Prajapati',
-            contect_no = 9876543210,
+            fname=fname,
+            lname=lname,
+            contect_no=contect_no,
+            email = email,
             password = password,
-            email = email
         )
 
         user.is_admin = True

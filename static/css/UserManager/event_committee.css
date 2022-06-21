@@ -1,6 +1,7 @@
 body{    
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
 }
@@ -12,13 +13,24 @@ body{
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: #ffffff;
-    padding: 25px;
+    padding: 40px 60px;
     border-radius: 25px;
+    width: 400px;
+}
+
+.box_title {
+    padding: 0;
+    margin: 0 0 30px; 
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
 }
 
 #login a{
     display: block;
     text-align: center;
+    font-weight: 600;
     padding: 10px;
     margin: 10px auto;
     background-color: rgba(255, 255, 255, 0.5);
@@ -31,6 +43,7 @@ body{
 #Registration{
     display: block;
     text-align: center;
+    font-weight: 600;
     border-radius: 10px;
     background-image: linear-gradient(to right, #4867e0 60%, #329fec);
     border: none;
@@ -46,4 +59,31 @@ body{
 #Registration:hover{
     transform: scale(1.02,1.02);
     transition: all 0.2s ease-out;
+}
+
+.outbtn_container {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+}
+
+.form_btn{
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 600;
+    background-image: linear-gradient(to right, #4867e0 60%, #329fec);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.6s ;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.form_btn a{
+    text-decoration: none;
+    color: white;
 }

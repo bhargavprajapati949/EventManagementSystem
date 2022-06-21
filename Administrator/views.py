@@ -495,4 +495,4 @@ def profile_administrator(request):
 
 def admin_logout(request):
     auth_logout(request)
-    return redirect('admin_login')
+    return redirect('eventCommittee')

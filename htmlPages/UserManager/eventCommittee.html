@@ -15,8 +15,8 @@
     </style>
 </head>
 <body>
-    <div id="main_content">
-        <h1>Event Committee Dashboard</h1>
+    <div id="main_content">        
+        <p class="box_title">Event Committee</p>
         <div id="login">
             <a href="{% url 'admin_login' %}">Admin</a>
             <a href="{% url 'coordinator_login' %}">Co Ordinator</a>
@@ -25,6 +25,9 @@
         <a href="eventCommitteeRegForm" id="Registration">
             Register
         </a>
+    </div>
+    <div class="outbtn_container">
+        <a href="{% url 'homepage' %}" class="form_btn">Homepage</a>
     </div>
 </body>
 </html>

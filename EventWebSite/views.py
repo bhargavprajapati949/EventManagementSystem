@@ -141,12 +141,12 @@ def event_detail(request):
     if query is not None:
         # events = Event.objects.filter(event_name=query).values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
         # events = Event.objects.filter(Q('event_name=query'))
-        events = Event.objects.filter(event_name__icontains=query)
+        event_list = Event.objects.filter(event_name__icontains=query)
     else:    
         # events = Event.objects.values('event_name','event_detail', 'rules', 'event_logo', 'fees', 'event_status')
-        events = Event.objects.all()
+        event_list = Event.objects.all()
 
-    context = {'events' : events}
+    context = {'event_list' : event_list}
     return render(request, 'EventWebSite/event_detail.html', context)
 
 
