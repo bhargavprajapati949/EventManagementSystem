@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="description" content="NU-Sports">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=1141">
     <link rel="shortcut icon" href="{% static 'media/favicon.ico' type='image/x-icon' %}">
     <link rel="stylesheet" href="{% static 'css/EventWebSite/base_participant.css'%}">
     {% block loadcss %}
@@ -33,7 +34,6 @@
                 <a id="home" href="{% url 'homepage' %}">Home</a>
                 <a id="about" href="homepage#about">About</a>
                 <a id="event" href="{% url 'event_detail' %}">Events</a>
-                <!-- <a id="our_team" href="#">Our Team</a> -->
                 <a id="sponsor" href="homepage#sponsers">Sponsors</a>
                 <a id="contact" href="homepage#contact_us_container">Contact</a>
             </ul>
@@ -42,7 +42,7 @@
         <div class="login_container">
             {% if user.is_authenticated %}
             <div class="dropdown">
-                    <a href="#"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
+                <a href="#"><button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
                 <div>
                     <a href="{% url 'participant_dashboard' %}">Dashborad</a>
                     <a href="{% url 'profile_participant' %}">Profile</a>

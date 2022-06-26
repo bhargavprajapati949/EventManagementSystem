@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from django.conf.urls import url
+# from django.conf.urls import url
 
 
 from django.conf import settings
@@ -39,4 +39,4 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 if settings.DEBUG:
-    urlpatterns += url(r'.+', never_cache(serve_static)),
+    urlpatterns += re_path(r'.+', never_cache(serve_static)),

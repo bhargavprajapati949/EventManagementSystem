@@ -46,6 +46,12 @@ def eventHead_dashboard(request):
         events = Event_Head.objects.filter(reg_no = request.user.reg_no, isActive = True).values('event__event_name', 'event__event_id')
         context = {'events' : events}
         return render(request, 'EventHead/eventHead_dashboard.html', context)
+    elif request.user.is_authenticated and ec and ec[0].is_coordinator:
+        return redirect('coordinator_dashboard')
+    elif request.user.is_authenticated and request.user.is_participant:
+        return redirect('participant_dashboard')
+    elif request.user.is_authenticated and request.user.is_admin:
+        return redirect('admin_dashboard')
     else:
         return redirect('eventHead_login_require')
 

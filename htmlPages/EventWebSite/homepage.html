@@ -16,11 +16,11 @@
 
     {% block content %}
 
-    </div id="slideshow" style="height: 100px;">
-        <img src="{% static 'media/slideshow.jpg' %}" alt="slideshow Image 1" style="width: 100%; height: 700px;">
+    <div id="main_image">
+        <img src="{% static 'media/slideshow.jpg' %}" alt="slideshow Image 1">
     </div>
 
-    <div id="news" class="basic">
+    <div id="news" class="middle_content">
         <h3>Announcements</h3>
         <ul>
             {% for n in news %}
@@ -33,15 +33,14 @@
             {% endfor %}
         </ul>
     </div>
-    <br>
-    <div class="aboutus_title" id="aboutus4">
-        <p id="aboutus">About Us</p>
+
+    
+    <div id="aboutus4" class="middle_content">
+        <p class="aboutus_title" id="aboutus">About Us</p>
 
         <p id="aboutus_content">NU-TECH is the National Level technical fest of Institute of Technology, Nirma University. With a view to promote the "SHAURYA". The NU-TECH 2019 is a platform, Where students are given an opportunity to explore themselves.</p>
 
     </div>
-    <br>
-    <br>
 
     <!-- <div class="about" id="about" name="about">
 			 Intro Item 
@@ -54,47 +53,49 @@
 			</div>
     </div> --> 
     
-    
-    <div class="sponsers_title" id="sponsers">Sponsers</div>    
-    <div class="sponsers_container">
-    
-        <div class="sponser_item">
-            <div class="sponser_image"><img src="{% static 'media/fasoos.png' %}"></div>
-        </div>
+    <div id="sponsers">
+        <div class="sponsers_title">Sponsers</div> 
+        <div class="sponsers_container">
+            <div class="sponser_item">
+                <div class="sponser_image"><img src="{% static 'media/fasoos.png' %}"></div>
+            </div>
 
-        
-        <div class="sponser_item">
-            <div class="sponser_image"><img src="{% static 'media/Paytm_logo.png' %}"></div>
-        </div>
 
-        <div class="sponser_item">
-            <div class="sponser_image"><img src="{% static 'media/rebull.png' %}"></div>
-        </div>
+            <div class="sponser_item">
+                <div class="sponser_image"><img src="{% static 'media/Paytm_logo.png' %}"></div>
+            </div>
 
-        <div class="sponser_item">
-            <div class="sponser_image"><img src="{% static 'media/ibm.png' %}"></div>
+            <div class="sponser_item">
+                <div class="sponser_image"><img src="{% static 'media/rebull.png' %}"></div>
+            </div>
+
+            <div class="sponser_item">
+                <div class="sponser_image"><img src="{% static 'media/ibm.png' %}"></div>
+            </div>
         </div>
     </div>
 
 
-    <div id="contact_us_container" class="contact_us_container" style="position: absolute; width: 95%;">
+    <div id="contact_us_container" class="contact_us_container">
         <div class="contact_tile">
             <h1>Contact us</h1>
             <hr color="#fff" width="60px">
         </div>
-        
-        <div class="contact">
-            <h2><p>Niral Pateliya</p></h2>
-            <h4><p class="email_contact">17bce091@nirmauni.ac.in</p>
-            <p class="contactno_contact">+91 70968 90142</p>
-            <p class="linkedin_contact"><a class="linkedin" href="https://www.linkedin.com/in/niralpatelia2913">https://www.linkedin.com/in/niralpatelia2913</a></p></h4>
-        </div>
-        
-        <div class="contact" style="float: right; margin-top: -190px; margin-right: 50px;">
+         
+        <div class="contact_data">
+            <div class="contact">
                 <h2><p>Bhargav Prajapati</p></h2>
                 <h4><p class="email_contact">17bce092@nirmauni.ac.in</p>
                 <p class="contactno_contact">+91 85111 20401</p>
                 <p class="linkedin_contact"><a  class="linkedin" href="https://www.linkedin.com/in/bhargavprajapati949">https://www.linkedin.com/in/bhargavprajapati949</a></p></h4>
+            </div>
+    
+            <div class="contact">
+                <h2><p>Niral Pateliya</p></h2>
+                <h4><p class="email_contact">17bce091@nirmauni.ac.in</p>
+                <p class="contactno_contact">+91 70968 90142</p>
+                <p class="linkedin_contact"><a class="linkedin" href="https://www.linkedin.com/in/niralpatelia2913">https://www.linkedin.com/in/niralpatelia2913</a></p></h4>
+            </div>
         </div>
     </div>
 

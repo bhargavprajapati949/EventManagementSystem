@@ -7,7 +7,7 @@
     <div class="links">
         {% if user.is_authenticated %}
         <div class="dropdown">
-            <button type="submit" id="profile_btn" class="submit_btn"><a href="{% url 'admin_dashboard' %}">Hi, {{user.fname}}</a></button>
+            <button type="submit" id="profile_btn" class="submit_btn">Hi, {{user.fname}}</button>
             <div class="options">
                 <a href="{% url 'admin_dashboard' %}">Dashboard</a>
                 <a href="{% url 'profile_administrator' %}">Profile</a>

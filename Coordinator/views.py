@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 import Coordinator
@@ -52,6 +53,12 @@ def coordinator_dashboard(request):
             return render(request, 'Coordinator/coordinator_dashboard.html')
         else:
             return redirect('coordinator_login')
+    elif request.user.is_authenticated and ec and ec[0].is_event_head:
+        return redirect('eventHead_dashboard')
+    elif request.user.is_authenticated and request.user.is_participant:
+        return redirect('participant_dashboard')
+    elif request.user.is_authenticated and request.user.is_admin:
+        return redirect('admin_dashboard')
     else:
         return redirect('coordinator_login_require')
 

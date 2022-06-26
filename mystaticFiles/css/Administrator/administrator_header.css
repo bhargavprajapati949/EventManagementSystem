@@ -29,7 +29,8 @@
 .dropdown #profile_btn {
     border: none;
     padding: 15px 40px;
-    background-color: #329fec;
+    background-color: white;
+    background-image: linear-gradient(to right, #4867e0, #329fec);
     transition: .3s;
     font-size: 20px;
     cursor: pointer;

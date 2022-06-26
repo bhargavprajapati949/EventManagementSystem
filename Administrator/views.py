@@ -39,6 +39,10 @@ def admin_login_require(request):
 def admin_dashboard(request):
     if request.user.is_authenticated and request.user.is_admin:
         return render(request, 'Administrator/administrator_dashboard.html')
+    elif request.user.is_authenticated and request.user.is_participant:
+        return render('participant_dashboard')
+    elif request.user.is_authenticated:
+        return redirect('coordinator_dashboard')
     else:
         return redirect('admin_login_require')
 

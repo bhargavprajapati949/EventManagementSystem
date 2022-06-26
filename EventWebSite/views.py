@@ -151,20 +151,25 @@ def event_detail(request):
 
 
 def participant_dashboard(request):
-    if request.user.is_authenticated and request.user.is_participant:
-        reg_no = request.user.reg_no
-        userinfo = Participants.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment', 'is_paid')[0]
-        events = Participation.objects.filter(reg_no = reg_no).values('event_id', 'reg_status', 'event_id__event_name', 'event_id__date_time', 'event_id__venue', 'attendance_otp', 'certi_otp' )
-        context = {'userinfo' : userinfo, 'events' : events}
-        winners = Winner.objects.filter(winner__reg_no = reg_no).values('event', 'position', 'winning_certi_otp')
-        
-        if winners:            
-            winnerVal = {}
-            for winner in winners:
-                winnerVal[winner['event']] = winner
-            context['winner'] = winnerVal
+    if request.user.is_authenticated:
+        if request.user.is_participant:
+            reg_no = request.user.reg_no
+            userinfo = Participants.objects.filter(reg_no=reg_no).values('reg_no','remark', 'total_payment', 'paid_payment', 'is_paid')[0]
+            events = Participation.objects.filter(reg_no = reg_no).values('event_id', 'reg_status', 'event_id__event_name', 'event_id__date_time', 'event_id__venue', 'attendance_otp', 'certi_otp' )
+            context = {'userinfo' : userinfo, 'events' : events}
+            winners = Winner.objects.filter(winner__reg_no = reg_no).values('event', 'position', 'winning_certi_otp')
 
-        return render(request, 'EventWebSite/participant_dashboard.html', context)
+            if winners:            
+                winnerVal = {}
+                for winner in winners:
+                    winnerVal[winner['event']] = winner
+                context['winner'] = winnerVal
+
+            return render(request, 'EventWebSite/participant_dashboard.html', context)
+        elif request.user.is_admin:
+            return redirect('admin_dashboard')
+        else:
+            return redirect('coordinator_dashboard')
     else:
         return redirect('participant_login_require')
 
